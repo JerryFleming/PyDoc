@@ -3,7 +3,7 @@
 =====================
 
 
-这些文档是从 `reStructuredText`_ 源文件中利用 `Sphinx`_ 生成的。 `Sphinx`_  是一个专门为 Python 写文档处理程序。
+这些文档是从 `reStructuredText`_ 源文件中利用 `Sphinx`_ 生成的。`Sphinx`_ 是一个专门为 Python 写文档处理程序。
 
 .. _reStructuredText: http://docutils.sf.net/rst.html
 .. _Sphinx: http://sphinx.pocoo.org/
