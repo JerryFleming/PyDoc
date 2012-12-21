@@ -92,15 +92,10 @@
       作为类、方法、或者模块中第一个表达式出现的源字符串。跃然在代码块执行时会被忽略，编译器却会利用它并把它放在其所对应的类、方法、或模块的 :attr:`__doc__` 属性中。因为它能够通过自省来访问，所以就成了保存该对象文档的标准地方。
 
    鸭子类型
-      一种编程风格，即不是根据一个对象的类型来决定其是否拥有正确的接口，而是直接调用其方法或访问其属性（"如果它看起来像鸭子，并且也像鸭子那样嘎嘎叫，那么它肯定是一只鸭子。")通过强调接口而不是具体的类型，设计良好的代码会通过多态性替换而变得灵活。鸭子类型避免了使用 :func:`type` 或者 :func:`isinstance` 来检测类型，(不过要注意的是，鸭子类型可以通过:term:`虚基类<abstract base class>`)，而是通常使用 :func:`hasattr` 来检测，或者使用:term:`EAFP`编程方法。
+      一种编程风格，即不是根据一个对象的类型来决定其是否拥有正确的接口，而是直接调用其方法或访问其属性（"如果它看起来像鸭子，并且也像鸭子那样嘎嘎叫，那么它肯定是一只鸭子。")通过强调接口而不是具体的类型，设计良好的代码会通过多态性替换而变得灵活。鸭子类型避免了使用 :func:`type` 或者 :func:`isinstance` 来检测类型，(不过要注意的是，鸭子类型可以通过:term:`虚基类<abstract base class>`)，而是通常使用 :func:`hasattr` 来检测，或者使用 :term:`EAFP` 编程方法。
 
    EAFP
-      Easier to ask for forgiveness than permission.  This common Python coding
-      style assumes the existence of valid keys or attributes and catches
-      exceptions if the assumption proves false.  This clean and fast style is
-      characterized by the presence of many :keyword:`try` and :keyword:`except`
-      statements.  The technique contrasts with the :term:`LBYL` style
-      common to many other languages such as C.
+      请求谅解比获得权限更容易。这是 Python 的编程风格，它假定某个键名或属性是有效的，如果假设错误则通过捕获异常来处理。这种简捷快速的风格的特征是带有很多 :keyword:`try` 和 :keyword:`except` 语句。这和很多其它语言中使用的 `LBYL` 风格是迥然不同的，例如 C 中的那样。
 
    expression
       A piece of syntax which can be evaluated to some value.  In other words,
