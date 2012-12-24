@@ -149,40 +149,21 @@
       参见\ :term:`解释器全局锁`\ 。
 
   解释器全局锁
-      :term:`CPython` 解释器所使用机制，用来确保同一时刻只有一个线程执行 Python :term:`字节码`\ 。这就简化了 CPython 的实现，因为它使得对象模型(包括重要的内置类型，例如 :class:`dict`)默认对并发访问就是安全的。Locking the entire interpreter
-      makes it easier for the interpreter to be multi-threaded, at the
-      expense of much of the parallelism afforded by multi-processor
-      machines.
+      :term:`CPython` 解释器所使用机制，用来确保同一时刻只有一个线程执行 Python :term:`字节码`\ 。这就简化了 CPython 的实现，因为它使得对象模型(包括重要的内置类型，例如 :class:`dict`)默认对并发访问就是安全的。把整个解释器锁定可以让它更容易的进行多线程工作，这样做的代价是多核处理器要应付更多的并行处理。
 
-      However, some extension modules, either standard or third-party,
-      are designed so as to release the GIL when doing computationally-intensive
-      tasks such as compression or hashing.  Also, the GIL is always released
-      when doing I/O.
+      但是有一些模块的设计，有核心的也有第三方的，在处理计算密集型的任务时，例如压缩或者哈希运算，是要释放 GIL 。并且，在进行 I/O 操作时也总是释放 GIL 。
 
-      Past efforts to create a "free-threaded" interpreter (one which locks
-      shared data at a much finer granularity) have not been successful
-      because performance suffered in the common single-processor case. It
-      is believed that overcoming this performance issue would make the
-      implementation much more complicated and therefore costlier to maintain.
+      以前曾试图创建一个"自由的多线程"解释器(能够在更细的粒度锁定共享数据)，但并没有取得多大成功，因为在常见的单处理器上性能非常差。大家认为，要解决这个性能问题需要把实现做得更复杂，所以维护成本也更高。
 
-   hashable
-      An object is *hashable* if it has a hash value which never changes during
-      its lifetime (it needs a :meth:`__hash__` method), and can be compared to
-      other objects (it needs an :meth:`__eq__` method).  Hashable objects which
-      compare equal must have the same hash value.
+   可散列的
+      在一个对象的生命周期中，如果它的散列值从来不会改变(要有一个 :meth:`__hash__` 方法)，还可以和其它对象比较(需要有 :meth:`__eq__` 方法)，则说这个对象是\ *可散列的*\ 。比较结果相等的可散列对象必须有相同的散列值。
 
-      Hashability makes an object usable as a dictionary key and a set member,
-      because these data structures use the hash value internally.
+      可散列的特性使一个对象能够用作字典的键名，以及集合的元素，因为这些数据结构内部使用散列值。
 
-      All of Python's immutable built-in objects are hashable, while no mutable
-      containers (such as lists or dictionaries) are.  Objects which are
-      instances of user-defined classes are hashable by default; they all
-      compare unequal, and their hash value is their :func:`id`.
+      Python 中所有不可改变的内部对象都是可散列的，而任何可改变的容器(例如列表或字典)都不是。用户自定义类的对象实例默认都是可散列的，它们比较结果都是不相等的；它们的散列值是其 :func:`id`\ 。
 
    IDLE
-      An Integrated Development Environment for Python.  IDLE is a basic editor
-      and interpreter environment which ships with the standard distribution of
-      Python.
+      Python 集成开发环境。IDLE 是 Python 发行版中自带的基本编辑器及解释执行环境。
 
    immutable
       An object with a fixed value.  Immutable objects include numbers, strings and
