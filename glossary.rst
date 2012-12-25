@@ -160,7 +160,7 @@
 
       可散列的特性使一个对象能够用作字典的键名，以及集合的元素，因为这些数据结构内部使用散列值。
 
-      Python 中所有不可改变的内部对象都是可散列的，而任何可改变的容器(例如列表或字典)都不是。用户自定义类的对象实例默认都是可散列的，它们比较结果都是不相等的；它们的散列值是其 :func:`id`\ 。
+      Python 中所有不可改变的内置对象都是可散列的，而任何可改变的容器(例如列表或字典)都不是。用户自定义类的对象实例默认都是可散列的，它们比较结果都是不相等的；它们的散列值是其 :func:`id`\ 。
 
    IDLE
       Python 集成开发环境。IDLE 是 Python 发行版中自带的基本编辑器及解释执行环境。
@@ -184,10 +184,10 @@
       Python 是解释型语言而不是编译型的，尽管字节码编译器的存在，其区别已经很模糊。这意味着源文件可以直接运行而不需要先明确创建一个可执行程序然后再运行。解释型语言的开发/调试周期通常比编译型的短，尽管这些程序一般也运行得慢。参见\ :term:`交互式`\ 。
 
    可迭代对象
-      可以每次返回其中一个元素的对象。可迭代对象的例子包括所有的序列类型(例如 :class:`list`\ 、\ :class:`str`\ 、\ :class:`tuple`)和一些非序列类型，如 :class:`dict` 和 :class:`file`\ ，还有你自己定义的类对象，只要它们有 :meth:`__iter__` 或者 :meth:`__getitem__` 方法。可迭代对象可以在 :keyword:`for` 循环语句和很多其它需要序列类型(:func:`zip`\ 、\ :func:`map`\ 、 ...)的地方使用。如果把一个可迭代对象作为形参传递给内部函数 :func:`iter`\ ，就会返回该对象的一个迭代器。这对于单次遍历一系列值而言是很好的。在使用可迭代对象时，通常都没有必要亲自调用 :func:`iter` 或者处理迭代器对象，\ ``for`` 语句会自动帮你完成，并在循环过程中创建一个临时变量来保存迭代器。参见 :term:`迭代器`\ 、\ :term:`序列` 和 :term:`生成函数`\ 。
+      可以每次返回其中一个元素的对象。可迭代对象的例子包括所有的序列类型(例如 :class:`list`\ 、\ :class:`str`\ 、\ :class:`tuple`)和一些非序列类型，如 :class:`dict` 和 :class:`file`\ ，还有你自己定义的类对象，只要它们有 :meth:`__iter__` 或者 :meth:`__getitem__` 方法。可迭代对象可以在 :keyword:`for` 循环语句和很多其它需要序列类型(:func:`zip`\ 、\ :func:`map`\ 、 ...)的地方使用。如果把一个可迭代对象作为形参传递给内置函数 :func:`iter`\ ，就会返回该对象的一个迭代器。这对于单次遍历一系列值而言是很好的。在使用可迭代对象时，通常都没有必要亲自调用 :func:`iter` 或者处理迭代器对象，\ ``for`` 语句会自动帮你完成，并在循环过程中创建一个临时变量来保存迭代器。参见 :term:`迭代器`\ 、\ :term:`序列` 和 :term:`生成函数`\ 。
 
    迭代器
-      代表一个数据流的对象。连续调用迭代器的 :meth:`~iterator.__next__` 方法(或者连续把它传给内部函数 :func:`next`)会相继返回流中的数据项。如果没有数据可用，则抛出 :exc:`StopIteration` 异常。这时，迭代器对象已经穷尽，如果继续调用其 :meth:`__next__` 方法就会再次抛出 :exc:`StopIteration` 异常。迭代器必须要有 :meth:`__iter__` 方法，这个方法要返回迭代器本身，所以每个迭代器都是可迭代对象，在可以使用其它可迭代对象的大部分对方也可以用迭代器。这里有个异常值得关注，就是试图多次遍历数据的代码。每当把容器对象(例如 :class:`list`)传给 :func:`iter` 函数或者在 :keyword:`for` 循环中使用时都会产生一个新的迭代器。如果这样使用迭代器，则会返回同样已经上次遍历中穷尽的迭代器对象，这使得它像一个空的容器。
+      代表一个数据流的对象。连续调用迭代器的 :meth:`~iterator.__next__` 方法(或者连续把它传给内置函数 :func:`next`)会相继返回流中的数据项。如果没有数据可用，则抛出 :exc:`StopIteration` 异常。这时，迭代器对象已经穷尽，如果继续调用其 :meth:`__next__` 方法就会再次抛出 :exc:`StopIteration` 异常。迭代器必须要有 :meth:`__iter__` 方法，这个方法要返回迭代器本身，所以每个迭代器都是可迭代对象，在可以使用其它可迭代对象的大部分对方也可以用迭代器。这里有个异常值得关注，就是试图多次遍历数据的代码。每当把容器对象(例如 :class:`list`)传给 :func:`iter` 函数或者在 :keyword:`for` 循环中使用时都会产生一个新的迭代器。如果这样使用迭代器，则会返回同样已经上次遍历中穷尽的迭代器对象，这使得它像一个空的容器。
 
       更多信息参见\ :ref:`typeiter`\ 。
 
@@ -233,149 +233,80 @@
       在类范围内定义的函数。如果作为该类实例的属性来调用，这个实例对象将是方法的第一个\ :term:`实参`\ (这个参数通常叫 ``self``)。参见\ :term:`函数`\ 和\ :term:`嵌套作用域`\ 。
 
    方法解析顺序
-      Method Resolution Order is the order in which base classes are searched
-      for a member during lookup. See `The Python 2.3 Method Resolution Order
-      <http://www.python.org/download/releases/2.3/mro/>`_.
+      方法解析顺序是指在基类中查找一个方法时所用的顺序。参见 `Python 2.3 中的方法解析顺序<http://www.python.org/download/releases/2.3/mro/>`_\ 。
 
-   module
-      An object that serves as an organizational unit of Python code.  Modules
-      have a namespace containing arbitrary Python objects.  Modules are loaded
-      into Python by the process of :term:`importing`.
+   模块
+      Python 代码的组织单位，也是一个对象。模块定义了一个命名空间，其中可以包含任意的 Python 对象。它是通过\ :term:`导入`\ 过程加载到 Python 中的。
 
    MRO
-      See :term:`method resolution order`.
+      参见\ :term:`方法解析顺序`\ 。
 
-   mutable
-      Mutable objects can change their value but keep their :func:`id`.  See
-      also :term:`immutable`.
+   可变对象
+      可变对象的值可以改变而保持相同的 :func:`id`\ 。参见\ :term:`不可变对象`\ 。
 
-   named tuple
-      Any tuple-like class whose indexable elements are also accessible using
-      named attributes (for example, :func:`time.localtime` returns a
-      tuple-like object where the *year* is accessible either with an
-      index such as ``t[0]`` or with a named attribute like ``t.tm_year``).
+   命名元组
+      任意像类一样的元组，其可用下标访问的元素也可以通过命名属性访问(例如 :func:`time.localtime` 返回像元组一样的对象，其 *year* 属性既可以用下标访问 ``t[0]`` 也可以用命名属性访问 ``t.tm_year``)。
 
-      A named tuple can be a built-in type such as :class:`time.struct_time`,
-      or it can be created with a regular class definition.  A full featured
-      named tuple can also be created with the factory function
-      :func:`collections.namedtuple`.  The latter approach automatically
-      provides extra features such as a self-documenting representation like
-      ``Employee(name='jones', title='programmer')``.
+      命名元组可以是内置类型，例如 :class:`time.struct_time`\ ，也可以用普通的类定义的方法创建。功能完整的命名元组还可以用工厂函数 :func:`collections.namedtuple` 来创建。最后这种方法自动提供了一些额外的功能，例如像 ``Employee(name='jones', title='programmer')`` 的自我解释形式。
 
-   namespace
-      The place where a variable is stored.  Namespaces are implemented as
-      dictionaries.  There are the local, global and built-in namespaces as well
-      as nested namespaces in objects (in methods).  Namespaces support
-      modularity by preventing naming conflicts.  For instance, the functions
-      :func:`builtins.open` and :func:`os.open` are distinguished by their
-      namespaces.  Namespaces also aid readability and maintainability by making
-      it clear which module implements a function.  For instance, writing
-      :func:`random.seed` or :func:`itertools.islice` makes it clear that those
-      functions are implemented by the :mod:`random` and :mod:`itertools`
-      modules, respectively.
+   命名空间
+      存储变量的地方。命名空间通过字典实现，它们有局部的、全局的、内置的、以及对象(方法)中嵌套的。命名空间避免了名称冲突，从而支持模块化。例如，函数 :func:`builtins.open` 和函数 :func:`os.open` 通过其命名空间得以区别。命名空间还明确指示一个函数在哪个模块中实现，因而增强可读性和可维护性。例如，\ :func:`random.seed` 和 :func:`itertools.islice` 这两个不同的写法说明这两个函数分别是 :mod:`random` 和 :mod:`itertools` 模块实现的。
 
-   namespace package
-      A :pep:`420` :term:`package` which serves only as a container for
-      subpackages.  Namespace packages may have no physical representation,
-      and specifically are not like a :term:`regular package` because they
-      have no ``__init__.py`` file.
+   包空间
+      遵循 :pep:`420` 的\ :term:`包`\ ，其作用只是作为子包的容器。包空间可以没有物理包结构，尤其是不像\ :term:`普通包`\ 那样包含 ``__init__.py`` 文件。
 
    嵌套作用域
-      The ability to refer to a variable in an enclosing definition.  For
-      instance, a function defined inside another function can refer to
-      variables in the outer function.  Note that 嵌套作用域 by default work
-      only for reference and not for assignment.  Local variables both read and
-      write in the innermost scope.  Likewise, global variables read and write
-      to the global namespace.  The :keyword:`nonlocal` allows writing to outer
-      scopes.
+      能够引用在嵌套外围定义的变量。例如，在另外一个函数之内定义的函数能够引用其外部的变量。注意，默认情况下嵌套作用域只对引用有效，而对赋值无效。本场变量在嵌套最内层既可读也可写；类似的，全局变量在全局空间也是可读可写的。\ :keyword:`nonlocal` 可以对外围的变量写入。
 
-   new-style class
-      Old name for the flavor of classes now used for all class objects.  In
-      earlier Python versions, only new-style classes could use Python's newer,
-      versatile features like :attr:`__slots__`, descriptors, properties,
-      :meth:`__getattribute__`, class methods, and static methods.
+   新式类
+      目前所有类对象都使用的风格，这是以前的称呼。在 Python 以前的版本中，只有新式的类才可以使用 Python 中新的强化功能，例如 :attr:`__slots__`\ 、描述符、属性、\ :meth:`__getattribute__`\ 、类方法、以及静态方法。
 
-   object
-      Any data with state (attributes or value) and defined behavior
-      (methods).  Also the ultimate base class of any :term:`new-style
-      class`.
+   对象
+      任何包含状态(属性或值)和既定行为(方法)的数据。object 也是所有\ :term:`新式类`\ 的最终基类。
 
-   package
-      A Python module which can contain submodules or recursively,
-      subpackages.  Technically, a package is a Python module with an
-      ``__path__`` attribute.
+   包
+      Python 中的模块，可以包含子模块或者递归的子包。从技术上说，包是指含有 ``__path__`` 属性的 Python 模块。
 
-   parameter
-      A named entity in a :term:`function` (or method) definition that
-      specifies an :term:`argument` (or in some cases, arguments) that the
-      function can accept.  There are five types of parameters:
+   形参
+      :term:`函数`\ (或者方法)定义中的命名实体，指定该函数能够接受的\ :term:`实参`\ (有时可以是多个实参)。形参有五种类型：
 
-      * :dfn:`positional-or-keyword`: specifies an argument that can be passed
-        either :term:`positionally <argument>` or as a :term:`keyword argument
-        <argument>`.  This is the default kind of parameter, for example *foo*
-        and *bar* in the following::
+      * :dfn:`位置形参或关键字形参`\ ：指定可以接受的\ :term:`位置实参<argument>`\ 或者\ :term:`关键字实参<argument>`\ 。这是默认的形参类型，例如下面的 *foo* 和 *bar*::
 
            def func(foo, bar=None): ...
 
-      * :dfn:`positional-only`: specifies an argument that can be supplied only
-        by position.  Python has no syntax for defining positional-only
-        parameters.  However, some built-in functions have positional-only
-        parameters (e.g. :func:`abs`).
+      * :dfn:`只用置形参`\ ：指定只能通过位置传入的实参。Python 中没有特殊的语法定义只用位置形参的函数，但有些内置函数却只有位置形参(例如 :func:`abs`)。
 
-      * :dfn:`keyword-only`: specifies an argument that can be supplied only
-        by keyword.  Keyword-only parameters can be defined by including a
-        single var-positional parameter or bare ``*`` in the parameter list
-        of the function definition before them, for example *kw_only1* and
-        *kw_only2* in the following::
+      * :dfn:`只用关键字形参`\ ：指定只能通过关键字传入的实参。关键字形参在定义时可以在函数的形参列表中先指定前面仅有的可变位置形参或单独的 ``*``\ ，例如下面的 *kw_only1* 和 *kw_only2*::
 
            def func(arg, *, kw_only1, kw_only2): ...
 
-      * :dfn:`var-positional`: specifies that an arbitrary sequence of
-        positional arguments can be provided (in addition to any positional
-        arguments already accepted by other parameters).  Such a parameter can
-        be defined by prepending the parameter name with ``*``, for example
-        *args* in the following::
+      * :dfn:`可变位置形参`\ ：指定可以传入任意个数的位置实参(除了其它形参已经接受的任何位置形参)。这种形参可以通过在形参名称前加上 ``*`` 来定义，例如下面的 *args*::
 
            def func(*args, **kwargs): ...
 
-      * :dfn:`var-keyword`: specifies that arbitrarily many keyword arguments
-        can be provided (in addition to any keyword arguments already accepted
-        by other parameters).  Such a parameter can be defined by prepending
-        the parameter name with ``**``, for example *kwargs* in the example
-        above.
+      * :dfn:`可变关键字形参`\ ：指定可以传入任意个数的关键字实参(除了其它形参已经接受的任何关键字形参)。这种形参可以通过在形参名称前面加上 ``**`` 来定义，例如上面例子中的 *kwargs*\ 。
 
-      Parameters can specify both optional and required arguments, as well as
-      default values for some optional arguments.
+      形参声明的实参既可以是可选的，也可以是必须的；它还可以为一些可选实参指定默认值。
 
-      See also the :term:`argument` glossary entry, the FAQ question on
-      :ref:`the difference between arguments and parameters
-      <faq-argument-vs-parameter>`, the :class:`inspect.Parameter` class, the
-      :ref:`function` section, and :pep:`362`.
+      参见术语条目\ :term:`实参`\ 、\ :ref:`实参和形参的区别<faq-argument-vs-parameter>`\ 处的常见问题、\ :class:`inspect.Parameter` 类、\ :ref:`函数`\ 、以及 :pep:`362`\ 。
 
    路径条目
-      A single location on the :term:`import path` which the :term:`path
-      based finder` consults to find modules for importing.
+      :term:`导入路径`\ 中的单个位置；\ :term:`基于路径的查找器`\ 用它来查找要导入的模块。
 
    路径条目查找器
-      A :term:`finder` returned by a callable on :data:`sys.path_hooks`
-      (i.e. a :term:`path entry hook`) which knows how to locate modules given
-      a :term:`path entry`.
+      :data:`sys.path_hooks` (即\ :term:`路径条目钩子`)中可调用对象返回的\ :term:`查找器`\ ，它知道怎么在给定\ :term:`路径条目`\ 中查找模块。
 
-   路径条目 hook
-      A callable on the :data:`sys.path_hook` list which returns a :term:`path
-      entry finder` if it knows how to find modules on a specific :term:`path
-      entry`.
+   路径条目钩子
+      :data:`sys.path_hook` 列表中的可调用对象，如果它知道怎么在指定的\ :term:`路径条目`\ 找到模块就会返回一个\ :term:`路径条目查找器`\ 。
 
-   path based finder
-      One of the default :term:`meta path finders <meta path finder>` which
-      searches an :term:`import path` for modules.
+   基于路径的查找器
+      默认的\ :term:`元路径查找器<meta path finder>`\ 之一，可以在\ :term:`导入路径`\ 中搜索模块。
 
-   portion
-      A set of files in a single directory (possibly stored in a zip file)
-      that contribute to a namespace package, as defined in :pep:`420`.
+   包块
+      构成包空间的单个目录(可能存储在 zip 文件中)中的一系列文件，参见 :pep:`420` 中的定义。
 
-   positional argument
-      See :term:`argument`.
+   位置实参
+      参见\ :term:`实参`\ 。
 
    provisional package
       A provisional package is one which has been deliberately excluded from
