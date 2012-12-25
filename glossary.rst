@@ -238,51 +238,29 @@
 
       More information can be found in :ref:`typeiter`.
 
-   key function
-      A key function or collation function is a callable that returns a value
-      used for sorting or ordering.  For example, :func:`locale.strxfrm` is
-      used to produce a sort key that is aware of locale specific sort
-      conventions.
+   关键字函数
+      关键字函数，又叫整理函数，是一个返回值可以用来排序的函数。例如， :func:`locale.strxfrm` 被用来生成一个排序键值，这个值知道语言区域相关的惯例。
 
-      A number of tools in Python accept key functions to control how elements
-      are ordered or grouped.  They include :func:`min`, :func:`max`,
-      :func:`sorted`, :meth:`list.sort`, :func:`heapq.nsmallest`,
-      :func:`heapq.nlargest`, and :func:`itertools.groupby`.
+      Python 中有许多函数接受关键字函数来控制元素的排序或者分组，包括 :func:`min`\ ,\ :func:`max`\ ，\ :func:`sorted`\ ，\ :meth:`list.sort`\ ，\ :func:`heapq.nsmallest`\ ，\ :func:`heapq.nlargest`\ ，以及\ :func:`itertools.groupby`\ 。
 
-      There are several ways to create a key function.  For example. the
-      :meth:`str.lower` method can serve as a key function for case insensitive
-      sorts.  Alternatively, an ad-hoc key function can be built from a
-      :keyword:`lambda` expression such as ``lambda r: (r[0], r[2])``.  Also,
-      the :mod:`operator` module provides three key function constructors:
-      :func:`~operator.attrgetter`, :func:`~operator.itemgetter`, and
-      :func:`~operator.methodcaller`.  See the :ref:`Sorting HOW TO
-      <sortinghowto>` for examples of how to create and use key functions.
+      创建关键字函数的方法有好几种。例如，\ :meth:`str.lower` 方法可以作为不区分大小写排序的关键字函数。还可以用 :keyword:`lambda` 表达式临时创建一个关键字函数，例如 ``lambda r: (r[0], r[2])``\ 。此外，\ :mod:`operator` 模块提供了三个关键字函数构造方法：\ :func:`~operator.attrgetter`\ ，\ :func:`~operator.itemgetter` 和 :func:`~operator.methodcaller`\ 。关于如何创建和使用关键字函数，参见\ :ref:`怎么排序<sortinghowto>`\ 。
 
-   keyword argument
-      See :term:`argument`.
+   命名实参
+      参见\ :term:`实参`\ 。
 
    lambda
-      An anonymous inline function consisting of a single :term:`expression`
-      which is evaluated when the function is called.  The syntax to create
-      a lambda function is ``lambda [arguments]: expression``
+      匿名的内联函数，只包含一个\ :term:`表达式`\ ，在调用该函数时会对这个表达式进行求值。创建一个 lambda 函数的语法是 ``lambda [arguments]: expression``\ 。
 
    LBYL
       看看周围环境再跳跃。这种编程风格在调用方法或者查找属性前明确检测前提条件。它和 :term:`EAFP` 方法相对，其特征是有很多 :keyword:`if` 语句。
 
       在多线程环境中，LBYL 方法可能引发"查看者"和"跳跃者"之间的竞争状态。例如，在代码 ``if key in mapping: return mapping[key]`` 中，如果另一个线程在检测过后查找之前把 *key* 从 *mapping* 删除掉。这种情况可以通过锁或者 EAFP 方法解决。
 
-   list
-      A built-in Python :term:`sequence`.  Despite its name it is more akin
-      to an array in other languages than to a linked list since access to
-      elements are O(1).
+   列表
+      Python 内置的一种\ :term:`序列`\ 类型。尽管这个名字有其它含义，它和其它语言中的数组更相近，而不是链表，因为它访问元素的复杂度是 O(1)。
 
-   list comprehension
-      A compact way to process all or part of the elements in a sequence and
-      return a list with the results.  ``result = ['{:#04x}'.format(x) for x in
-      range(256) if x % 2 == 0]`` generates a list of strings containing
-      even hex numbers (0x..) in the range from 0 to 255. The :keyword:`if`
-      clause is optional.  If omitted, all elements in ``range(256)`` are
-      processed.
+   列表解析
+      处理序列中所有或者部分元素的一种紧凑形式，结果返回一个列表。\ ``result = ['{:#04x}'.format(x) for x in range(256) if x % 2 == 0]`` 生成一个字符串列表，包括了从 0 到 255 之间的十六进制偶数(0x..)。这里的 :keyword:`if` 子句是可选的；如果省略，则会处理 ``range(256)`` 中的所有元素。
 
    loader
       An object that loads a module. It must define a method named
