@@ -165,78 +165,31 @@
    IDLE
       Python 集成开发环境。IDLE 是 Python 发行版中自带的基本编辑器及解释执行环境。
 
-   immutable
-      An object with a fixed value.  Immutable objects include numbers, strings and
-      tuples.  Such an object cannot be altered.  A new object has to
-      be created if a different value has to be stored.  They play an important
-      role in places where a constant hash value is needed, for example as a key
-      in a dictionary.
+   不可变对象
+      其值固定不变的对象。不可变对象包括数值，字符串和元组，它们都不能更改。如果要存储不同的值，必须创建新的对象。它们在需要散列常量值的地方起着重要作用，例如作为字典的键名。
 
-   import path
-      A list of locations (or :term:`path entries <path entry>`) that are
-      searched by the :term:`path based finder` for modules to import. During
-      import, this list of locations usually comes from :data:`sys.path`, but
-      for subpackages it may also come from the parent package's ``__path__``
-      attribute.
+   导入路径
+      :term:`基于路径的搜索器`\ 在导入模块时所搜索的位置列表(或者叫\ :term:`路径条目<path entry>`)。时行导入时，这个位置列表通常来自 :data:`sys.path`\ ，但对于子包也可以来自父包的 ``__path__`` 属性。
 
-   importing
-      The process by which Python code in one module is made available to
-      Python code in another module.
+   导入
+      Python 一个模块中的代码借此在另一个模块中使用的过程。
 
-   importer
-      An object that both finds and loads a module; both a
-      :term:`finder` and :term:`loader` object.
+   导入器
+      一个既能搜索又能加载模块的对象；它既是\ :term:`查找器`\ 又是\ :term:`加载器`\ 对象。
 
-   interactive
-      Python has an interactive interpreter which means you can enter
-      statements and expressions at the interpreter prompt, immediately
-      execute them and see their results.  Just launch ``python`` with no
-      arguments (possibly by selecting it from your computer's main
-      menu). It is a very powerful way to test out new ideas or inspect
-      modules and packages (remember ``help(x)``).
+   交互式
+      Python 有个交互式的解析器，这意味着你可以在解释器提示符下输入语句和表达式，让它们立即执行并看到运行结果。这只要运行 ``python`` 命令而不加参数(也有可能从你电脑的主菜单中选择)就可以了。这对于测试新的思路或检阅模块及包(记住要用 ``help(x)``)来说是非常强大的。
 
-   interpreted
-      Python is an interpreted language, as opposed to a compiled one,
-      though the distinction can be blurry because of the presence of the
-      bytecode compiler.  This means that source files can be run directly
-      without explicitly creating an executable which is then run.
-      Interpreted languages typically have a shorter development/debug cycle
-      than compiled ones, though their programs generally also run more
-      slowly.  See also :term:`interactive`.
+   解释型
+      Python 是解释型语言而不是编译型的，尽管字节码编译器的存在，其区别已经很模糊。这意味着源文件可以直接运行而不需要先明确创建一个可执行程序然后再运行。解释型语言的开发/调试周期通常比编译型的短，尽管这些程序一般也运行得慢。参见\ :term:`交互式`\ 。
 
-   iterable
-      An object capable of returning its members one at a
-      time. Examples of iterables include all sequence types (such as
-      :class:`list`, :class:`str`, and :class:`tuple`) and some non-sequence
-      types like :class:`dict` and :class:`file` and objects of any classes you
-      define with an :meth:`__iter__` or :meth:`__getitem__` method.  Iterables
-      can be used in a :keyword:`for` loop and in many other places where a
-      sequence is needed (:func:`zip`, :func:`map`, ...).  When an iterable
-      object is passed as an argument to the built-in function :func:`iter`, it
-      returns an iterator for the object.  This iterator is good for one pass
-      over the set of values.  When using iterables, it is usually not necessary
-      to call :func:`iter` or deal with iterator objects yourself.  The ``for``
-      statement does that automatically for you, creating a temporary unnamed
-      variable to hold the iterator for the duration of the loop.  See also
-      :term:`iterator`, :term:`sequence`, and :term:`generator`.
+   可迭代对象
+      可以每次返回其中一个元素的对象。可迭代对象的例子包括所有的序列类型(例如 :class:`list`\ 、\ :class:`str`\ 、\ :class:`tuple`)和一些非序列类型，如 :class:`dict` 和 :class:`file`\ ，还有你自己定义的类对象，只要它们有 :meth:`__iter__` 或者 :meth:`__getitem__` 方法。可迭代对象可以在 :keyword:`for` 循环语句和很多其它需要序列类型(:func:`zip`\ 、\ :func:`map`\ 、 ...)的地方使用。如果把一个可迭代对象作为形参传递给内部函数 :func:`iter`\ ，就会返回该对象的一个迭代器。这对于单次遍历一系列值而言是很好的。在使用可迭代对象时，通常都没有必要亲自调用 :func:`iter` 或者处理迭代器对象，\ ``for`` 语句会自动帮你完成，并在循环过程中创建一个临时变量来保存迭代器。参见 :term:`迭代器`\ 、\ :term:`序列` 和 :term:`生成函数`\ 。
 
-   iterator
-      An object representing a stream of data.  Repeated calls to the iterator's
-      :meth:`~iterator.__next__` method (or passing it to the built-in function
-      :func:`next`) return successive items in the stream.  When no more data
-      are available a :exc:`StopIteration` exception is raised instead.  At this
-      point, the iterator object is exhausted and any further calls to its
-      :meth:`__next__` method just raise :exc:`StopIteration` again.  Iterators
-      are required to have an :meth:`__iter__` method that returns the iterator
-      object itself so every iterator is also iterable and may be used in most
-      places where other iterables are accepted.  One notable exception is code
-      which attempts multiple iteration passes.  A container object (such as a
-      :class:`list`) produces a fresh new iterator each time you pass it to the
-      :func:`iter` function or use it in a :keyword:`for` loop.  Attempting this
-      with an iterator will just return the same exhausted iterator object used
-      in the previous iteration pass, making it appear like an empty container.
+   迭代器
+      代表一个数据流的对象。连续调用迭代器的 :meth:`~iterator.__next__` 方法(或者连续把它传给内部函数 :func:`next`)会相继返回流中的数据项。如果没有数据可用，则抛出 :exc:`StopIteration` 异常。这时，迭代器对象已经穷尽，如果继续调用其 :meth:`__next__` 方法就会再次抛出 :exc:`StopIteration` 异常。迭代器必须要有 :meth:`__iter__` 方法，这个方法要返回迭代器本身，所以每个迭代器都是可迭代对象，在可以使用其它可迭代对象的大部分对方也可以用迭代器。这里有个异常值得关注，就是试图多次遍历数据的代码。每当把容器对象(例如 :class:`list`)传给 :func:`iter` 函数或者在 :keyword:`for` 循环中使用时都会产生一个新的迭代器。如果这样使用迭代器，则会返回同样已经上次遍历中穷尽的迭代器对象，这使得它像一个空的容器。
 
-      More information can be found in :ref:`typeiter`.
+      更多信息参见\ :ref:`typeiter`\ 。
 
    关键字函数
       关键字函数，又叫整理函数，是一个返回值可以用来排序的函数。例如， :func:`locale.strxfrm` 被用来生成一个排序键值，这个值知道语言区域相关的惯例。
@@ -262,7 +215,7 @@
    列表解析
       处理序列中所有或者部分元素的一种紧凑形式，结果返回一个列表。\ ``result = ['{:#04x}'.format(x) for x in range(256) if x % 2 == 0]`` 生成一个字符串列表，包括了从 0 到 255 之间的十六进制偶数(0x..)。这里的 :keyword:`if` 子句是可选的；如果省略，则会处理 ``range(256)`` 中的所有元素。
 
-   loader
+   加载器
       An object that loads a module. It must define a method named
       :meth:`load_module`. A loader is typically returned by a
       :term:`finder`. See :pep:`302` for details and
