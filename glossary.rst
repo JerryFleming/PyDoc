@@ -155,7 +155,7 @@
 
       以前曾试图创建一个"自由的多线程"解释器(能够在更细的粒度锁定共享数据)，但并没有取得多大成功，因为在常见的单处理器上性能非常差。大家认为，要解决这个性能问题需要把实现做得更复杂，所以维护成本也更高。
 
-   可散列的
+   可散列对象
       在一个对象的生命周期中，如果它的散列值从来不会改变(要有一个 :meth:`__hash__` 方法)，还可以和其它对象比较(需要有 :meth:`__eq__` 方法)，则说这个对象是\ *可散列的*\ 。比较结果相等的可散列对象必须有相同的散列值。
 
       可散列的特性使一个对象能够用作字典的键名，以及集合的元素，因为这些数据结构内部使用散列值。
@@ -194,7 +194,7 @@
    关键字函数
       关键字函数，又叫整理函数，是一个返回值可以用来排序的函数。例如， :func:`locale.strxfrm` 被用来生成一个排序键值，这个值知道语言区域相关的惯例。
 
-      Python 中有许多函数接受关键字函数来控制元素的排序或者分组，包括 :func:`min`, :func:`max`, :func:`sorted`, :meth:`list.sort`,  :func:`heapq.nsmallest`, :func:`heapq.nlargest`\ ，以及\ :func:`itertools.groupby`\ 。
+      Python 中有许多函数接受关键字函数来控制元素的排序或者分组，包括 :func:`min`\ ，\ :func:`max`\ ，\ :func:`sorted`\ ，\ :meth:`list.sort`\ ，\ :func:`heapq.nsmallest`\ ，\ :func:`heapq.nlargest`\ ，以及\ :func:`itertools.groupby`\ 。
 
       创建关键字函数的方法有好几种。例如，\ :meth:`str.lower` 方法可以作为不区分大小写排序的关键字函数。还可以用 :keyword:`lambda` 表达式临时创建一个关键字函数，例如 ``lambda r: (r[0], r[2])``\ 。此外，\ :mod:`operator` 模块提供了三个关键字函数构造方法：\ :func:`~operator.attrgetter`\ ，\ :func:`~operator.itemgetter` 和 :func:`~operator.methodcaller`\ 。关于如何创建和使用关键字函数，参见\ :ref:`怎么排序<sortinghowto>`\ 。
 
@@ -216,36 +216,18 @@
       处理序列中所有或者部分元素的一种紧凑形式，结果返回一个列表。\ ``result = ['{:#04x}'.format(x) for x in range(256) if x % 2 == 0]`` 生成一个字符串列表，包括了从 0 到 255 之间的十六进制偶数(0x..)。这里的 :keyword:`if` 子句是可选的；如果省略，则会处理 ``range(256)`` 中的所有元素。
 
    加载器
-      An object that loads a module. It must define a method named
-      :meth:`load_module`. A loader is typically returned by a
-      :term:`finder`. See :pep:`302` for details and
-      :class:`importlib.abc.Loader` for an :term:`abstract base class`.
+      能加载模块的对象，它必须定义 :meth:`load_module` 方法。加载器通常是由\ :term:`查找器`\ 返回的。详情参见 :pep:`302` 或者 :class:`importlib.abc.Loader` 中的\ :term:`虚基类`\ 。
 
-   mapping
-      A container object that supports arbitrary key lookups and implements the
-      methods specified in the :class:`~collections.abc.Mapping` or
-      :class:`~collections.abc.MutableMapping`
-      :ref:`abstract base classes <collections-abstract-base-classes>`.  Examples
-      include :class:`dict`, :class:`collections.defaultdict`,
-      :class:`collections.OrderedDict` and :class:`collections.Counter`.
+   映射
+      一个容器对象，支持用任意键名访问，并实现了 :class:`~collections.abc.Mapping` 或者 :class:`~collections.abc.MutableMapping` :ref:`虚基类<collections-abstract-base-classes>`\ 中指定的方法。例如 :class:`dict`\ ，\ :class:`collections.defaultdict`\ ，\ :class:`collections.OrderedDict` 和 :class:`collections.Counter`\ 。
 
-   meta path finder
-      A finder returned by a search of :data:`sys.meta_path`.  Meta path
-      finders are related to, but different from :term:`path entry finders
-      <path entry finder>`.
+   元路径查找器
+      在 :data:`sys.meta_path` 找到的查找器，它和\ :term:`路径条目查找器<path entry finder>`\ 有关系，但又不一样。.
 
-   metaclass
-      The class of a class.  Class definitions create a class name, a class
-      dictionary, and a list of base classes.  The metaclass is responsible for
-      taking those three arguments and creating the class.  Most object oriented
-      programming languages provide a default implementation.  What makes Python
-      special is that it is possible to create custom metaclasses.  Most users
-      never need this tool, but when the need arises, metaclasses can provide
-      powerful, elegant solutions.  They have been used for logging attribute
-      access, adding thread-safety, tracking object creation, implementing
-      singletons, and many other tasks.
+   元类
+      类之类，即定义了类名、类字典、一系列基类的类。元类负责利用这三个参数创建一个类。许多面向对象的编程语言提供了默认的元类实现，而 Python 的特别之处在于它允许创建自定义元类。大部分用户都不需要这个东西，但在需要的时候它就能提供很强大和优雅的方案。它们已经被用来记录属性访问、增加线程安全性、跟踪对象创建、实现单例模式以及很多其它的任务。
 
-      More information can be found in :ref:`metaclasses`.
+      更多信息参见\ :ref:`metaclasses`\ 。
 
    方法
       A function which is defined inside a class body.  If called as an attribute
@@ -373,16 +355,16 @@
       <faq-argument-vs-parameter>`, the :class:`inspect.Parameter` class, the
       :ref:`function` section, and :pep:`362`.
 
-   path entry
+   路径条目
       A single location on the :term:`import path` which the :term:`path
       based finder` consults to find modules for importing.
 
-   path entry finder
+   路径条目查找器
       A :term:`finder` returned by a callable on :data:`sys.path_hooks`
       (i.e. a :term:`path entry hook`) which knows how to locate modules given
       a :term:`path entry`.
 
-   path entry hook
+   路径条目 hook
       A callable on the :data:`sys.path_hook` list which returns a :term:`path
       entry finder` if it knows how to find modules on a specific :term:`path
       entry`.
