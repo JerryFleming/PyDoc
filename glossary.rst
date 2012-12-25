@@ -114,7 +114,7 @@
    查找器
       能够尽可能搜索一个模块中 :term:`loader` 的对象。它必须实现一个叫 :meth:`find_loader` 或者 :meth:`find_module` 的方法。详情参见 :pep:`302` 以及 :pep:`420`\ ，或者 :class:`importlib.abc.Finder` 中的 :term:`abstract base class`\ 。
 
-   下进位除法(整除)
+   下进位除法
       数学中的商向下进位到最近的整数。下进位除法的运算符是 ``//``\ 。例如，表达式 ``11 // 4`` 值为 ``2`` 而真正的浮点数除法的值是 ``2.75``\ 。注意 ``(-11) // 4`` 是 ``-3``\ ，因为要把 ``-2.75`` *向下*\ 进位。参见 :pep:`238`\ 。
 
    函数
@@ -230,12 +230,9 @@
       更多信息参见\ :ref:`metaclasses`\ 。
 
    方法
-      A function which is defined inside a class body.  If called as an attribute
-      of an instance of that class, the method will get the instance object as
-      its first :term:`argument` (which is usually called ``self``).
-      See :term:`function` and :term:`nested scope`.
+      在类范围内定义的函数。如果作为该类实例的属性来调用，这个实例对象将是方法的第一个\ :term:`实参`\ (这个参数通常叫 ``self``)。参见\ :term:`函数`\ 和\ :term:`嵌套作用域`\ 。
 
-   method resolution order
+   方法解析顺序
       Method Resolution Order is the order in which base classes are searched
       for a member during lookup. See `The Python 2.3 Method Resolution Order
       <http://www.python.org/download/releases/2.3/mro/>`_.
@@ -283,10 +280,10 @@
       and specifically are not like a :term:`regular package` because they
       have no ``__init__.py`` file.
 
-   nested scope
+   嵌套作用域
       The ability to refer to a variable in an enclosing definition.  For
       instance, a function defined inside another function can refer to
-      variables in the outer function.  Note that nested scopes by default work
+      variables in the outer function.  Note that 嵌套作用域 by default work
       only for reference and not for assignment.  Local variables both read and
       write in the innermost scope.  Likewise, global variables read and write
       to the global namespace.  The :keyword:`nonlocal` allows writing to outer
