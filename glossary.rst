@@ -23,7 +23,7 @@
       虚基类(ABC)是\ :term:`鸭子类型`\ 的典型例子，它提供了一种定义接口的方法；而这时其它的技巧，例如 :func:`hasattr` 等(如用\ :ref:`魔术方法<special-lookup>`)，都显得笨拙或有点错误。虚基类引入虚子类的概念，即一个类并没有继承另一个类，但仍可以通过 :func:`isinstance` 和 :func:`issubclass` 来识别，详见 :mod:`abc` 模块的文档。Python 内置了很多虚基类以用于数据类型(在 :mod:`collections.abc` 模块中)、数值(在 :mod:`numbers` 模块中)、数据流(在 :mod:`io` 模块中)、导入时搜索和加载(在 :mod:`importlib.abc` 模块中)。你也可以用 :mod:`abc` 模块创建自己的虚基类。
 
    实参
-      在调用\ :term:`函数`(或者\ :term:`方法`)时所传递的值。实参有两种类型：
+      在调用\ :term:`函数`\ (或者\ :term:`方法`)时所传递的值。实参有两种类型：
 
       * :dfn:`命名实参`\ ：在函数调用中带有标志符(例如 ``name=``)的参数，或者字典中键值前带有 ``**`` 的传入参数。例如下面调用 :func:`complex` 时 ``3`` 和 ``5`` 都是命名实参::
 
@@ -57,7 +57,7 @@
       在要求两个运算数类型相同的运算中，一种类的实例转化为另外一种类的实例。例如，\ ``int(3.15)`` 把浮点数转化为整数 ``3``\ ，但是在 ``3+4.5`` 中，运算数的类型各不相同(一个 int，一个 float)，所以在它们相加之前都要转化为相同的类型，否则就会抛出 ``TypeError`` 异常来。如果没有隐匿转换，即使是类型兼容的运算数也必须由程序员来转换。例如要写成 ``float(3)+4.5`` 而不是简单的 ``3+4.5``\ 。
 
    复数
-      这是您熟悉的实数系统的扩展，其中所有的数都表示为实部和虚部之和。虚数是虚数单位(``-1`` 的平方根，在数学中通常记为 ``i``，而在工程领域则记为 ``j``)与实数的积。Python 内置了对算数的支持，采用了第二种书写形式，即虚部带有 ``j`` 后缀，例如 ``3+1j``\ 。和 :mod:`math` 模块相对应的算数模块是 :mod:`cmath`\ 。复数的使用是相当高等的数学中才会有的。如果你不知道哪里要用到它，就可以放心的忽略这些。
+      这是您熟悉的实数系统的扩展，其中所有的数都表示为实部和虚部之和。虚数是虚数单位(``-1`` 的平方根，在数学中通常记为 ``i``\ ，而在工程领域则记为 ``j``)与实数的积。Python 内置了对算数的支持，采用了第二种书写形式，即虚部带有 ``j`` 后缀，例如 ``3+1j``\ 。和 :mod:`math` 模块相对应的算数模块是 :mod:`cmath`\ 。复数的使用是相当高等的数学中才会有的。如果你不知道哪里要用到它，就可以放心的忽略这些。
 
    上下文管理器
       在 :keyword:`with` 语句中用于管理环境的一个对象，它定义了 :meth:`__enter__` 和 :meth:`__exit__` 方法。参见 :pep:`343`\ 。
@@ -98,7 +98,7 @@
       请求谅解比获得权限更容易。这是 Python 的编程风格，它假定某个键名或属性是有效的，如果假设错误则通过捕获异常来处理。这种简捷快速的风格的特征是带有很多 :keyword:`try` 和 :keyword:`except` 语句。这和很多其它语言中使用的 `LBYL` 风格相对，例如 C 中的那样。
 
    表达式
-      一段可以求值的语法结构。换句话说，一个表达式是由一系列表达式元素组成的，例如源常量，名称，属性访问，运算符，或者有返回值的函数调用。和其它语言不同的是，并非所有的语法结构都是表达式。还有些\ :term:`语句`\ 不能作为表达式使用，例如 :keyword:`if`\ 。赋值语法也是语句，而不是表达式。
+      一段可以求值的语法结构。换句话说，一个表达式是由一系列表达式元素组成的，例如源常量、名称、属性访问、运算符、或者有返回值的函数调用。和其它语言不同的是，并非所有的语法结构都是表达式。还有些\ :term:`语句`\ 不能作为表达式使用，例如 :keyword:`if`\ 。赋值语法也是语句，而不是表达式。
 
    扩展模块
       使用 C 或者 C++ 编写的模块，它们通过 Python 的 C API 来和核心及用户代码交互。
@@ -112,7 +112,7 @@
       :term:`文件对象`\ 的同义词。
 
    查找器
-      能够尽可能搜索一个模块 :term:`loader` 的对象。它必须实现一个叫 :meth:`find_loader` 或者 :meth:`find_module` 的方法。详情参见 :pep:`302` 以及 :pep:`420`\ ，或者 :class:`importlib.abc.Finder` 中的 :term:`abstract base class`\ 。
+      能够尽可能搜索一个模块中 :term:`loader` 的对象。它必须实现一个叫 :meth:`find_loader` 或者 :meth:`find_module` 的方法。详情参见 :pep:`302` 以及 :pep:`420`\ ，或者 :class:`importlib.abc.Finder` 中的 :term:`abstract base class`\ 。
 
    下进位除法(整除)
       数学中的商向下进位到最近的整数。下进位除法的运算符是 ``//``\ 。例如，表达式 ``11 // 4`` 值为 ``2`` 而真正的浮点数除法的值是 ``2.75``\ 。注意 ``(-11) // 4`` 是 ``-3``\ ，因为要把 ``-2.75`` *向下*\ 进位。参见 :pep:`238`\ 。
@@ -169,7 +169,7 @@
       其值固定不变的对象。不可变对象包括数值，字符串和元组，它们都不能更改。如果要存储不同的值，必须创建新的对象。它们在需要散列常量值的地方起着重要作用，例如作为字典的键名。
 
    导入路径
-      :term:`基于路径的搜索器`\ 在导入模块时所搜索的位置列表(或者叫\ :term:`路径条目<path entry>`)。时行导入时，这个位置列表通常来自 :data:`sys.path`\ ，但对于子包也可以来自父包的 ``__path__`` 属性。
+      :term:`基于路径的搜索器`\ 在导入模块时所搜索的位置列表(或者叫\ :term:`路径条目<path entry>`)。进行导入时，这个位置列表通常来自 :data:`sys.path`\ ，但对于子包也可以来自父包的 ``__path__`` 属性。
 
    导入
       Python 一个模块中的代码借此在另一个模块中使用的过程。
@@ -194,7 +194,7 @@
    关键字函数
       关键字函数，又叫整理函数，是一个返回值可以用来排序的函数。例如， :func:`locale.strxfrm` 被用来生成一个排序键值，这个值知道语言区域相关的惯例。
 
-      Python 中有许多函数接受关键字函数来控制元素的排序或者分组，包括 :func:`min`\ ,\ :func:`max`\ ，\ :func:`sorted`\ ，\ :meth:`list.sort`\ ，\ :func:`heapq.nsmallest`\ ，\ :func:`heapq.nlargest`\ ，以及\ :func:`itertools.groupby`\ 。
+      Python 中有许多函数接受关键字函数来控制元素的排序或者分组，包括 :func:`min`, :func:`max`, :func:`sorted`, :meth:`list.sort`,  :func:`heapq.nsmallest`, :func:`heapq.nlargest`\ ，以及\ :func:`itertools.groupby`\ 。
 
       创建关键字函数的方法有好几种。例如，\ :meth:`str.lower` 方法可以作为不区分大小写排序的关键字函数。还可以用 :keyword:`lambda` 表达式临时创建一个关键字函数，例如 ``lambda r: (r[0], r[2])``\ 。此外，\ :mod:`operator` 模块提供了三个关键字函数构造方法：\ :func:`~operator.attrgetter`\ ，\ :func:`~operator.itemgetter` 和 :func:`~operator.methodcaller`\ 。关于如何创建和使用关键字函数，参见\ :ref:`怎么排序<sortinghowto>`\ 。
 
@@ -247,7 +247,7 @@
 
       More information can be found in :ref:`metaclasses`.
 
-   method
+   方法
       A function which is defined inside a class body.  If called as an attribute
       of an instance of that class, the method will get the instance object as
       its first :term:`argument` (which is usually called ``self``).
