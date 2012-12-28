@@ -105,29 +105,21 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 .. _func-bytes:
 .. function:: bytes([source[, encoding[, errors]]])
 
-   Return a new "bytes" object, which is an immutable sequence of integers in
-   the range ``0 <= x < 256``.  :class:`bytes` is an immutable version of
-   :class:`bytearray` -- it has the same non-mutating methods and the same
-   indexing and slicing behavior.
+   返回一个新的"bytes"对象，它是一个 ``0 <= x < 256`` 范围内整数的不可变序列。\ :class:`bytes` 是 :class:`bytearray` 的不可变版本 --- 它用同样的不可变方法，以及索引和切片行为。
 
-   Accordingly, constructor arguments are interpreted as for :func:`bytearray`.
+   相应的，其构造函数的参数也如 :func:`bytearray` 中描述的那样。
 
-   Bytes objects can also be created with literals, see :ref:`strings`.
+   bytes 对象还可以通过源常量创建，参见\ :ref:`字符串`\ 。
 
-   See also :ref:`binaryseq`, :ref:`typebytes`, and :ref:`bytes-methods`.
+   另见\ :ref:`binaryseq`\ 、\ :ref:`typebytes`\ 、和 :ref:`bytes-methods`\ 。
 
 
 .. function:: callable(object)
 
-   Return :const:`True` if the *object* argument appears callable,
-   :const:`False` if not.  If this returns true, it is still possible that a
-   call fails, but if it is false, calling *object* will never succeed.
-   Note that classes are callable (calling a class returns a new instance);
-   instances are callable if their class has a :meth:`__call__` method.
+   如果参数 *object* 看起来可调用，则返回 :const:`True` ，否则返回 :const:`False` 。如果返回真，调用时仍然可能失败；但如果返回假，则调用 *object* 肯定不会成功。注意，类是可调用的(调用类会返回一个新的实例)；而如果类有 :meth:`__call__` 方法，则其实例也是可调用的。
 
    .. versionadded:: 3.2
-      This function was first removed in Python 3.0 and then brought back
-      in Python 3.2.
+      这个函数先从 Python 3.0 删除，然后在 Python 3.2 中又恢复了。
 
 
 .. function:: chr(i)

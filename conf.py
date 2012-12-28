@@ -1,4 +1,4 @@
-#
+# coding: utf8
 # Python documentation build configuration file
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -12,13 +12,14 @@ sys.path.append(os.path.abspath('tools/sphinxext'))
 # General configuration
 # ---------------------
 
+language = 'zh_CN'
 extensions = ['sphinx.ext.refcounting', 'sphinx.ext.coverage',
               'sphinx.ext.doctest', 'pyspecific']
 templates_path = ['tools/sphinxext']
 
 # General substitutions.
 project = 'Python'
-copyright = '1990-%s, Python Software Foundation' % time.strftime('%Y')
+copyright = u'1990-%s, Python 软件基金会' % time.strftime('%Y')
 
 # The default replacements for |version| and |release|.
 #
