@@ -7,7 +7,7 @@
 Python 解释器中内置了一些函数和类型，可以随时使用。下面按字母顺序列出。
 
 ===================  =================  ==================  ================  ====================
-..                   ..                 Built-in Functions  ..                ..
+ ..                   ..                 内置函数            ..                ..
 ===================  =================  ==================  ================  ====================
 :func:`abs`          |func-dict|_       :func:`help`        :func:`min`       :func:`setattr`
 :func:`all`          :func:`dir`        :func:`hex`         :func:`next`      :func:`slice`
@@ -174,7 +174,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
           @classmethod
           def f(cls, arg1, arg2, ...): ...
 
-   The ``@classmethod`` form is a function :term:`decorator` -- see the description
+   The ``@classmethod`` form is a function :term:`描述符` -- see the description
    of function definitions in :ref:`function` for details.
 
    It can be called either on the class (such as ``C.f()``) or on an instance (such
@@ -355,7 +355,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 .. function:: enumerate(iterable, start=0)
 
    Return an enumerate object. *iterable* must be a sequence, an
-   :term:`iterator`, or some other object which supports iteration.
+   :term:`迭代器`, or some other object which supports iteration.
    The :meth:`~iterator.__next__` method of the iterator returned by
    :func:`enumerate` returns a tuple containing a count (from *start* which
    defaults to 0) and the values obtained from iterating over *iterable*.
@@ -675,8 +675,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: issubclass(class, classinfo)
 
-   Return true if *class* is a subclass (direct, indirect or :term:`virtual
-   <abstract base class>`) of *classinfo*.  A
+   Return true if *class* is a subclass (direct, indirect or :term:`virtual <虚基类>`) of *classinfo*.  A
    class is considered a subclass of itself. *classinfo* may be a tuple of class
    objects, in which case every entry in *classinfo* will be checked. In any other
    case, a :exc:`TypeError` exception is raised.
@@ -684,7 +683,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: iter(object[, sentinel])
 
-   Return an :term:`iterator` object.  The first argument is interpreted very
+   Return an :term:`迭代器` object.  The first argument is interpreted very
    differently depending on the presence of the second argument. Without a
    second argument, *object* must be a collection object which supports the
    iteration protocol (the :meth:`__iter__` method), or it must support the
@@ -820,7 +819,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
 
-   Open *file* and return a corresponding :term:`file object`.  If the file
+   Open *file* and return a corresponding :term:`文件对象`.  If the file
    cannot be opened, an :exc:`OSError` is raised.
 
    *file* is either a string or bytes object giving the pathname (absolute or
@@ -908,7 +907,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
    .. index::
       single: universal newlines; open() built-in function
 
-   *newline* controls how :term:`universal newlines` mode works (it only
+   *newline* controls how :term:`万能换行符` mode works (it only
    applies to text mode).  It can be ``None``, ``''``, ``'\n'``, ``'\r'``, and
    ``'\r\n'``.  It works as follows:
 
@@ -954,7 +953,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
       The *opener* parameter was added.
       The ``'x'`` mode was added.
 
-   The type of :term:`file object` returned by the :func:`open` function
+   The type of :term:`文件对象` returned by the :func:`open` function
    depends on the mode.  When :func:`open` is used to open a file in a text
    mode (``'w'``, ``'r'``, ``'wt'``, ``'rt'``, etc.), it returns a subclass of
    :class:`io.TextIOBase` (specifically :class:`io.TextIOWrapper`).  When used
@@ -1056,7 +1055,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    If given, *doc* will be the docstring of the property attribute. Otherwise, the
    property will copy *fget*'s docstring (if it exists).  This makes it possible to
-   create read-only properties easily using :func:`property` as a :term:`decorator`::
+   create read-only properties easily using :func:`property` as a :term:`迭代器`::
 
       class Parrot:
           def __init__(self):
@@ -1122,7 +1121,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: reversed(seq)
 
-   Return a reverse :term:`iterator`.  *seq* must be an object which has
+   Return a reverse :term:`迭代器`.  *seq* must be an object which has
    a :meth:`__reversed__` method or supports the sequence protocol (the
    :meth:`__len__` method and the :meth:`__getitem__` method with integer
    arguments starting at ``0``).
@@ -1177,7 +1176,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    .. index:: single: Numerical Python
 
-   Return a :term:`slice` object representing the set of indices specified by
+   Return a :term:`切片` object representing the set of indices specified by
    ``range(start, stop, step)``.  The *start* and *step* arguments default to
    ``None``.  Slice objects have read-only data attributes :attr:`start`,
    :attr:`stop` and :attr:`step` which merely return the argument values (or their
@@ -1218,7 +1217,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
           @staticmethod
           def f(arg1, arg2, ...): ...
 
-   The ``@staticmethod`` form is a function :term:`decorator` -- see the
+   The ``@staticmethod`` form is a function :term:`迭代器` -- see the
    description of function definitions in :ref:`function` for details.
 
    It can be called either on the class (such as ``C.f()``) or on an instance (such
@@ -1242,7 +1241,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    Return a :class:`str` version of *object*.  See :func:`str` for details.
 
-   ``str`` is the built-in string :term:`class`.  For general information
+   ``str`` is the built-in string :term:`类`.  For general information
    about strings, see :ref:`textseq`.
 
 

@@ -1,12 +1,10 @@
 .. _whatsnew-index:
 
 ######################
- What's New in Python
+Python 最近更新
 ######################
 
-The "What's New in Python" series of essays takes tours through the most
-important changes between major Python versions.  They are a "must read" for
-anyone wishing to stay up-to-date after a new release.
+"Python 最近更新"系列会简单介绍不同 Python 主版本所引入的变动。这是新发布后每个人走上潮流的"必读"内容。
 
 .. toctree::
    :maxdepth: 2
@@ -24,8 +22,7 @@ anyone wishing to stay up-to-date after a new release.
    2.1.rst
    2.0.rst
 
-The "Changelog" is a HTML version of the file :source:`Misc/NEWS` which
-contains *all* nontrivial changes to Python for the current version.
+"Changelog"是文件 :source:`Misc/NEWS` 的 HTML 版本，其中描述了当前 Python 版本中\ *所有*\ 较大改动。
 
 .. toctree::
    :maxdepth: 2

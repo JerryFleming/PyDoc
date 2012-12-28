@@ -4,7 +4,7 @@
 术语
 ********
 
-.. 原注释要求词条按顺序排列；但对于中文，为了保持与原文对应，可以不予理会！
+.. if you add new entries, keep the alphabetical sorting!
 
 .. glossary::
 

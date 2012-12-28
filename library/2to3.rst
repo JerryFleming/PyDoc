@@ -334,4 +334,4 @@
 
    :mod:`lib2to3` 的 API 应该看作不稳定的，将来可能有很大变化。
 
-.. XXX 它的长久接口又会是什么样子呢？
+.. XXX What is the public interface anyway?
