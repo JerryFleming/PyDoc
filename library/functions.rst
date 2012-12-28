@@ -40,15 +40,12 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: abs(x)
 
-   Return the absolute value of a number.  The argument may be an
-   integer or a floating point number.  If the argument is a complex number, its
-   magnitude is returned.
+   返回一个数的绝对值，参数可以是整数或者浮点数。如果参数是复数，则返回其模。
 
 
 .. function:: all(iterable)
 
-   Return True if all elements of the *iterable* are true (or if the iterable
-   is empty).  Equivalent to::
+   如果 *iterable* 中的所有元素都为真(或者 iterable 为空)则返回 True 。相当于::
 
       def all(iterable):
           for element in iterable:
@@ -59,8 +56,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: any(iterable)
 
-   Return True if any element of the *iterable* is true.  If the iterable
-   is empty, return False.  Equivalent to::
+   如果 *iterable* 中的任意元素为真则返回 True 。如果 iterable 为空则返回 False 。相当于::
 
       def any(iterable):
           for element in iterable:
@@ -71,27 +67,17 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: ascii(object)
 
-   As :func:`repr`, return a string containing a printable representation of an
-   object, but escape the non-ASCII characters in the string returned by
-   :func:`repr` using ``\x``, ``\u`` or ``\U`` escapes.  This generates a string
-   similar to that returned by :func:`repr` in Python 2.
+   和 :func:`repr` 一样，返回一个字符串，表示一个对象的可打印形式，但是把 :func:`repr` 返回的字符串中非 ASCII 字符用 ``\x`` 、\ ``\u`` 、\ ``\U`` 转义。生成的字符串和 Python 2 中的 :func:`repr` 返回值很相似。
 
 
 .. function:: bin(x)
 
-   Convert an integer number to a binary string. The result is a valid Python
-   expression.  If *x* is not a Python :class:`int` object, it has to define an
-   :meth:`__index__` method that returns an integer.
+   把整数转化为二进制字符串，其结果是个有效的 Python 表达式。如果 *x* 不是 Python 的 :class:`int` 对象，则需要定义 :meth:`__index__` 方法并返回一个整数。
 
 
 .. function:: bool([x])
 
-   Convert a value to a Boolean, using the standard :ref:`truth testing
-   procedure <truth>`.  If *x* is false or omitted, this returns ``False``;
-   otherwise it returns ``True``. :class:`bool` is also a class, which is a
-   subclass of :class:`int` (see :ref:`typesnumeric`).  Class :class:`bool`
-   cannot be subclassed further.  Its only instances are ``False`` and
-   ``True`` (see :ref:`bltin-boolean-values`).
+   使用标准的\ :ref:`真值检测过程 <truth>`\ 把一个值转化为布尔值。如果 *x* 为假或者省略，则返回 ``False`` ，否则返回 ``True`` 。\ :class:`bool` 还是一个类，它是 :class:`int` 的子类(参见 :ref:`typesnumeric`)。类 :class:`bool` 不能继续派生，它只有两个实例，即 ``False`` 和 ``True`` (参见 :ref:`bltin-boolean-values`)。
 
    .. index:: pair: Boolean; type
 
@@ -99,30 +85,21 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 .. _func-bytearray:
 .. function:: bytearray([source[, encoding[, errors]]])
 
-   Return a new array of bytes.  The :class:`bytearray` type is a mutable
-   sequence of integers in the range 0 <= x < 256.  It has most of the usual
-   methods of mutable sequences, described in :ref:`typesseq-mutable`, as well
-   as most methods that the :class:`bytes` type has, see :ref:`bytes-methods`.
+   返回一个字节数组。\ :class:`bytearray` 类型是个可变的整数序列，其中的数都在 0 <= x < 256 范围内。它有大部分可变序列的常规方法，如\ :ref:`typesseq-mutable`\ 所述，以及 :class:`bytes` 类型的大部分方法，参见\ :ref:`bytes-methods` 。
 
-   The optional *source* parameter can be used to initialize the array in a few
-   different ways:
+   可以用可选参数 *source* 来及以下方法来初始化数组：
 
-   * If it is a *string*, you must also give the *encoding* (and optionally,
-     *errors*) parameters; :func:`bytearray` then converts the string to
-     bytes using :meth:`str.encode`.
+   * 如果它是\ *字符串*\ ，则必须同时指定 *encoding* (以及可选的 *errors*)参数。这时 :func:`bytearray` 会把这个字符串用 :meth:`str.encode` 转化为字节。
 
-   * If it is an *integer*, the array will have that size and will be
-     initialized with null bytes.
+   * 如果它是\ *整数*\ ，则表示数组的长度，数组用空字节初始化。
 
-   * If it is an object conforming to the *buffer* interface, a read-only buffer
-     of the object will be used to initialize the bytes array.
+   * 如果它是个和 *buffer* 界面兼容的对象，则使用这个对象的只读缓存来初始化字节数组。
 
-   * If it is an *iterable*, it must be an iterable of integers in the range
-     ``0 <= x < 256``, which are used as the initial contents of the array.
+   * 如果它是个\ *可迭代对象*\ ，则这个对象必须是 ``0 <= x < 256`` 范围内的整数可迭代对象，其元素用来初始化数组内容。
 
-   Without an argument, an array of size 0 is created.
+   如果没有参数，则创建长度为 0 的数组。
 
-   See also :ref:`binaryseq` and :ref:`typebytearray`.
+   参见\ :ref:`binaryseq`\ 和\ :ref:`typebytearray` 。
 
 
 .. _func-bytes:
@@ -664,8 +641,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 .. function:: isinstance(object, classinfo)
 
    Return true if the *object* argument is an instance of the *classinfo*
-   argument, or of a (direct, indirect or :term:`virtual <abstract base
-   class>`) subclass thereof.  If *object* is not
+   argument, or of a (direct, indirect or :term:`virtual <虚基类>`) subclass thereof.  If *object* is not
    an object of the given type, the function always returns false.  If
    *classinfo* is not a class (type object), it may be a tuple of type objects,
    or may recursively contain other such tuples (other sequence types are not
