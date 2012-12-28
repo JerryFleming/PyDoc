@@ -172,30 +172,18 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: complex([real[, imag]])
 
-   Create a complex number with the value *real* + *imag*\*j or convert a string or
-   number to a complex number.  If the first parameter is a string, it will be
-   interpreted as a complex number and the function must be called without a second
-   parameter.  The second parameter can never be a string. Each argument may be any
-   numeric type (including complex). If *imag* is omitted, it defaults to zero and
-   the function serves as a numeric conversion function like :func:`int`
-   and :func:`float`.  If both arguments are omitted, returns ``0j``.
+   创建一个值为 *real* + *imag*\*j 的复数，或者把一个字符串或数值转化为复数。如果第一个参数是字符串，则把它解析成复数；这时不得有第二个参数。第二个参数不可能是字符串。每个参数都可以是任意的数值类型(包括复数)。如果 *imag* 省略，则其默认为零，这时函数就相当于一个数值转换函数，像 :func:`int` 和 :func:`float` 一样。如果两个参数都省略，则返回 ``0j`` 。
 
    .. note::
 
-      When converting from a string, the string must not contain whitespace
-      around the central ``+`` or ``-`` operator.  For example,
-      ``complex('1+2j')`` is fine, but ``complex('1 + 2j')`` raises
-      :exc:`ValueError`.
+      转换字符串时，字符串中间的 ``+`` 或 ``-`` 运算符旁边不得包含空格。例如，\ ``complex('1+2j')`` 可以接受，而 ``complex('1 + 2j')`` 会抛出 :exc:`ValueError` 。
 
-   The complex type is described in :ref:`typesnumeric`.
+   复数类型在\ :ref:`typesnumeric`\ 中介绍。
 
 
 .. function:: delattr(object, name)
 
-   This is a relative of :func:`setattr`.  The arguments are an object and a
-   string.  The string must be the name of one of the object's attributes.  The
-   function deletes the named attribute, provided the object allows it.  For
-   example, ``delattr(x, 'foobar')`` is equivalent to ``del x.foobar``.
+   它和 :func:`setattr` 相关联，其参数是一个对象 object 和字符串 name。name 必须是 object 一个属性的名字。如果允许，函数会删除对象的指定的属性。例如，\ ``delattr(x, 'foobar')`` 相当于 ``del x.foobar`` 。
 
 
 .. _func-dict:
@@ -204,49 +192,33 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
               dict(iterable, **kwarg)
    :noindex:
 
-   Create a new dictionary.  The :class:`dict` object is the dictionary class.
-   See :class:`dict` and :ref:`typesmapping` for documentation about this
-   class.
+   创建一个新的字典。\ :class:`dict` 对象是字典类，其文档参见 :class:`dict` 和\ :ref:`typesmapping`\ 。
 
-   For other containers see the built-in :class:`list`, :class:`set`, and
-   :class:`tuple` classes, as well as the :mod:`collections` module.
+   关于其它容器，参见内置的 :class:`list` 、\ :class:`set` 、和 :class:`tuple` 类，以及 :mod:`collections` 模块。
 
 
 .. function:: dir([object])
 
-   Without arguments, return the list of names in the current local scope.  With an
-   argument, attempt to return a list of valid attributes for that object.
+   如果没有参数，则返回当前本地作用域的名字列表。如果有参数，将试图返回该对象有效属性的列表。
 
-   If the object has a method named :meth:`__dir__`, this method will be called and
-   must return the list of attributes. This allows objects that implement a custom
-   :func:`__getattr__` or :func:`__getattribute__` function to customize the way
-   :func:`dir` reports their attributes.
+   如果 object 有个叫 :meth:`__dir__` 的方法，则调用这个方法；方法必须返回属性列表。这样对象就可以通过实现 :func:`__getattr__` 或者 :func:`__getattribute__` 函数来自定义 :func:`dir` 如何列出其属性。
 
-   If the object does not provide :meth:`__dir__`, the function tries its best to
-   gather information from the object's :attr:`__dict__` attribute, if defined, and
-   from its type object.  The resulting list is not necessarily complete, and may
-   be inaccurate when the object has a custom :func:`__getattr__`.
+   如果 object 没有提供 :meth:`__dir__` ，则该函数会尽量从 object 的 :attr:`__dict__` 属性(如果存在)和其 type 对象中搜集信息。结果列表不一定要详尽，如果 object 有自定义的 :func:`__getattr__` 则结果可能不准。
 
-   The default :func:`dir` mechanism behaves differently with different types of
-   objects, as it attempts to produce the most relevant, rather than complete,
-   information:
+   默认的 :func:`dir` 机制对不同类型的对象其行为也不一样，因为它会尽量提供最相关的而不是最准确的信息：
 
-   * If the object is a module object, the list contains the names of the module's
-     attributes.
+   * 如果 object 是个模块级对象，则结果包含该模块属性的名称。
 
-   * If the object is a type or class object, the list contains the names of its
-     attributes, and recursively of the attributes of its bases.
+   * 如果 object 是一种类型或类对象，则结果包含其属性名称，并递归的包含基类的属性名称。
 
-   * Otherwise, the list contains the object's attributes' names, the names of its
-     class's attributes, and recursively of the attributes of its class's base
-     classes.
+   * 否则，结果包含 object 的属性名称、其类的属性名称、以及递归包含其类之基类的属性名称。
 
-   The resulting list is sorted alphabetically.  For example:
+   结果列表会按字母排序。例如：
 
       >>> import struct
-      >>> dir()   # show the names in the module namespace
+      >>> dir()   # 显示模块命名空间中的名称
       ['__builtins__', '__name__', 'struct']
-      >>> dir(struct)   # show the names in the struct module # doctest: +SKIP
+      >>> dir(struct)   # 显示 struct 模块中的名称 # doctest: +SKIP
       ['Struct', '__all__', '__builtins__', '__cached__', '__doc__', '__file__',
        '__initializing__', '__loader__', '__name__', '__package__',
        '_clearcache', 'calcsize', 'error', 'pack', 'pack_into',
@@ -260,33 +232,18 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    .. note::
 
-      Because :func:`dir` is supplied primarily as a convenience for use at an
-      interactive prompt, it tries to supply an interesting set of names more
-      than it tries to supply a rigorously or consistently defined set of names,
-      and its detailed behavior may change across releases.  For example,
-      metaclass attributes are not in the result list when the argument is a
-      class.
+      因为 :func:`dir` 主要作用是便于在交互式提示符下使用，它会尽量提供有用的名称列表，而不是生硬的完备的名称列表，并且其具体行为可能在不同版本中有改变。例如，当参数是一个类时，元类的属性并不包含在结果中。
 
 
 .. function:: divmod(a, b)
 
-   Take two (non complex) numbers as arguments and return a pair of numbers
-   consisting of their quotient and remainder when using integer division.  With
-   mixed operand types, the rules for binary arithmetic operators apply.  For
-   integers, the result is the same as ``(a // b, a % b)``. For floating point
-   numbers the result is ``(q, a % b)``, where *q* is usually ``math.floor(a /
-   b)`` but may be 1 less than that.  In any case ``q * b + a % b`` is very
-   close to *a*, if ``a % b`` is non-zero it has the same sign as *b*, and ``0
-   <= abs(a % b) < abs(b)``.
+   接受两个(不是复数的)数值参数，返回一对数值，其中分别是其整除时的商和余数。对于混合的操作数类型，还会应用二进制算术运算规则。对于整数，结果和 ``(a // b, a % b)`` 是一样的。对于浮点数，结果是 ``(q, a % b)`` ，其中的 *q* 通常是 ``math.floor(a /
+   b)`` ，但也有可能比之小 1 。在任何情况下，\ ``q * b + a % b`` 都和 *a* 相当接近，如果 ``a % b`` 不为零就会和 *b* 正负符号相同，还有 ``0 <= abs(a % b) < abs(b)`` 。
 
 
 .. function:: enumerate(iterable, start=0)
 
-   Return an enumerate object. *iterable* must be a sequence, an
-   :term:`迭代器`, or some other object which supports iteration.
-   The :meth:`~iterator.__next__` method of the iterator returned by
-   :func:`enumerate` returns a tuple containing a count (from *start* which
-   defaults to 0) and the values obtained from iterating over *iterable*.
+   返回一个枚举对象。\ *iterable* 必须是个序列、\ :term:`迭代器`\ 、或者支迭代的其它对象。\ :func:`enumerate` 返回一个迭代器，这个迭代器的 :meth:`~iterator.__next__` 方法返回一个元组，其中包含一个计数(从 *start* 开始，默认为 0)和通过迭代 *iterable* 所得到的值。
 
       >>> seasons = ['Spring', 'Summer', 'Fall', 'Winter']
       >>> list(enumerate(seasons))
@@ -294,7 +251,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
       >>> list(enumerate(seasons, start=1))
       [(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
 
-   Equivalent to::
+   相当于::
 
       def enumerate(sequence, start=0):
           n = start
@@ -305,78 +262,36 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: eval(expression, globals=None, locals=None)
 
-   The arguments are a string and optional globals and locals.  If provided,
-   *globals* must be a dictionary.  If provided, *locals* can be any mapping
-   object.
+   参数是个字符串以及可选的全局和局部变量。如果指定 *globals* ，则它必须是字典。如果指定 *locals* ，则它可以是任何映射对象。
 
-   The *expression* argument is parsed and evaluated as a Python expression
-   (technically speaking, a condition list) using the *globals* and *locals*
-   dictionaries as global and local namespace.  If the *globals* dictionary is
-   present and lacks '__builtins__', the current globals are copied into *globals*
-   before *expression* is parsed.  This means that *expression* normally has full
-   access to the standard :mod:`builtins` module and restricted environments are
-   propagated.  If the *locals* dictionary is omitted it defaults to the *globals*
-   dictionary.  If both dictionaries are omitted, the expression is executed in the
-   environment where :func:`eval` is called.  The return value is the result of
-   the evaluated expression. Syntax errors are reported as exceptions.  Example:
+   *expression* 参数作为 Python 表达式(从技术上讲其实是条件列表)解析和运算，并把 *globals* 和 *locals* 字典作为全局和局部的命名空间。如果有 *globals* 字典并且其中没有 '__builtins__' ，则在解析 *expression* 之前会把当前的全局变量复制到 *globals* 中去。这意味着 *expression* 通常总是可以完全访问标准的 :mod:`builtins` 模块，即使是在受限制的环境中。如果省略了 *locals* 字典，则它默认使用 *globals* 字典。如果两个字典都省略，则使用调用 :func:`eval` 的环境来执行表达式。其返回值是表达式的计算结果。如果有语法错误，则抛出异常。例如：
 
       >>> x = 1
       >>> eval('x+1')
       2
 
-   This function can also be used to execute arbitrary code objects (such as
-   those created by :func:`compile`).  In this case pass a code object instead
-   of a string.  If the code object has been compiled with ``'exec'`` as the
-   *mode* argument, :func:`eval`\'s return value will be ``None``.
+   这个函数还可以用来执行任意的代码对象(例如用 :func:`compile` 创建的)。这时，传进的参数是个代码对象而不是字符串。如果这个代码对象编译时已经用 ``'exec'`` 作为 *mode* 参数，则 :func:`eval` 的返回值为 ``None`` 。
 
-   Hints: dynamic execution of statements is supported by the :func:`exec`
-   function.  The :func:`globals` and :func:`locals` functions
-   returns the current global and local dictionary, respectively, which may be
-   useful to pass around for use by :func:`eval` or :func:`exec`.
+   提示：\ :func:`exec` 函数支持动态执行语句。\ :func:`globals` 和 :func:`locals` 函数分别返回当前的全局和局部字典，它们可以用来传给 :func:`eval` 或者 :func:`exec` 。
 
-   See :func:`ast.literal_eval` for a function that can safely evaluate strings
-   with expressions containing only literals.
+   参见 :func:`ast.literal_eval` 函数；它能安全的对字符串中仅含源常量的表达式进行求值。
 
 
 .. function:: exec(object[, globals[, locals]])
 
-   This function supports dynamic execution of Python code. *object* must be
-   either a string or a code object.  If it is a string, the string is parsed as
-   a suite of Python statements which is then executed (unless a syntax error
-   occurs). [#]_ If it is a code object, it is simply executed.  In all cases,
-   the code that's executed is expected to be valid as file input (see the
-   section "File input" in the Reference Manual). Be aware that the
-   :keyword:`return` and :keyword:`yield` statements may not be used outside of
-   function definitions even within the context of code passed to the
-   :func:`exec` function. The return value is ``None``.
+   这个函数支持动态执行 Python 代码。\ *object* 必须是字符串或者代码对象。如果是字符串，则把它当成包含 Python 语句的代码块来执行(除非发生语法错误)。\ [#]_\ 如果它是个代码块，则直接执行。不管怎样，要执行的代码都要是有效的文件输入(参见参考手册中的"File input"一节)。注意，\ :keyword:`return` 和 :keyword:`yield` 语句不可以在函数定义以外的地方使用，即使是对传给 :func:`exec` 函数的代码也是一样。其返回值是 ``None`` 。
 
-   In all cases, if the optional parts are omitted, the code is executed in the
-   current scope.  If only *globals* is provided, it must be a dictionary, which
-   will be used for both the global and the local variables.  If *globals* and
-   *locals* are given, they are used for the global and local variables,
-   respectively.  If provided, *locals* can be any mapping object.  Remember
-   that at module level, globals and locals are the same dictionary. If exec
-   gets two separate objects as *globals* and *locals*, the code will be
-   executed as if it were embedded in a class definition.
+   在任何情况下，如果省略了可选参数，则在当前作用域中执行代码。如果只提供了 *globals* ，则它必须是个字典，它会同时用作全局和局部变量。如果给出 *globals* 和 *locals* ，则分别用它们作为全局和局部变量。如果提供了 *locals* ，则它可以是任意映射对象。记住，在模块级别，全局和局部变量是相同的字典。如果 exec 得到两个不同的对象作为 *globals* 和 *locals* ，则会像在类定义中一样执行代码。
 
-   If the *globals* dictionary does not contain a value for the key
-   ``__builtins__``, a reference to the dictionary of the built-in module
-   :mod:`builtins` is inserted under that key.  That way you can control what
-   builtins are available to the executed code by inserting your own
-   ``__builtins__`` dictionary into *globals* before passing it to :func:`exec`.
+   如果 *globals* 中不包含其值为 ``__builtins__`` 的键名，则会在其中插入这个缺少的键名，其值是对内部模块 :mod:`builtins` 字典的引用。这样你就可以在 *globals* 中插入自己的 ``__builtins__`` 字典，然后传给 :func:`exec` ，从而能控制代码执行时哪些内部成员可用。
 
    .. note::
 
-      The built-in functions :func:`globals` and :func:`locals` return the current
-      global and local dictionary, respectively, which may be useful to pass around
-      for use as the second and third argument to :func:`exec`.
+      内部函数 :func:`globals` 和 :func:`locals` 分别返回当前的全局和局部字典，它们可以用作第二和第三个参数传给 :func:`exec` 。
 
    .. note::
 
-      The default *locals* act as described for function :func:`locals` below:
-      modifications to the default *locals* dictionary should not be attempted.
-      Pass an explicit *locals* dictionary if you need to see effects of the
-      code on *locals* after function :func:`exec` returns.
+      对于 :func:`locals` ，默认的 *locals* 行为如下：不应该修改默认的 *locals* 字典。如果你想看到 :func:`exec` 返回后代码的执行对 *locals* 有何效果，就需要显式的传递一个 *locals* 字典。
 
 
 .. function:: filter(function, iterable)
