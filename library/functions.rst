@@ -1,11 +1,10 @@
 .. XXX document all delegations to __special__ methods
 .. _built-in-funcs:
 
-Built-in Functions
+内置函数
 ==================
 
-The Python interpreter has a number of functions and types built into it that
-are always available.  They are listed here in alphabetical order.
+Python 解释器中内置了一些函数和类型，可以随时使用。下面按字母顺序列出。
 
 ===================  =================  ==================  ================  ====================
 ..                   ..                 Built-in Functions  ..                ..
