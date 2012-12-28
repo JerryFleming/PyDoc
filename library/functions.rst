@@ -109,7 +109,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    相应的，其构造函数的参数也如 :func:`bytearray` 中描述的那样。
 
-   bytes 对象还可以通过源常量创建，参见\ :ref:`字符串`\ 。
+   bytes 对象还可以通过源常量创建，参见\ :ref:`strings`\ 。
 
    另见\ :ref:`binaryseq`\ 、\ :ref:`typebytes`\ 、和 :ref:`bytes-methods`\ 。
 
@@ -124,91 +124,50 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: chr(i)
 
-   Return the string representing a character whose Unicode codepoint is the integer
-   *i*.  For example, ``chr(97)`` returns the string ``'a'``. This is the
-   inverse of :func:`ord`.  The valid range for the argument is from 0 through
-   1,114,111 (0x10FFFF in base 16).  :exc:`ValueError` will be raised if *i* is
-   outside that range.
+   返回一个字符串，用来表示整数 *i* 所代表的 Unicode 字符。例如，\ ``chr(97)`` 返回字符 ``'a'`` 。这和 :func:`ord` 正好相反。参数的有效范围是从 0 到 1,114,111 (16 进制为 0x10FFFF)。如果 *i* 不在此范围则抛出 :exc:`ValueError` 。
 
 
 .. function:: classmethod(function)
 
-   Return a class method for *function*.
+   为 *function* 返回一个类方法。
 
-   A class method receives the class as implicit first argument, just like an
-   instance method receives the instance. To declare a class method, use this
-   idiom::
+   类方法隐含的把其类作为第一个参数，就像实例方法接受实例一样。要声明类方法，使用下面的约定::
 
       class C:
           @classmethod
           def f(cls, arg1, arg2, ...): ...
 
-   The ``@classmethod`` form is a function :term:`描述符` -- see the description
-   of function definitions in :ref:`function` for details.
+   这里的 ``@classmethod`` 形式是个函数\ :term:`描述符` --- 详情参见\ :ref:`function`\ 中对函数定义的描述。
 
-   It can be called either on the class (such as ``C.f()``) or on an instance (such
-   as ``C().f()``).  The instance is ignored except for its class. If a class
-   method is called for a derived class, the derived class object is passed as the
-   implied first argument.
+   它既可以用类(例如 ``C.f()``)也可以用实例(例如 ``C().f()``)来调用。对于实例，仅使用其类而忽略其它。如果在派生类中调用类方法，则把派生类对象作为隐含是第一个参数。
 
-   Class methods are different than C++ or Java static methods. If you want those,
-   see :func:`staticmethod` in this section.
+   类方法和 C++ 或 Java 中的静态方法是不同的。如是你需要静态方法，参见本节的 :func:`staticmethod` 。
 
-   For more information on class methods, consult the documentation on the standard
-   type hierarchy in :ref:`types`.
+   关于类方法的更多信息，请查阅\ :ref:`types`\ 中标准类型体系的文档。
 
 
 .. function:: compile(source, filename, mode, flags=0, dont_inherit=False, optimize=-1)
 
-   Compile the *source* into a code or AST object.  Code objects can be executed
-   by :func:`exec` or :func:`eval`.  *source* can either be a string or an AST
-   object.  Refer to the :mod:`ast` module documentation for information on how
-   to work with AST objects.
+   把 *source* 编译成 AST 代码对象。代码对象可以用 :func:`exec` 或者 :func:`eval` 来执行。\ *source* 可以是字符串或者 AST 对象。关于如何使用 AST 对象参见 :mod:`ast` 模块的文档。
 
-   The *filename* argument should give the file from which the code was read;
-   pass some recognizable value if it wasn't read from a file (``'<string>'`` is
-   commonly used).
+   *filename* 参数应该指定从中读取代码的文件，如果不是从文件读取则可以转入一个易于识别的标识(通常用 ``'<string>'``)。
 
-   The *mode* argument specifies what kind of code must be compiled; it can be
-   ``'exec'`` if *source* consists of a sequence of statements, ``'eval'`` if it
-   consists of a single expression, or ``'single'`` if it consists of a single
-   interactive statement (in the latter case, expression statements that
-   evaluate to something other than ``None`` will be printed).
+   *mode* 参数指定编译什么类型的代码。如果 *source* 含有一系列语句，则这个参数可以是 ``'exec'`` ；如果只包含一个表达式，则它可以是 ``'eval'`` ；而如果只包含一个交互式语句，则是 ``'single'`` (在最后这种情况下，如果表达式语句的值不是 ``None`` 则会被打印出来)。
 
-   The optional arguments *flags* and *dont_inherit* control which future
-   statements (see :pep:`236`) affect the compilation of *source*.  If neither
-   is present (or both are zero) the code is compiled with those future
-   statements that are in effect in the code that is calling compile.  If the
-   *flags* argument is given and *dont_inherit* is not (or is zero) then the
-   future statements specified by the *flags* argument are used in addition to
-   those that would be used anyway. If *dont_inherit* is a non-zero integer then
-   the *flags* argument is it -- the future statements in effect around the call
-   to compile are ignored.
+   可选的参数 *flags* 和 *dont_inherit* 控制哪些 future 语句(参见 :pep:`236`)可以影响 *source* 的编译。如果一个也没有给出(或者都是零)，则调用 compile 的代码中起作用的 future 语句将会被使用。如果指定了 *flags* 参数而没有指定 *dont_inherit* (或其值为零)，则除了正常要使用的 future 语句，还会使用 *flags* 参数中指定的那些。如果 *dont_inherit* 是个非零整数，则仅使用 *flags* 参数指定的 future 语句 --- 调用 compile 时起作用的那些将会被忽略。
 
-   Future statements are specified by bits which can be bitwise ORed together to
-   specify multiple statements.  The bitfield required to specify a given feature
-   can be found as the :attr:`compiler_flag` attribute on the :class:`_Feature`
-   instance in the :mod:`__future__` module.
+   future 语句通过二进制位来指定，可以通过\ *按位与*\ 运算来指定多个。指定特定功能的二进制值可见于 :mod:`__future__` 模块中 :class:`_Feature` 类实例的 :attr:`compiler_flag` 属性。
 
-   The argument *optimize* specifies the optimization level of the compiler; the
-   default value of ``-1`` selects the optimization level of the interpreter as
-   given by :option:`-O` options.  Explicit levels are ``0`` (no optimization;
-   ``__debug__`` is true), ``1`` (asserts are removed, ``__debug__`` is false)
-   or ``2`` (docstrings are removed too).
+   参数 *optimize* 指定编译器的优化级别，默认值 ``-1`` 选择的级别和解释器 :option:`-O` 选项给出的一样。可以明确指定的级别有 ``0`` (不优化，\ ``__debug__`` 为真)，\ ``1`` (去除断言语句，\ ``__debug__`` 为假)，或者 ``2`` (还要去掉文档字符串)。
 
-   This function raises :exc:`SyntaxError` if the compiled source is invalid,
-   and :exc:`TypeError` if the source contains null bytes.
+   如果编译后的代码无效则抛出 :exc:`SyntaxError` ，如果代码中含有空字节则抛出 :exc:`TypeError` 。
 
    .. note::
 
-      When compiling a string with multi-line code in ``'single'`` or
-      ``'eval'`` mode, input must be terminated by at least one newline
-      character.  This is to facilitate detection of incomplete and complete
-      statements in the :mod:`code` module.
+      如果使用 ``'single'`` 或者 ``'eval'`` 模式编译含有多行代码的字符串，则输入代码必须由至少一个换行符结束。这是为了帮助检测 :mod:`code` 模块中的完整和不完整的语句。
 
    .. versionchanged:: 3.2
-      Allowed use of Windows and Mac newlines.  Also input in ``'exec'`` mode
-      does not have to end in a newline anymore.  Added the *optimize* parameter.
+      允许使用 Windows 和 Mac 换行符。并且 ``'exec'`` 模式下的输入不一定要换行符结束。还加入了 *optimize* 参数。
 
 
 .. function:: complex([real[, imag]])
@@ -1442,12 +1401,8 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
       the default value to 0).
 
 
-.. rubric:: Footnotes
+.. rubric:: 脚注
 
-.. [#] Note that the parser only accepts the Unix-style end of line convention.
-   If you are reading the code from a file, make sure to use newline conversion
-   mode to convert Windows or Mac-style newlines.
+.. [#] 注意，解析器只接受 Unix 风格的行结束符。如果从文件中读取代码，要确保使用换行符转换模式来处理 Windows 或 Mac 风格的换行符。
 
-.. [#] In the current implementation, local variable bindings cannot normally be
-   affected this way, but variables retrieved from other scopes (such as modules)
-   can be.  This may change.
+.. [#] 在当前实现中，这样做通常不会影响本地变量的绑定，但从其它作用域(例如模块)获得的变量可能受影响。这点可能会改变。

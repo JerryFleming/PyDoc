@@ -281,7 +281,7 @@
 
 .. 2to3fixer:: sys_exc
 
-   把不推荐用的 :data:`sys.exc_value` 、\ :data:`sys.exc_type` 、\ :data:`sys.exc_traceback` 改成使用 :func:`sys.exc_info` 。
+   把废弃的 :data:`sys.exc_value` 、\ :data:`sys.exc_type` 、\ :data:`sys.exc_traceback` 改成使用 :func:`sys.exc_info` 。
 
 .. 2to3fixer:: throw
 
