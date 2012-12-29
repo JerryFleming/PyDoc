@@ -296,18 +296,11 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: filter(function, iterable)
 
-   Construct an iterator from those elements of *iterable* for which *function*
-   returns true.  *iterable* may be either a sequence, a container which
-   supports iteration, or an iterator.  If *function* is ``None``, the identity
-   function is assumed, that is, all elements of *iterable* that are false are
-   removed.
+   返回一个迭代器，其元素是 *iterable* 中的元素经过 *function* 过滤返回为真的那些。\ *iterable* 可以是个序列、支持迭代的容器、或者迭代器。如果 *function* 是 ``None`` ，则内定使用布尔识别函数，即去除 *iterable* 中所有为假的元素。
 
-   Note that ``filter(function, iterable)`` is equivalent to the generator
-   expression ``(item for item in iterable if function(item))`` if function is
-   not ``None`` and ``(item for item in iterable if item)`` if function is
-   ``None``.
+   注意，如果 function 不是 ``None`` ，则 ``filter(function, iterable)`` 相当于生成函数表达式 ``(item for item in iterable if function(item))`` ；而如果 function 是 ``None`` ，则相当于 ``(item for item in iterable if item)`` 。
 
-   See :func:`itertools.filterfalse` for the complementary function that returns
+   参见See :func:`itertools.filterfalse` for the complementary function that returns
    elements of *iterable* for which *function* returns false.
 
 
@@ -317,15 +310,9 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
       single: NaN
       single: Infinity
 
-   Convert a string or a number to floating point.
+   把字符串或整数转化为浮点数。
 
-   If the argument is a string, it should contain a decimal number, optionally
-   preceded by a sign, and optionally embedded in whitespace.  The optional
-   sign may be ``'+'`` or ``'-'``; a ``'+'`` sign has no effect on the value
-   produced.  The argument may also be a string representing a NaN
-   (not-a-number), or a positive or negative infinity.  More precisely, the
-   input must conform to the following grammar after leading and trailing
-   whitespace characters are removed:
+   如果参数是字符串，则其中应该包含一个十进制整数，前面有可选的符号，然后整体可能在空格之中。可选的符号可以是 ``'+'`` 或者 ``'-'`` ，使用 ``'+'`` 号对产生的值没有影响。参数也可以是个表示 NaN (not-a-number)的字符串，或者正无穷或负无穷。更准确的说，输入的东西在去除前后的空格之后必须符合下面的语法：
 
    .. productionlist::
       sign: "+" | "-"
@@ -334,22 +321,15 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
       numeric_value: `floatnumber` | `infinity` | `nan`
       numeric_string: [`sign`] `numeric_value`
 
-   Here ``floatnumber`` is the form of a Python floating-point literal,
-   described in :ref:`floating`.  Case is not significant, so, for example,
-   "inf", "Inf", "INFINITY" and "iNfINity" are all acceptable spellings for
-   positive infinity.
+   这里的 ``floatnumber`` 是 Python 中浮点数源常量的形式，在\ :ref:`floating`\ 中介绍。大小写是不重要的，例如，"inf"、"Inf"、"INFINITY"、"iNfINity" 都是正无穷的正确拼写。
 
-   Otherwise, if the argument is an integer or a floating point number, a
-   floating point number with the same value (within Python's floating point
-   precision) is returned.  If the argument is outside the range of a Python
-   float, an :exc:`OverflowError` will be raised.
+   否则，如果参数是个整数或浮点数，则返回一个(在 Python 的浮点数精度之内)值相等的浮点数。如果参数在 Python 浮点数范围之外，则抛出 :exc:`OverflowError` 。
 
-   For a general Python object ``x``, ``float(x)`` delegates to
-   ``x.__float__()``.
+   对于一般的 Python 对象 ``x`` ，\ ``float(x)`` 会调用 ``x.__float__()`` 。
 
-   If no argument is given, ``0.0`` is returned.
+   如果没有参数，则返回 ``0.0`` 。
 
-   Examples::
+   例如::
 
       >>> float('+1.23')
       1.23
@@ -362,41 +342,29 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
       >>> float('-Infinity')
       -inf
 
-   The float type is described in :ref:`typesnumeric`.
+   浮点数类型在\ :ref:`typesnumeric`\ 介绍。
 
    .. index::
       single: __format__
-      single: string; format() (built-in function)
+      single: string; format() (内置函数)
 
 
 .. function:: format(value[, format_spec])
 
-   Convert a *value* to a "formatted" representation, as controlled by
-   *format_spec*.  The interpretation of *format_spec* will depend on the type
-   of the *value* argument, however there is a standard formatting syntax that
-   is used by most built-in types: :ref:`formatspec`.
+   按照 *format_spec* 的规定把 *value* 转化成"格式化"形式。怎么解释 *format_spec* 依赖于 *value* 参数的类型，但有个标准的格式化语法可以用于大部分内置类型：\ :ref:`formatspec`\ 。
 
-   The default *format_spec* is an empty string which usually gives the same
-   effect as calling :func:`str(value) <str>`.
+   默认的 *format_spec* 是个空字符串，它的效果通常和调用 :func:`str(value) <str>` 是一样的。
 
-   A call to ``format(value, format_spec)`` is translated to
-   ``type(value).__format__(format_spec)`` which bypasses the instance
-   dictionary when searching for the value's :meth:`__format__` method.  A
-   :exc:`TypeError` exception is raised if the method is not found or if either
-   the *format_spec* or the return value are not strings.
+   对 ``format(value, format_spec)`` 的调用会被翻译成 ``type(value).__format__(format_spec)`` ，这样就在查找 value 的 :meth:`__format__` 方法时避开了实例的字典。如果这个方法没有找到，或者 *format_spec* 或返回值不是字符串，则抛出 :exc:`TypeError` 异常。
 
 
 .. _func-frozenset:
 .. function:: frozenset([iterable])
    :noindex:
 
-   Return a new :class:`frozenset` object, optionally with elements taken from
-   *iterable*.  ``frozenset`` is a built-in class.  See :class:`frozenset` and
-   :ref:`types-set` for documentation about this class.
+   返回一个新的 :class:`frozenset` 对象，其中的元素是可选的并且来自 *iterable* 。\ ``frozenset`` 是一个内置的类，其文档参见 :class:`frozenset` 和\ :ref:`types-set`\ 。
 
-   For other containers see the built-in :class:`set`, :class:`list`,
-   :class:`tuple`, and :class:`dict` classes, as well as the :mod:`collections`
-   module.
+   关于其它容器，参见内置的 :class:`set` 、\ :class:`list` 、\ :class:`tuple` 、\ :class:`dict` 类，以及 :mod:`collections` 模块。
 
 
 .. function:: getattr(object, name[, default])
