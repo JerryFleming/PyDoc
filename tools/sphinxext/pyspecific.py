@@ -100,7 +100,7 @@ class ImplementationDetail(Directive):
         pnode = nodes.compound(classes=['impl-detail'])
         content = self.content
         add_text = nodes.strong('CPython implementation detail:',
-                                'CPython implementation detail:')
+                                u'CPython 实现细节：')
         if self.arguments:
             n, m = self.state.inline_text(self.arguments[0], self.lineno)
             pnode.append(nodes.paragraph('', '', *(n + m)))
@@ -145,7 +145,7 @@ from sphinx.locale import versionlabels
 from sphinx.util.compat import Directive
 
 versionlabels['deprecated-removed'] = \
-    'Deprecated since version %s, will be removed in version %s'
+    u'从 %s 版本废弃，将在 %s 版本去除'
 
 class DeprecatedRemoved(Directive):
     has_content = True

@@ -495,17 +495,17 @@ msgstr "警告"
 #: sphinx/locale/__init__.py:168
 #, python-format
 msgid "New in version %s"
-msgstr "%s 新版功能"
+msgstr "%s 版新增"
 
 #: sphinx/locale/__init__.py:169
 #, python-format
 msgid "Changed in version %s"
-msgstr "在 %s 版更改"
+msgstr "%s 版变动"
 
 #: sphinx/locale/__init__.py:170
 #, python-format
 msgid "Deprecated since version %s"
-msgstr "%s 版后已移除"
+msgstr "%s 版后废弃"
 
 #: sphinx/locale/__init__.py:176
 msgid "keyword"
@@ -530,7 +530,7 @@ msgstr "內置函数"
 #: sphinx/themes/agogo/layout.html:45 sphinx/themes/basic/globaltoc.html:10
 #: sphinx/themes/basic/localtoc.html:11
 msgid "Table Of Contents"
-msgstr "內容目录"
+msgstr "目录"
 
 #: sphinx/themes/agogo/layout.html:49 sphinx/themes/basic/layout.html:137
 #: sphinx/themes/basic/search.html:11 sphinx/themes/basic/search.html:20
@@ -699,7 +699,7 @@ msgstr "本页"
 #: sphinx/themes/basic/changes/versionchanges.html:12
 #, python-format
 msgid "Changes in Version %(version)s &mdash; %(docstitle)s"
-msgstr "更改发生在版本 %(version)s &mdash; %(docstitle)s"
+msgstr ""
 
 #: sphinx/themes/basic/changes/rstsource.html:5
 #, python-format
@@ -709,7 +709,7 @@ msgstr ""
 #: sphinx/themes/basic/changes/versionchanges.html:17
 #, python-format
 msgid "Automatically generated list of changes in version %(version)s"
-msgstr "自动生成的版本 %(version)s中的更改列表"
+msgstr "自动生成的 %(version)s 更改列表"
 
 #: sphinx/themes/basic/changes/versionchanges.html:18
 msgid "Library changes"
@@ -730,7 +730,7 @@ msgstr "永久链接至标题"
 
 #: sphinx/themes/basic/static/doctools.js:160 sphinx/writers/html.py:92
 msgid "Permalink to this definition"
-msgstr "永久链接至目标"
+msgstr "永久链接至定义"
 
 #: sphinx/themes/basic/static/doctools.js:189
 msgid "Hide Search Matches"
@@ -738,16 +738,16 @@ msgstr "隐藏搜索结果"
 
 #: sphinx/themes/default/static/sidebar.js:69
 msgid "Expand sidebar"
-msgstr ""
+msgstr "展开侧边栏"
 
 #: sphinx/themes/default/static/sidebar.js:82
 #: sphinx/themes/default/static/sidebar.js:110
 msgid "Collapse sidebar"
-msgstr ""
+msgstr "隐藏侧边栏"
 
 #: sphinx/themes/haiku/layout.html:26
 msgid "Contents"
-msgstr ""
+msgstr "目录"
 
 #: sphinx/writers/latex.py:177
 msgid "Release"
@@ -756,16 +756,15 @@ msgstr "发布"
 #: sphinx/writers/latex.py:594 sphinx/writers/manpage.py:182
 #: sphinx/writers/texinfo.py:589
 msgid "Footnotes"
-msgstr ""
+msgstr "脚注"
 
 #: sphinx/writers/latex.py:676
 msgid "continued from previous page"
-msgstr ""
+msgstr "续上页"
 
 #: sphinx/writers/latex.py:681
-#, fuzzy
 msgid "Continued on next page"
-msgstr "一页的全部索引"
+msgstr "下页继续"
 
 #: sphinx/writers/text.py:437
 msgid "[image]"

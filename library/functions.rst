@@ -369,148 +369,86 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: getattr(object, name[, default])
 
-   Return the value of the named attribute of *object*.  *name* must be a string.
-   If the string is the name of one of the object's attributes, the result is the
-   value of that attribute.  For example, ``getattr(x, 'foobar')`` is equivalent to
-   ``x.foobar``.  If the named attribute does not exist, *default* is returned if
-   provided, otherwise :exc:`AttributeError` is raised.
+   返回 *object* 指定属性的值。\ *name* 必须是个字符串；如果它是 object 某个属性的名字，则结果就是这个属性的值。例如，\ ``getattr(x, 'foobar')`` 相当于 ``x.foobar`` 。如果指定的属性不存在，而 *default* 存在，则返回 default 的值，否则抛出 :exc:`AttributeError` 。
 
 
 .. function:: globals()
 
-   Return a dictionary representing the current global symbol table. This is always
-   the dictionary of the current module (inside a function or method, this is the
-   module where it is defined, not the module from which it is called).
+   返回一个字典，代表当前的全局符号表。它总是当前模块的字典(在函数和方法内部，它是定义函数或方法的模块，而不是调用它们的模块).
 
 
 .. function:: hasattr(object, name)
 
-   The arguments are an object and a string.  The result is ``True`` if the
-   string is the name of one of the object's attributes, ``False`` if not. (This
-   is implemented by calling ``getattr(object, name)`` and seeing whether it
-   raises an :exc:`AttributeError` or not.)
+   参数是一个对象 object 和一个字符串 name 。如果 name 是 object 的某个属性的名字则返回 ``True`` ，否则返回 ``False`` (它的实现方法是，调用 ``getattr(object, name)`` 看看是否会抛出 :exc:`AttributeError`)。
 
 
 .. function:: hash(object)
 
-   Return the hash value of the object (if it has one).  Hash values are integers.
-   They are used to quickly compare dictionary keys during a dictionary lookup.
-   Numeric values that compare equal have the same hash value (even if they are of
-   different types, as is the case for 1 and 1.0).
+   返回 object 的散列值(如果有)。散列值是个整数，用来在字典查找时快速比较字典的键。相等的数值有相同的散列值(即使它们类型不同，例如 1 和 1.0 的情形)。
 
 
 .. function:: help([object])
 
-   Invoke the built-in help system.  (This function is intended for interactive
-   use.)  If no argument is given, the interactive help system starts on the
-   interpreter console.  If the argument is a string, then the string is looked up
-   as the name of a module, function, class, method, keyword, or documentation
-   topic, and a help page is printed on the console.  If the argument is any other
-   kind of object, a help page on the object is generated.
+   启动内部的帮助系统。(这个函数旨在用于交互式界面)如果没有提供参数，则交互式的帮助系统会在解释器终端上启动。如果参数是个字符串，则把这个字符串当作模块、函数、类、方法、关键字的名称，或者文档的主题，并在终端上打印其帮助页面。如果参数是任何其它类型的对象，则生成该对象的帮助页面。
 
-   This function is added to the built-in namespace by the :mod:`site` module.
+   这个函数通过 :mod:`site` 模块加入到内置的命名空间。
 
 
 .. function:: hex(x)
 
-   Convert an integer number to a hexadecimal string. The result is a valid Python
-   expression.  If *x* is not a Python :class:`int` object, it has to define an
-   :meth:`__index__` method that returns an integer.
+   把一个整数转化成十六进制字符串，结果是个有效的 Python 表达式。如果 *x* 不是 Python :class:`int` 对象，则必须定义 :meth:`__index__` 方法并返回一个整数。
 
    .. note::
 
-      To obtain a hexadecimal string representation for a float, use the
-      :meth:`float.hex` method.
+      要获得一个浮点数的十六进制形式，需使用 :meth:`float.hex` 方法。
 
 
 .. function:: id(object)
 
-   Return the "identity" of an object.  This is an integer which
-   is guaranteed to be unique and constant for this object during its lifetime.
-   Two objects with non-overlapping lifetimes may have the same :func:`id`
-   value.
+   返回一个对象 object 的"身份标志"。这是个整数，它能确保是唯一的，并且在 object 的生命周期中保持不变。两个对象如果生命周期没有重合，则可能有相同的 :func:`id` 值。
 
-   .. impl-detail:: This is the address of the object in memory.
+   .. impl-detail:: 这是 object 在内存中的地址。
 
 
 .. function:: input([prompt])
 
-   If the *prompt* argument is present, it is written to standard output without
-   a trailing newline.  The function then reads a line from input, converts it
-   to a string (stripping a trailing newline), and returns that.  When EOF is
-   read, :exc:`EOFError` is raised.  Example::
+   如果提供了 *prompt* 参数，则把它写入到标准输出，后面不加换行符。这个函数然后会从标准输入读取一行内容，把它转化成字符串(去掉结尾的换行符)，并返回其结果。如果读取到 EOF ，则抛出 :exc:`EOFError` 。例如::
 
       >>> s = input('--> ')  # doctest: +SKIP
       --> Monty Python's Flying Circus
       >>> s  # doctest: +SKIP
       "Monty Python's Flying Circus"
 
-   If the :mod:`readline` module was loaded, then :func:`input` will use it
-   to provide elaborate line editing and history features.
+   如果加载了 :mod:`readline` 模块，则 :func:`input` 就会用它来提供更便利的行编辑和历史功能。
 
 
 .. function:: int(x=0)
               int(x, base=10)
 
-   Convert a number or string *x* to an integer, or return ``0`` if no
-   arguments are given.  If *x* is a number, return :meth:`x.__int__()
-   <object.__int__>`.  For floating point numbers, this truncates towards zero.
+   把作为数字或字符串的 *x* 转化成整数，如果没有参数则返回 ``0`` 。如果 *x* 的个整数，则返回 :meth:`x.__int__() <object.__int__>` 。对于浮点数，则在去掉尾数时向零靠近。
 
-   If *x* is not a number or if *base* is given, then *x* must be a string,
-   :class:`bytes`, or :class:`bytearray` instance representing an :ref:`integer
-   literal <integers>` in radix *base*.  Optionally, the literal can be
-   preceded by ``+`` or ``-`` (with no space in between) and surrounded by
-   whitespace.  A base-n literal consists of the digits 0 to n-1, with ``a``
-   to ``z`` (or ``A`` to ``Z``) having
-   values 10 to 35.  The default *base* is 10. The allowed values are 0 and 2-36.
-   Base-2, -8, and -16 literals can be optionally prefixed with ``0b``/``0B``,
-   ``0o``/``0O``, or ``0x``/``0X``, as with integer literals in code.  Base 0
-   means to interpret exactly as a code literal, so that the actual base is 2,
-   8, 10, or 16, and so that ``int('010', 0)`` is not legal, while
-   ``int('010')`` is, as well as ``int('010', 8)``.
+   如果 *x* 不是整数，或者指定了 *base* ，则 *x* 必须是表示 *base* 进制的\ :ref:`整数源常量 <integers>`\ 字符串、\ :class:`bytes` 、或者 :class:`bytearray` 实例。这个源常量前面有可选的 ``+`` 或 ``-`` (之间没有空格)，周围可以有空格。n 进制源常量由数字 0 到 n-1 组成，并且用 ``a`` 到 ``z`` (或者 ``A`` 到 ``Z``)表示 10 到 35。\ *base* 的默认值是 10 ，其允许的范围是 0 和 2-36 。2/8/16 进制源常量可以分别带有可选的 ``0b``/``0B`` 、``0o``/``0O`` 或 ``0x``/``0X`` 前缀，和代码中的整形源常量一样。base 为 0 表示把 x 当作源常量本身而不转化，所以其基数实际是 2 、8 、10 、或 16，这样 ``int('010', 0)`` 就是非法的，而 ``int('010')`` 以及 ``int('010', 8)`` 却是合法的。
 
-   The integer type is described in :ref:`typesnumeric`.
+   整数类型在\ :ref:`typesnumeric`\ 中介绍。
 
 
 .. function:: isinstance(object, classinfo)
 
-   Return true if the *object* argument is an instance of the *classinfo*
-   argument, or of a (direct, indirect or :term:`virtual <虚基类>`) subclass thereof.  If *object* is not
-   an object of the given type, the function always returns false.  If
-   *classinfo* is not a class (type object), it may be a tuple of type objects,
-   or may recursively contain other such tuples (other sequence types are not
-   accepted).  If *classinfo* is not a type or tuple of types and such tuples,
-   a :exc:`TypeError` exception is raised.
+   如果 *object* 参数是 *classinfo* 参数或其(直接的、间接的、或者\ :term:`虚的 <虚基类>`)子类的一个实例则返回真。如果 *object* 不是指定的类型则总是返回假。如果 *classinfo* 不是一个类(type 对象)，则可以是 type 对象的元组，或者递归的包含这样的元组(不可以是其它序列类型)。如果 *classinfo* 不是一个类型，也不是类型元组或由类型组成的元组，则抛出 :exc:`TypeError` 异常。
 
 
 .. function:: issubclass(class, classinfo)
 
-   Return true if *class* is a subclass (direct, indirect or :term:`virtual <虚基类>`) of *classinfo*.  A
-   class is considered a subclass of itself. *classinfo* may be a tuple of class
-   objects, in which case every entry in *classinfo* will be checked. In any other
-   case, a :exc:`TypeError` exception is raised.
+   如果 *class* 是 *classinfo* 的(直接的、间接的、或者\ :term:`虚的 <虚基类>`)子类则返回真。一个类也是其自身的子类。\ *classinfo* 可以是类对象的元组，这时会检测 *classinfo* 中的每个元素。在任何其它情况下都会抛出 :exc:`TypeError` 异常。
 
 
 .. function:: iter(object[, sentinel])
 
-   Return an :term:`迭代器` object.  The first argument is interpreted very
-   differently depending on the presence of the second argument. Without a
-   second argument, *object* must be a collection object which supports the
-   iteration protocol (the :meth:`__iter__` method), or it must support the
-   sequence protocol (the :meth:`__getitem__` method with integer arguments
-   starting at ``0``).  If it does not support either of those protocols,
-   :exc:`TypeError` is raised. If the second argument, *sentinel*, is given,
-   then *object* must be a callable object.  The iterator created in this case
-   will call *object* with no arguments for each call to its
-   :meth:`~iterator.__next__` method; if the value returned is equal to
-   *sentinel*, :exc:`StopIteration` will be raised, otherwise the value will
-   be returned.
+   返回一个\ :term:`迭代器`\ 对象。对第一个参数的解释会根据是否有第二个参数而区别很大。如果没有第二个参数，则 *object* 必须是个支持迭代协议(:meth:`__iter__` 方法)的集合对象，或者支持序列协议(:meth:`__getitem__` 方法，其参数为整数，从 ``0`` 开始)。如果它不支持这两种协议，则抛出 :exc:`TypeError` 。如果指定了第二个参数 *sentinel* 则 *object* 必须可调用。这种情况下创建的迭代器，每当调用其 :meth:`~iterator.__next__` 方法时都会不带参数的调用 *object* ；如果返回的值和 *sentinel* 相等，则抛出 :exc:`StopIteration` ，否则才正常返回这个值。
 
-   See also :ref:`typeiter`.
+   另见\ :ref:`typeiter`\ 。
 
-   One useful application of the second form of :func:`iter` is to read lines of
-   a file until a certain line is reached.  The following example reads a file
-   until the :meth:`readline` method returns an empty string::
+   第二种 :func:`iter` 形式的一个用处就是读取一个文件中和行，直到遇到特定的一行。下面的例子读取一个文件，直到 :meth:`readline` 方法遇到一个空字符串::
 
       with open('mydata.txt') as fp:
           for line in iter(fp.readline, ''):
@@ -519,84 +457,57 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: len(s)
 
-   Return the length (the number of items) of an object.  The argument may be a
-   sequence (string, tuple or list) or a mapping (dictionary).
+   返回对象的长度(其中元素的个数)。其参数可以是序列(字符串、元组、列表)或映射(字典)。
 
 
 .. _func-list:
 .. function:: list([iterable])
    :noindex:
 
-   Rather than being a function, :class:`list` is actually a mutable
-   sequence type, as documented in :ref:`typesseq-list` and :ref:`typesseq`.
+   :class:`list` 其实不仅是个函数，它更是个可变的序列类型，在\ :ref:`typesseq-list`\ 和\ :ref:`typesseq`\ 中介绍。
 
 
 .. function:: locals()
 
-   Update and return a dictionary representing the current local symbol table.
-   Free variables are returned by :func:`locals` when it is called in function
-   blocks, but not in class blocks.
+   更新并返回一个字典，代表当前局部符号表。如果在函数块体调用 :func:`locals` 则会在返回中包含自由变量，而在类体中调用却不会。
 
    .. note::
-      The contents of this dictionary should not be modified; changes may not
-      affect the values of local and free variables used by the interpreter.
+      不应该修改这个字典的内容。如果修改，也可能不会影响解释器中局部和自由变量的值。
 
 .. function:: map(function, iterable, ...)
 
-   Return an iterator that applies *function* to every item of *iterable*,
-   yielding the results.  If additional *iterable* arguments are passed,
-   *function* must take that many arguments and is applied to the items from all
-   iterables in parallel.  With multiple iterables, the iterator stops when the
-   shortest iterable is exhausted.  For cases where the function inputs are
-   already arranged into argument tuples, see :func:`itertools.starmap`\.
+   返回一个迭代器，依次都对 *iterable* 的每个元素调用 *function* ，从而产生返回结果。如果还有更多的 *iterable* ，则 *function* 必须接受这么多参数，然后从每个 iterable 中并行取出元素并调用 function 。对于多个 iterable 的情形，在最短的那个穷尽时迭代器就会停止。对于只接受元组参数的情况，参见 :func:`itertools.starmap`\ 。
 
 
 .. function:: max(iterable, *[, key])
               max(arg1, arg2, *args[, key])
 
-   Return the largest item in an iterable or the largest of two or more
-   arguments.
+   返回 iterable 中最大的项，或者两个或更多参数中最大的那个。
 
-   If one positional argument is provided, *iterable* must be a non-empty
-   iterable (such as a non-empty string, tuple or list).  The largest item
-   in the iterable is returned.  If two or more positional arguments are
-   provided, the largest of the positional arguments is returned.
+   如果有一个位置参数，则 *iterable* 必须是非空的可迭代对象(例如非空字符串、元组、或列表)；这时返回 iterable 中最大的项。如果有两个或更多参数，则返回位置参数中最大的那个。
 
-   The optional keyword-only *key* argument specifies a one-argument ordering
-   function like that used for :meth:`list.sort`.
+   可选的唯关键字参数 *key* 指定一个只接受单个参数的排序函数，就像 :meth:`list.sort` 中使用的那样。
 
-   If multiple items are maximal, the function returns the first one
-   encountered.  This is consistent with other sort-stability preserving tools
-   such as ``sorted(iterable, key=keyfunc, reverse=True)[0]`` and
-   ``heapq.nlargest(1, iterable, key=keyfunc)``.
+   如果最大的项有多个，这个函数返回最先找到的那个。这和其它具有排序稳定性的工具是一致的，例如 ``sorted(iterable, key=keyfunc, reverse=True)[0]`` 和 ``heapq.nlargest(1, iterable, key=keyfunc)`` 。
 
 
 .. _func-memoryview:
 .. function:: memoryview(obj)
    :noindex:
 
-   Return a "memory view" object created from the given argument.  See
-   :ref:`typememoryview` for more information.
+   根据指定的参数创建并返回一个"内存视图"对象。详情参见\ :ref:`typememoryview`\ 。
 
 
 .. function:: min(iterable, *[, key])
               min(arg1, arg2, *args[, key])
 
-   Return the smallest item in an iterable or the smallest of two or more
-   arguments.
+   返回 iterable 中最小的项，或者两个或更多参数中最小的那个。
 
-   If one positional argument is provided, *iterable* must be a non-empty
-   iterable (such as a non-empty string, tuple or list).  The smallest item
-   in the iterable is returned.  If two or more positional arguments are
-   provided, the smallest of the positional arguments is returned.
+   如果有一个位置参数，则 *iterable* 必须是非空的可迭代对象(例如非空字符串、元组、或列表)；这时返回 iterable 中最小的项。如果有两个或更多参数，则返回位置参数中最小的那个。
 
-   The optional keyword-only *key* argument specifies a one-argument ordering
-   function like that used for :meth:`list.sort`.
+   可选的唯关键字参数 *key* 指定一个只接受单个参数的排序函数，就像 :meth:`list.sort` 中使用的那样。
 
-   If multiple items are minimal, the function returns the first one
-   encountered.  This is consistent with other sort-stability preserving tools
-   such as ``sorted(iterable, key=keyfunc)[0]`` and ``heapq.nsmallest(1,
-   iterable, key=keyfunc)``.
+   如果最小的项有多个，这个函数返回最先找到的那个。这和其它具有排序稳定性的工具是一致的，例如 ``sorted(iterable, key=keyfunc, reverse=True)[0]`` 和 ``heapq.nlargest(1, iterable, key=keyfunc)`` 。
 
 .. function:: next(iterator[, default])
 
