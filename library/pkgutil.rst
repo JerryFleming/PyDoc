@@ -148,8 +148,7 @@ support.
    .. note::
       Only works for a :term:`finder` which defines an ``iter_modules()``
       method. This interface is non-standard, so the module also provides
-      implementations for :class:`importlib.machinery.FileFinder` and
-      :class:`zipimport.zipimporter`.
+      implementations for :class:`importlib.machinery.FileFinder` and :class:`zipimport.zipimporter`.
 
    .. versionchanged:: 3.3
       Updated to be based directly on :mod:`importlib` rather than relying
@@ -186,8 +185,7 @@ support.
    .. note::
       Only works for a :term:`finder` which defines an ``iter_modules()``
       method. This interface is non-standard, so the module also provides
-      implementations for :class:`importlib.machinery.FileFinder` and
-      :class:`zipimport.zipimporter`.
+      implementations for :class:`importlib.machinery.FileFinder` and :class:`zipimport.zipimporter`.
 
    .. versionchanged:: 3.3
       Updated to be based directly on :mod:`importlib` rather than relying

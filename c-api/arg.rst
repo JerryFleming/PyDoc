@@ -47,9 +47,7 @@ Unless otherwise stated, buffers are not NUL-terminated.
 .. note::
    For all ``#`` variants of formats (``s#``, ``y#``, etc.), the type of
    the length argument (int or :c:type:`Py_ssize_t`) is controlled by
-   defining the macro :c:macro:`PY_SSIZE_T_CLEAN` before including
-   :file:`Python.h`.  If the macro was defined, length is a
-   :c:type:`Py_ssize_t` rather than an :c:type:`int`. This behavior will change
+   defining the macro :c:macro:`PY_SSIZE_T_CLEAN` before including :file:`Python.h`.  If the macro was defined, length is a :c:type:`Py_ssize_t` rather than an :c:type:`int`. This behavior will change
    in a future Python version to only support :c:type:`Py_ssize_t` and
    drop :c:type:`int` support. It is best to always define :c:macro:`PY_SSIZE_T_CLEAN`.
 

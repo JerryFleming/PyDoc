@@ -266,8 +266,7 @@ process and user.
       the list of effective group ids associated with the current user process;
       this list is limited to a system-defined number of entries, typically 16,
       and may be modified by calls to :func:`setgroups` if suitably privileged.
-      If built with a deployment target greater than :const:`10.5`,
-      :func:`getgroups` returns the current group access list for the user
+      If built with a deployment target greater than :const:`10.5`, :func:`getgroups` returns the current group access list for the user
       associated with the effective user id of the process; the group access
       list may change over the lifetime of the process, it is not affected by
       calls to :func:`setgroups`, and its length is not limited to 16.  The

@@ -552,8 +552,7 @@ code, or when embedding the Python interpreter:
       when there is only a single thread, all object accesses are safe.  Therefore,
       when this function initializes the global interpreter lock, it also acquires
       it.  Before the Python :mod:`_thread` module creates a new thread, knowing
-      that either it has the lock or the lock hasn't been created yet, it calls
-      :c:func:`PyEval_InitThreads`.  When this call returns, it is guaranteed that
+      that either it has the lock or the lock hasn't been created yet, it calls :c:func:`PyEval_InitThreads`.  When this call returns, it is guaranteed that
       the lock has been created and that the calling thread has acquired it.
 
       It is **not** safe to call this function when it is unknown which thread (if

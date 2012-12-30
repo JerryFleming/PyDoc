@@ -607,8 +607,7 @@ SSL sockets also have the following additional methods and attributes:
        'version': 3}
 
    .. note::
-      To validate a certificate for a particular service, you can use the
-      :func:`match_hostname` function.
+      To validate a certificate for a particular service, you can use the :func:`match_hostname` function.
 
    If the ``binary_form`` parameter is :const:`True`, and a certificate was
    provided, this method returns the DER-encoded form of the entire certificate

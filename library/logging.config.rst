@@ -109,16 +109,13 @@ in :mod:`logging` itself) and defining handlers which are declared either in
    send it to the socket as a string of bytes preceded by a four-byte length
    string packed in binary using ``struct.pack('>L', n)``.
 
-   .. note:: Because portions of the configuration are passed through
-      :func:`eval`, use of this function may open its users to a security risk.
+   .. note:: Because portions of the configuration are passed through :func:`eval`, use of this function may open its users to a security risk.
       While the function only binds to a socket on ``localhost``, and so does
       not accept connections from remote machines, there are scenarios where
-      untrusted code could be run under the account of the process which calls
-      :func:`listen`. Specifically, if the process calling :func:`listen` runs
+      untrusted code could be run under the account of the process which calls :func:`listen`. Specifically, if the process calling :func:`listen` runs
       on a multi-user machine where users cannot trust each other, then a
       malicious user could arrange to run essentially arbitrary code in a
-      victim user's process, simply by connecting to the victim's
-      :func:`listen` socket and sending a configuration which runs whatever
+      victim user's process, simply by connecting to the victim's :func:`listen` socket and sending a configuration which runs whatever
       code the attacker wants to have executed in the victim's process. This is
       especially easy to do if the default port is used, but not hard even if a
       different port is used).
@@ -710,8 +707,7 @@ exception tracebacks in an expanded or condensed format.
 .. note:: Due to the use of :func:`eval` as described above, there are
    potential security risks which result from using the :func:`listen` to send
    and receive configurations via sockets. The risks are limited to where
-   multiple users with no mutual trust run code on the same machine; see the
-   :func:`listen` documentation for more information.
+   multiple users with no mutual trust run code on the same machine; see the :func:`listen` documentation for more information.
 
 .. seealso::
 

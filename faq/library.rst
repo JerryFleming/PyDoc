@@ -510,8 +510,7 @@ you can also use the :mod:`array` module.
    To read and write binary data, it is mandatory to open the file in
    binary mode (here, passing ``"rb"`` to :func:`open`).  If you use
    ``"r"`` instead (the default), the file will be open in text mode
-   and ``f.read()`` will return :class:`str` objects rather than
-   :class:`bytes` objects.
+   and ``f.read()`` will return :class:`str` objects rather than :class:`bytes` objects.
 
 
 I can't seem to use os.read() on a pipe created with os.popen(); why?

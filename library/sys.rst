@@ -244,8 +244,7 @@ always available.
 
    .. note:: If a :ref:`virtual environment <venv-def>` is in effect, this
       value will be changed in ``site.py`` to point to the virtual environment.
-      The value for the Python installation will still be available, via
-      :data:`base_exec_prefix`.
+      The value for the Python installation will still be available, via :data:`base_exec_prefix`.
 
 
 .. data:: executable

@@ -90,8 +90,7 @@ another rational number, or from a string.
       value of *flt*, which must be a :class:`float`. Beware that
       ``Fraction.from_float(0.3)`` is not the same value as ``Fraction(3, 10)``
 
-      .. note:: From Python 3.2 onwards, you can also construct a
-         :class:`Fraction` instance directly from a :class:`float`.
+      .. note:: From Python 3.2 onwards, you can also construct a :class:`Fraction` instance directly from a :class:`float`.
 
 
    .. method:: from_decimal(dec)
@@ -99,8 +98,7 @@ another rational number, or from a string.
       This class method constructs a :class:`Fraction` representing the exact
       value of *dec*, which must be a :class:`decimal.Decimal` instance.
 
-      .. note:: From Python 3.2 onwards, you can also construct a
-         :class:`Fraction` instance directly from a :class:`decimal.Decimal`
+      .. note:: From Python 3.2 onwards, you can also construct a :class:`Fraction` instance directly from a :class:`decimal.Decimal`
          instance.
 
 
