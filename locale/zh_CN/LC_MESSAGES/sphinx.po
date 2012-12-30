@@ -478,11 +478,11 @@ msgstr "重要"
 
 #: sphinx/locale/__init__.py:161
 msgid "Note"
-msgstr "注解"
+msgstr "备注"
 
 #: sphinx/locale/__init__.py:162
 msgid "See Also"
-msgstr "也可以参考"
+msgstr "另见"
 
 #: sphinx/locale/__init__.py:163
 msgid "Tip"

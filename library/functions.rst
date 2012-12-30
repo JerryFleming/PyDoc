@@ -93,7 +93,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    * 如果它是\ *整数*\ ，则表示数组的长度，数组用空字节初始化。
 
-   * 如果它是个和 *buffer* 界面兼容的对象，则使用这个对象的只读缓存来初始化字节数组。
+   * 如果它是个和 *buffer* 界面兼容的对象，则使用这个对象的只读缓冲区来初始化字节数组。
 
    * 如果它是个\ *可迭代对象*\ ，则这个对象必须是 ``0 <= x < 256`` 范围内的整数可迭代对象，其元素用来初始化数组内容。
 
@@ -150,7 +150,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    把 *source* 编译成 AST 代码对象。代码对象可以用 :func:`exec` 或者 :func:`eval` 来执行。\ *source* 可以是字符串或者 AST 对象。关于如何使用 AST 对象参见 :mod:`ast` 模块的文档。
 
-   *filename* 参数应该指定从中读取代码的文件，如果不是从文件读取则可以转入一个易于识别的标识(通常用 ``'<string>'``)。
+   *filename* 参数应该指定从中读取代码的文件，如果不是从文件读取则可以传入一个易于识别的标识(通常用 ``'<string>'``)。
 
    *mode* 参数指定编译什么类型的代码。如果 *source* 含有一系列语句，则这个参数可以是 ``'exec'`` ；如果只包含一个表达式，则它可以是 ``'eval'`` ；而如果只包含一个交互式语句，则是 ``'single'`` (在最后这种情况下，如果表达式语句的值不是 ``None`` 则会被打印出来)。
 
@@ -511,154 +511,79 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: next(iterator[, default])
 
-   Retrieve the next item from the *iterator* by calling its
-   :meth:`~iterator.__next__` method.  If *default* is given, it is returned
-   if the iterator is exhausted, otherwise :exc:`StopIteration` is raised.
+   通过调用 *iteror* 的 :meth:`~iterator.__next__` 方法返回其中的下一个项。当 iterator 穷尽时，如果指定了 *default* 就返回这个值，否则就抛出 :exc:`StopIteration` 。
 
 
 .. function:: object()
 
-   Return a new featureless object.  :class:`object` is a base for all classes.
-   It has the methods that are common to all instances of Python classes.  This
-   function does not accept any arguments.
+   返回一个普通的对象。\ :class:`object` 是所有类的基类，它定义了所有 Python 类实例所共有的方法。这个函数不接受任何参数。
 
    .. note::
 
-      :class:`object` does *not* have a :attr:`__dict__`, so you can't assign
-      arbitrary attributes to an instance of the :class:`object` class.
+      :class:`object` *没有* :attr:`__dict__` ，所以你不能对 :class:`object` 类实例任意赋以属性。
 
 
 .. function:: oct(x)
 
-   Convert an integer number to an octal string.  The result is a valid Python
-   expression.  If *x* is not a Python :class:`int` object, it has to define an
-   :meth:`__index__` method that returns an integer.
+   把一个整数转化为八进制字符串，结果是个有效的 Python 表达式。如果 *x* 不是个 Python :class:`int` 对象，则必须定义 :meth:`__index__` 方法并返回一个整数。
 
 
    .. index::
-      single: file object; open() built-in function
+      single: 文件对象; 内置函数 open()
 
 .. function:: open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
 
-   Open *file* and return a corresponding :term:`文件对象`.  If the file
-   cannot be opened, an :exc:`OSError` is raised.
+   打开 *file* 并返回相应的\ :term:`文件对象`\ 。如果这个文件不能打开，则抛出 :exc:`OSError` 。
 
-   *file* is either a string or bytes object giving the pathname (absolute or
-   relative to the current working directory) of the file to be opened or
-   an integer file descriptor of the file to be wrapped.  (If a file descriptor
-   is given, it is closed when the returned I/O object is closed, unless
-   *closefd* is set to ``False``.)
+   *file* 是个字符串或者 bytes 对象，它指定要打开文件的路径(绝对路径或者基于当前工作目录的相对路径)，或者指定要封装的文件描述符。(如果指定的是文件描述符，则在返回的 I/O 对象关闭时文件描述符也会关闭，除非把 *closefd* 设为 ``False`` 。)
 
-   *mode* is an optional string that specifies the mode in which the file is
-   opened.  It defaults to ``'r'`` which means open for reading in text mode.
-   Other common values are ``'w'`` for writing (truncating the file if it
-   already exists), ``'x'`` for exclusive creation and ``'a'`` for appending
-   (which on *some* Unix systems, means that *all* writes append to the end of
-   the file regardless of the current seek position).  In text mode, if
-   *encoding* is not specified the encoding used is platform dependent:
-   ``locale.getpreferredencoding(False)`` is called to get the current locale
-   encoding. (For reading and writing raw bytes use binary mode and leave
-   *encoding* unspecified.)  The available modes are:
+   *mode* 是个可选的字符串，指定打开文件所使用的模式；其默认值为 ``'r'`` ，表示以文本读取的方式打开。其它常见模式有表示写入(如果文件存在则先清空)的 ``'w'`` ，表示单单创建的 ``'x'`` ，以及表示添加内容(在\ *有的*\ Unix 系统，表示\ *所有*\ 的写入都会添加到文件的结尾，而不管文件指针的位置)的 ``'a'`` 。在文本模式下，如果没有指定 *encoding* 则使用的编码方式依赖于系统：通过调用 ``locale.getpreferredencoding(False)`` 来得到当前的系统编码方式。(如果要读写二进制字节，则要使用二进制模式，并且不要指定 *encoding* 。)可用的模式如下：
 
    ========= ===============================================================
-   Character Meaning
+   字符      含义
    --------- ---------------------------------------------------------------
-   ``'r'``   open for reading (default)
-   ``'w'``   open for writing, truncating the file first
-   ``'x'``   open for exclusive creation, failing if the file already exists
-   ``'a'``   open for writing, appending to the end of the file if it exists
-   ``'b'``   binary mode
-   ``'t'``   text mode (default)
-   ``'+'``   open a disk file for updating (reading and writing)
-   ``'U'``   universal newlines mode (for backwards compatibility; should
-             not be used in new code)
+   ``'r'``   以读取方式打开(默认的)
+   ``'w'``   以写入方式打开，会首先清空文件
+   ``'x'``   单单以创建模式打开，如果文件已经存在则打开失败
+   ``'a'``   以写入模式打开，如果文件已存在则在文件末尾添加
+   ``'b'``   二进制模式
+   ``'t'``   文件模式(默认的)
+   ``'+'``   打开并更新一个磁盘文件(读取或写入)
+   ``'U'``   万能换行符模式(为了向后兼容；新代码中不应使用)
    ========= ===============================================================
 
-   The default mode is ``'r'`` (open for reading text, synonym of ``'rt'``).
-   For binary read-write access, the mode ``'w+b'`` opens and truncates the file
-   to 0 bytes.  ``'r+b'`` opens the file without truncation.
+   默认的模式是 ``'r'`` (以读取文本方式打开，和 ``'rt'`` 同义)。对于二进制文件的读写，模式 ``'w+b'`` 会打开文件并把它清空成 0 字节；\ ``'r+b'`` 会打开文件但不清空。
 
-   As mentioned in the :ref:`io-overview`, Python distinguishes between binary
-   and text I/O.  Files opened in binary mode (including ``'b'`` in the *mode*
-   argument) return contents as :class:`bytes` objects without any decoding.  In
-   text mode (the default, or when ``'t'`` is included in the *mode* argument),
-   the contents of the file are returned as :class:`str`, the bytes having been
-   first decoded using a platform-dependent encoding or using the specified
-   *encoding* if given.
+   正如\ :ref:`io-overview`\ 提到的那样，Python 的 I/O 区分二进制文件和文本文件。以二进制方式(在 *mode* 参数中含有 ``'b'``)打开的文件会以 :class:`bytes` 对象的形式返回内容，而不进行任何解码。在文本模式(这是默认的，或者 *mode* 参数包含 ``'t'`` 时)则以 :class:`str` 的形式返回文件内容，这些内容使用依赖系统的编码方式进行解码，如果指定 *encoding* 则用它来解码。
 
    .. note::
 
-      Python doesn't depend on the underlying operating system's notion of text
-      files; all the processing is done by Python itself, and is therefore
-      platform-independent.
+      Python 并不依赖底层的操作系统来决定文件是否是文本文件，整个过程都由 Python 自己完成，所有和系统是无关的。
 
-   *buffering* is an optional integer used to set the buffering policy.  Pass 0
-   to switch buffering off (only allowed in binary mode), 1 to select line
-   buffering (only usable in text mode), and an integer > 1 to indicate the size
-   of a fixed-size chunk buffer.  When no *buffering* argument is given, the
-   default buffering policy works as follows:
+   *buffering* 是个可选的整数，用以指定缓冲区策略。传入 0 表示要关闭缓冲区(只允许用于二进制模式)，1 表示选择基于行的缓冲区(只用于文本模式)，大于 1 的整数表示一个固定缓冲区的大小。如果没有指定 *buffering* 参数，默认的缓冲区策略如下：
 
-   * Binary files are buffered in fixed-size chunks; the size of the buffer is
-     chosen using a heuristic trying to determine the underlying device's "block
-     size" and falling back on :attr:`io.DEFAULT_BUFFER_SIZE`.  On many systems,
-     the buffer will typically be 4096 or 8192 bytes long.
+   * 二进制文件有大小固定的缓冲区，其缓冲区大小根据其底层设备的“块大小”来决定，如果不行则用 :attr:`io.DEFAULT_BUFFER_SIZE` 。在很多系统中这个缓冲区大小都是 4096 或 8192 字节。
 
-   * "Interactive" text files (files for which :meth:`isatty` returns True) use
-     line buffering.  Other text files use the policy described above for binary
-     files.
+   * "交互的"文本文件(调用 :meth:`isatty` 返回真的那些文件)使用行缓冲区。其它的文件文件使用上面的二进制文件策略。
 
-   *encoding* is the name of the encoding used to decode or encode the file.
-   This should only be used in text mode.  The default encoding is platform
-   dependent (whatever :func:`locale.getpreferredencoding` returns), but any
-   encoding supported by Python can be used.  See the :mod:`codecs` module for
-   the list of supported encodings.
+   *encoding* 是对文件编码或解码所用的编码名称，这个只用于文本模式。默认的编码和系统相关(任意由 :func:`locale.getpreferredencoding` 返回的值)，但可以使用任意 Python 支持的编码。这个支持的编码列表参见\ :mod:`codecs`\ 。
 
-   *errors* is an optional string that specifies how encoding and decoding
-   errors are to be handled--this cannot be used in binary mode.  Pass
-   ``'strict'`` to raise a :exc:`ValueError` exception if there is an encoding
-   error (the default of ``None`` has the same effect), or pass ``'ignore'`` to
-   ignore errors.  (Note that ignoring encoding errors can lead to data loss.)
-   ``'replace'`` causes a replacement marker (such as ``'?'``) to be inserted
-   where there is malformed data.  When writing, ``'xmlcharrefreplace'``
-   (replace with the appropriate XML character reference) or
-   ``'backslashreplace'`` (replace with backslashed escape sequences) can be
-   used.  Any other error handling name that has been registered with
-   :func:`codecs.register_error` is also valid.
+   *errors* 是个可选的字符串，指定如何处理编码或解码错误 --- 这不能用于二进制模式。传入 ``'strict'`` 会在发生编码错误时抛出 :exc:`ValueError` 异常(默认值 ``None`` 有相同的效果)，而传入 ``'ignore'`` 会忽略错误(注意，忽略编码错误可能导致数据丢失)。传入 ``'replace'`` 会在遇到格式错误的数据时插入一个替换的标识(例如 ``'?'``)，而在写入时可以使用 ``'xmlcharrefreplace'`` (替换成适当的 XML 字符引用)或者 ``'backslashreplace'`` (替换成反斜线转义序列)。任何通过 :func:`codecs.register_error` 注册的错误处理名称出都是有效的。
 
    .. index::
-      single: universal newlines; open() built-in function
+      single: 万能换行符; 内置函数 open()
 
-   *newline* controls how :term:`万能换行符` mode works (it only
-   applies to text mode).  It can be ``None``, ``''``, ``'\n'``, ``'\r'``, and
-   ``'\r\n'``.  It works as follows:
+   *newline* 控制\ :term:`万能换行符`\ 模式如何工作(只对文本模式有效)，其值可以是 ``None`` 、\ ``''`` 、\ ``'\n'`` 、\ ``'\r'`` 、或 ``'\r\n'`` 。它的作用方式如下：
 
-   * When reading input from the stream, if *newline* is ``None``, universal
-     newlines mode is enabled.  Lines in the input can end in ``'\n'``,
-     ``'\r'``, or ``'\r\n'``, and these are translated into ``'\n'`` before
-     being returned to the caller.  If it is ``''``, universal newlines mode is
-     enabled, but line endings are returned to the caller untranslated.  If it
-     has any of the other legal values, input lines are only terminated by the
-     given string, and the line ending is returned to the caller untranslated.
+   * 在从流中读取输入时，如果 *newline* 是 ``None`` ，则启用万能换行符模式。输入中的每一行都可以用 ``'\n'`` 、\ ``'\r'`` 、或者 ``'\r\n'`` 结束，它们会在返回到调用那里之前被转化为 ``'\n'`` 。如果是 ``''`` ，则会打开万能换行模式，但是行结束符会不加转换的返回给调用者。如果它是其它任何合法的值，则输入行只能以指定的字符串结束，该结束符会不回转换的返回给调用者。
 
-   * When writing output to the stream, if *newline* is ``None``, any ``'\n'``
-     characters written are translated to the system default line separator,
-     :data:`os.linesep`.  If *newline* is ``''`` or ``'\n'``, no translation
-     takes place.  If *newline* is any of the other legal values, any ``'\n'``
-     characters written are translated to the given string.
+   * 在向流中写入输出时，如果 *newline* 是 ``None`` ，任何写入的 ``'\n'`` 字符都会转换成系统默认的行分隔符 :data:`os.linesep` 。如果 *newline* 是 ``''`` 或者 ``'\n'`` ，则不进行转换。如果 *newline* 是任何其它合法的值，任何写入的 ``'\n'`` 字符都会转换成这个指定的字符串。
 
-   If *closefd* is ``False`` and a file descriptor rather than a filename was
-   given, the underlying file descriptor will be kept open when the file is
-   closed.  If a filename is given *closefd* has no effect and must be ``True``
-   (the default).
+   如果 *closefd* 是 ``False`` ，并且指定了一个文件描述符而不是文件名，则在关闭该文件时保持打开这个文件描述符。如果指定了文件名，则 *closefd* 不起作用，且必须为 ``True`` (默认值)。
 
-   A custom opener can be used by passing a callable as *opener*. The underlying
-   file descriptor for the file object is then obtained by calling *opener* with
-   (*file*, *flags*). *opener* must return an open file descriptor (passing
-   :mod:`os.open` as *opener* results in functionality similar to passing
-   ``None``).
+   可以通过传入一个可调用的 *opener* 来打开文件。这时可以通过加上 (*file*, *flags*) 来调用 *opener* 以得到文件对象所对应的文件描述符。\ *opener* 必须返回一个打开的文件描述符(把 :mod:`os.open` 作为 *opener* 传入，其作用和传入 ``None`` 相似)。
 
-   The following example uses the :ref:`dir_fd <dir_fd>` parameter of the
-   :func:`os.open` function to open a file relative to a given directory::
+   下面的例子使用 :func:`os.open` 函数的 :ref:`dir_fd <dir_fd>` 参数来打开一个相对于指定目录的文件::
 
       >>> import os
       >>> dir_fd = os.open('somedir', os.O_RDONLY)
@@ -671,38 +596,24 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
       >>> os.close(dir_fd)  # don't leak a file descriptor
 
    .. versionchanged:: 3.3
-      The *opener* parameter was added.
-      The ``'x'`` mode was added.
+      增加 *opener* 参数。增加 ``'x'`` 模式。
 
-   The type of :term:`文件对象` returned by the :func:`open` function
-   depends on the mode.  When :func:`open` is used to open a file in a text
-   mode (``'w'``, ``'r'``, ``'wt'``, ``'rt'``, etc.), it returns a subclass of
-   :class:`io.TextIOBase` (specifically :class:`io.TextIOWrapper`).  When used
-   to open a file in a binary mode with buffering, the returned class is a
-   subclass of :class:`io.BufferedIOBase`.  The exact class varies: in read
-   binary mode, it returns a :class:`io.BufferedReader`; in write binary and
-   append binary modes, it returns a :class:`io.BufferedWriter`, and in
-   read/write mode, it returns a :class:`io.BufferedRandom`.  When buffering is
-   disabled, the raw stream, a subclass of :class:`io.RawIOBase`,
-   :class:`io.FileIO`, is returned.
+   :func:`open` 函数所返回的\ :term:`文件对象`\ 的类型取决于打开的模式。如果用 :func:`open` 以文本模式打开文件(``'w'`` 、\ ``'r'`` 、\ ``'wt'`` 、\ ``'rt'`` 等等)，则返回 :class:`io.TextIOBase` 的子类(尤其是 :class:`io.TextIOWrapper`)。当以带缓冲区的二进制模式打开文件时，返回的类是 :class:`io.BufferedIOBase` 的子类。具体的类各不相同：在二进制读取模式中，返回 :class:`io.BufferedReader` ；在二进制写入和添加模式中，返回 :class:`io.BufferedWriter` ；在读写模式中，返回 :class:`io.BufferedRandom` ；如果禁用缓冲区，则返回原生流，它是 :class:`io.RawIOBase` 和 :class:`io.FileIO` 的子类。
 
    .. index::
-      single: line-buffered I/O
-      single: unbuffered I/O
-      single: buffer size, I/O
-      single: I/O control; buffering
-      single: binary mode
-      single: text mode
+      single: 行缓冲区 I/O
+      single: 无缓冲区 I/O
+      single: 缓冲区大小, I/O
+      single: I/O 控制; 缓冲区
+      single: 二进制模式
+      single: 文本模式
       module: sys
 
-   See also the file handling modules, such as, :mod:`fileinput`, :mod:`io`
-   (where :func:`open` is declared), :mod:`os`, :mod:`os.path`, :mod:`tempfile`,
-   and :mod:`shutil`.
+   另见文件处理模式，例如 :mod:`fileinput` ，\ :mod:`io` (这是定义 :func:`open` 的地方)，\ :mod:`os` 、\ :mod:`os.path` 、\ :mod:`tempfile` 、和 :mod:`shutil` 。
 
    .. versionchanged:: 3.3
-      :exc:`IOError` used to be raised, it is now an alias of :exc:`OSError`.
-      :exc:`FileExistsError` is now raised if the file opened in exclusive
-      creation mode (``'x'``) already exists.
+      以前会抛出 :exc:`IOError` ，它现在是 :exc:`OSError` 的别名。
+      现在，如果文件单单以创建模式(``'x'``)打开并且已经存在，则会抛出 :exc:`FileExistsError` 。
 
 
 .. XXX works for bytes too, but should it?
