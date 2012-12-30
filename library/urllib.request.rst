@@ -63,7 +63,7 @@ The :mod:`urllib.request` module defines the following functions:
       an HTTPS request will not do any verification of the server's
       certificate.
 
-   This function returns a file-like object that works as a :term:`context manager`,
+   This function returns a file-like object that works as a :term:`上下文管理器`,
    with two additional methods from the :mod:`urllib.response` module
 
    * :meth:`geturl` --- return the URL of the resource retrieved,
@@ -1075,7 +1075,7 @@ will use the same for decoding the bytes object. ::
    "http://www.w3.org/TR/xhtml1/DTD/xhtm
 
 It is also possible to achieve the same result without using the
-:term:`context manager` approach. ::
+:term:`上下文管理器` approach. ::
 
    >>> import urllib.request
    >>> f = urllib.request.urlopen('http://www.python.org/')

@@ -381,8 +381,7 @@ two-character sequence of a carriage return plus a newline.
 
 Python's file objects can now support end of line conventions other than the
 one followed by the platform on which Python is running. Opening a file with
-the mode ``'U'`` or ``'rU'`` will open a file for reading in :term:`universal
-newlines` mode.  All three line ending conventions will be translated to a
+the mode ``'U'`` or ``'rU'`` will open a file for reading in :term:`万能换行符` mode.  All three line ending conventions will be translated to a
 ``'\n'`` in the strings returned by the various file methods such as
 :meth:`read` and :meth:`readline`.
 

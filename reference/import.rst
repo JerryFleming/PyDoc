@@ -7,8 +7,8 @@ The import system
 
 .. index:: single: import machinery
 
-Python code in one :term:`module` gains access to the code in another module
-by the process of :term:`importing` it.  The :keyword:`import` statement is
+Python code in one :term:`模块` gains access to the code in another module
+by the process of :term:`导入` it.  The :keyword:`import` statement is
 the most common way of invoking the import machinery, but it is not the only
 way.  Functions such as :func:`importlib.import_module` and built-in
 :func:`__import__` can also be used to invoke the import machinery.
@@ -69,7 +69,7 @@ Packages
 Python has only one type of module object, and all modules are of this type,
 regardless of whether the module is implemented in Python, C, or something
 else.  To help organize modules and provide a naming hierarchy, Python has a
-concept of :term:`packages <package>`.
+concept of :term:`packages <包>`.
 
 You can think of packages as the directories on a file system and modules as
 files within directories, but don't take this analogy too literally since
@@ -97,8 +97,7 @@ Regular packages
 .. index::
     pair: package; regular
 
-Python defines two types of packages, :term:`regular packages <regular
-package>` and :term:`namespace packages <namespace package>`.  Regular
+Python defines two types of packages, :term:`regular packages <普通包>` and :term:`namespace packages <包空间>`.  Regular
 packages are traditional packages as they existed in Python 3.2 and earlier.
 A regular package is typically implemented as a directory containing an
 ``__init__.py`` file.  When a regular package is imported, this
@@ -132,7 +131,7 @@ Namespace packages
     pair:: package; namespace
     pair:: package; portion
 
-A namespace package is a composite of various :term:`portions <portion>`,
+A namespace package is a composite of various :term:`portions <包块>`,
 where each portion contributes a subpackage to the parent package.  Portions
 may reside in different locations on the file system.  Portions may also be
 found in zip files, on the network, or anywhere else that Python searches
@@ -159,7 +158,7 @@ See also :pep:`420` for the namespace package specification.
 Searching
 =========
 
-To begin the search, Python needs the :term:`fully qualified <qualified name>`
+To begin the search, Python needs the :term:`fully qualified <限定名字>`
 name of the module (or package, but for the purposes of this discussion, the
 difference is immaterial) being imported.  This name may come from various
 arguments to the :keyword:`import` statement, or from the parameters to the
@@ -213,16 +212,16 @@ Finders and loaders
 
 If the named module is not found in :data:`sys.modules`, then Python's import
 protocol is invoked to find and load the module.  This protocol consists of
-two conceptual objects, :term:`finders <finder>` and :term:`loaders <loader>`.
+two conceptual objects, :term:`finders <查找器>` and :term:`loaders <加载器>`.
 A finder's job is to determine whether it can find the named module using
 whatever strategy it knows about. Objects that implement both of these
-interfaces are referred to as :term:`importers <importer>` - they return
+interfaces are referred to as :term:`importers <导入器>` - they return
 themselves when they find that they can load the requested module.
 
 Python includes a number of default finders and importers.  The first one
 knows how to locate built-in modules, and the second knows how to locate
-frozen modules.  A third default finder searches an :term:`import path`
-for modules.  The :term:`import path` is a list of locations that may
+frozen modules.  A third default finder searches an :term:`导入路径`
+for modules.  The :term:`导入路径` is a list of locations that may
 name file system paths or zip files.  It can also be extended to search
 for any locatable resource, such as those identified by URLs.
 
@@ -230,7 +229,7 @@ The import machinery is extensible, so new finders can be added to extend the
 range and scope of module searching.
 
 Finders do not actually load modules.  If they can find the named module, they
-return a :term:`loader`, which the import machinery then invokes to load the
+return a :term:`加载器`, which the import machinery then invokes to load the
 module and create the corresponding module object.
 
 The following sections describe the protocol for finders and loaders in more
@@ -312,8 +311,8 @@ second argument.
 
 Python's default :data:`sys.meta_path` has three meta path finders, one that
 knows how to import built-in modules, one that knows how to import frozen
-modules, and one that knows how to import modules from an :term:`import path`
-(i.e. the :term:`path based finder`).
+modules, and one that knows how to import modules from an :term:`导入路径`
+(i.e. the :term:`基于路径的查找器`).
 
 
 Loaders
@@ -469,8 +468,7 @@ The Path Based Finder
     single: path based finder
 
 As mentioned previously, Python comes with several default meta path finders.
-One of these, called the :term:`path based finder`, searches an :term:`import
-path`, which contains a list of :term:`path entries <path entry>`.  Each path
+One of these, called the :term:`基于路径的查找器`, searches an :term:`导入路径`, which contains a list of :term:`path entries <路径条目>`.  Each path
 entry names a location to search for modules.
 
 The path based finder itself doesn't know how to import anything. Instead, it
@@ -492,13 +490,13 @@ The path based finder provides additional hooks and protocols so that you
 can extend and customize the types of searchable path entries.  For example,
 if you wanted to support path entries as network URLs, you could write a hook
 that implements HTTP semantics to find modules on the web.  This hook (a
-callable) would return a :term:`path entry finder` supporting the protocol
+callable) would return a :term:`路径条目查找器` supporting the protocol
 described below, which was then used to get a loader for the module from the
 web.
 
 A word of warning: this section and the previous both use the term *finder*,
-distinguishing between them by using the terms :term:`meta path finder` and
-:term:`path entry finder`.  These two types of finders are very similar,
+distinguishing between them by using the terms :term:`元路径查找器` and
+:term:`路径条目查找器`.  These two types of finders are very similar,
 support similar protocols, and function in similar ways during the import
 process, but it's important to keep in mind that they are subtly different.
 In particular, meta path finders operate at the beginning of the import
@@ -519,17 +517,16 @@ Path entry finders
     single: sys.path_importer_cache
     single: PYTHONPATH
 
-The :term:`path based finder` is responsible for finding and loading Python
-modules and packages whose location is specified with a string :term:`path
-entry`.  Most path entries name locations in the file system, but they need
+The :term:`基于路径的查找器` is responsible for finding and loading Python
+modules and packages whose location is specified with a string :term:`路径条目`.  Most path entries name locations in the file system, but they need
 not be limited to this.
 
-As a meta path finder, the :term:`path based finder` implements the
+As a meta path finder, the :term:`基于路径的查找器` implements the
 :meth:`find_module()` protocol previously described, however it exposes
 additional hooks that can be used to customize how modules are found and
-loaded from the :term:`import path`.
+loaded from the :term:`导入路径`.
 
-Three variables are used by the :term:`path based finder`, :data:`sys.path`,
+Three variables are used by the :term:`基于路径的查找器`, :data:`sys.path`,
 :data:`sys.path_hooks` and :data:`sys.path_importer_cache`.  The ``__path__``
 attributes on package objects are also used.  These provide additional ways
 that the import machinery can be customized.
@@ -542,11 +539,10 @@ directories on the file system, zip files, and potentially other "locations"
 (see the :mod:`site` module) that should be searched for modules, such as
 URLs, or database queries.  Only strings and bytes should be present on
 :data:`sys.path`; all other data types are ignored.  The encoding of bytes
-entries is determined by the individual :term:`path entry finders <path entry
-finder>`.
+entries is determined by the individual :term:`path entry finders <路径条目查找器>`.
 
-The :term:`path based finder` is a :term:`meta path finder`, so the import
-machinery begins the :term:`import path` search by calling the path
+The :term:`基于路径的查找器` is a :term:`元路径查找器`, so the import
+machinery begins the :term:`导入路径` search by calling the path
 based finder's :meth:`find_module()` method as described previously.  When
 the ``path`` argument to :meth:`find_module()` is given, it will be a
 list of string paths to traverse - typically a package's ``__path__``
@@ -554,38 +550,35 @@ attribute for an import within that package.  If the ``path`` argument
 is ``None``, this indicates a top level import and :data:`sys.path` is used.
 
 The path based finder iterates over every entry in the search path, and
-for each of these, looks for an appropriate :term:`path entry finder` for the
+for each of these, looks for an appropriate :term:`路径条目查找器` for the
 path entry.  Because this can be an expensive operation (e.g. there may be
 `stat()` call overheads for this search), the path based finder maintains
 a cache mapping path entries to path entry finders.  This cache is maintained
 in :data:`sys.path_importer_cache` (despite the name, this cache actually
-stores finder objects rather than being limited to :term:`importer` objects).
-In this way, the expensive search for a particular :term:`path entry`
-location's :term:`path entry finder` need only be done once.  User code is
+stores finder objects rather than being limited to :term:`导入器` objects).
+In this way, the expensive search for a particular :term:`路径条目`
+location's :term:`路径条目查找器` need only be done once.  User code is
 free to remove cache entries from :data:`sys.path_importer_cache` forcing
 the path based finder to perform the path entry search again [#fnpic]_.
 
 If the path entry is not present in the cache, the path based finder iterates
-over every callable in :data:`sys.path_hooks`.  Each of the :term:`path entry
-hooks <path entry hook>` in this list is called with a single argument, the
-path entry to be searched.  This callable may either return a :term:`path
-entry finder` that can handle the path entry, or it may raise
+over every callable in :data:`sys.path_hooks`.  Each of the :term:`path entry hooks <路径条目钩子>` in this list is called with a single argument, the
+path entry to be searched.  This callable may either return a :term:`路径条目查找器` that can handle the path entry, or it may raise
 :exc:`ImportError`.  An :exc:`ImportError` is used by the path based finder to
-signal that the hook cannot find a :term:`path entry finder` for that
-:term:`path entry`.  The exception is ignored and :term:`import path`
+signal that the hook cannot find a :term:`路径条目查找器` for that
+:term:`路径条目`.  The exception is ignored and :term:`导入路径`
 iteration continues.  The hook should expect either a string or bytes object;
 the encoding of bytes objects is up to the hook (e.g. it may be a file system
 encoding, UTF-8, or something else), and if the hook cannot decode the
 argument, it should raise :exc:`ImportError`.
 
-If :data:`sys.path_hooks` iteration ends with no :term:`path entry finder`
+If :data:`sys.path_hooks` iteration ends with no :term:`路径条目查找器`
 being returned, then the path based finder's :meth:`find_module()` method
 will store ``None`` in :data:`sys.path_importer_cache` (to indicate that
 there is no finder for this path entry) and return ``None``, indicating that
-this :term:`meta path finder` could not find the module.
+this :term:`元路径查找器` could not find the module.
 
-If a :term:`path entry finder` *is* returned by one of the :term:`path entry
-hook` callables on :data:`sys.path_hooks`, then the following protocol is used
+If a :term:`路径条目查找器` *is* returned by one of the :term:`路径条目钩子` callables on :data:`sys.path_hooks`, then the following protocol is used
 to ask the finder for a module loader, which is then used to load the module.
 
 
@@ -598,7 +591,7 @@ the :meth:`find_loader()` method.
 
 :meth:`find_loader()` takes one argument, the fully qualified name of the
 module being imported.  :meth:`find_loader()` returns a 2-tuple where the
-first item is the loader and the second item is a namespace :term:`portion`.
+first item is the loader and the second item is a namespace :term:`包块`.
 When the first item (i.e. the loader) is ``None``, this means that while the
 path entry finder does not have a loader for the named module, it knows that the
 path entry contributes to a namespace portion for the named module.  This will
@@ -671,7 +664,7 @@ although some details have changed since the writing of that document.
 The original specification for :data:`sys.meta_path` was :pep:`302`, with
 subsequent extension in :pep:`420`.
 
-:pep:`420` introduced :term:`namespace packages <namespace package>` for
+:pep:`420` introduced :term:`namespace packages <包空间>` for
 Python 3.3.  :pep:`420` also introduced the :meth:`find_loader` protocol as an
 alternative to :meth:`find_module`.
 

@@ -432,7 +432,7 @@ write the function like this instead::
 Keyword Arguments
 -----------------
 
-Functions can also be called using :term:`keyword arguments <keyword argument>`
+Functions can also be called using :term:`keyword arguments <实参>`
 of the form ``kwarg=value``.  For instance, the following function::
 
    def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):

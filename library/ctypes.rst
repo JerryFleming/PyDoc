@@ -596,7 +596,7 @@ Nested structures can also be initialized in the constructor in several ways::
    >>> r = RECT(POINT(1, 2), POINT(3, 4))
    >>> r = RECT((1, 2), (3, 4))
 
-Field :term:`descriptor`\s can be retrieved from the *class*, they are useful
+Field :term:`描述符`\s can be retrieved from the *class*, they are useful
 for debugging because they can provide useful information::
 
    >>> print(POINT.x)
@@ -1146,7 +1146,7 @@ Another example that may behave different from what one would expect is this::
    >>>
 
 Why is it printing ``False``?  ctypes instances are objects containing a memory
-block plus some :term:`descriptor`\s accessing the contents of the memory.
+block plus some :term:`描述符`\s accessing the contents of the memory.
 Storing a Python object in the memory block does not store the object itself,
 instead the ``contents`` of the object is stored.  Accessing the contents again
 constructs a new Python object each time!
@@ -1305,7 +1305,7 @@ way is to instantiate one of the following classes:
    :class:`WinDLL` and :class:`OleDLL` use the standard calling convention on this
    platform.
 
-The Python :term:`global interpreter lock` is released before calling any
+The Python :term:`解释器全局锁` is released before calling any
 function exported by these libraries, and reacquired afterwards.
 
 
@@ -1942,7 +1942,7 @@ Data types
    alive in case the memory block contains pointers.
 
    Common methods of ctypes data types, these are all class methods (to be
-   exact, they are methods of the :term:`metaclass`):
+   exact, they are methods of the :term:`元类`):
 
    .. method:: _CData.from_buffer(source[, offset])
 
@@ -2278,7 +2278,7 @@ other data types containing pointer type fields.
 
    Concrete structure and union types must be created by subclassing one of these
    types, and at least define a :attr:`_fields_` class variable. :mod:`ctypes` will
-   create :term:`descriptor`\s which allow reading and writing the fields by direct
+   create :term:`描述符`\s which allow reading and writing the fields by direct
    attribute accesses.  These are the
 
 

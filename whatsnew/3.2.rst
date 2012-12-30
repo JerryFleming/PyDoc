@@ -256,7 +256,7 @@ Both classes share a common interface with three methods:
 returning a :class:`~concurrent.futures.Future` object;
 :meth:`~concurrent.futures.Executor.map` for scheduling many asynchronous calls
 at a time, and :meth:`~concurrent.futures.Executor.shutdown` for freeing
-resources.  The class is a :term:`context manager` and can be used in a
+resources.  The class is a :term:`上下文管理器` and can be used in a
 :keyword:`with` statement to assure that resources are automatically released
 when currently pending futures are done executing.
 
@@ -336,8 +336,7 @@ aspects that are visible to the programmer:
   bytecode files to be written to their legacy location rather than
   *__pycache__*.
 
-* The :mod:`importlib.abc` module has been updated with new :term:`abstract base
-  classes <abstract base class>` for loading bytecode files.  The obsolete
+* The :mod:`importlib.abc` module has been updated with new :term:`abstract base classes <虚基类>` for loading bytecode files.  The obsolete
   ABCs, :class:`~importlib.abc.PyLoader` and
   :class:`~importlib.abc.PyPycLoader`, have been deprecated (instructions on how
   to stay Python 3.1 compatible are included with the documentation).
@@ -447,7 +446,7 @@ Some smaller changes made to the core Python language are:
 
 * There is also a new :meth:`str.format_map` method that extends the
   capabilities of the existing :meth:`str.format` method by accepting arbitrary
-  :term:`mapping` objects.  This new method makes it possible to use string
+  :term:`映射` objects.  This new method makes it possible to use string
   formatting with any of Python's many dictionary-like objects such as
   :class:`~collections.defaultdict`, :class:`~shelve.Shelf`,
   :class:`~configparser.ConfigParser`, or :mod:`dbm`.  It is also useful with
@@ -559,7 +558,7 @@ Some smaller changes made to the core Python language are:
 * The internal :c:type:`structsequence` tool now creates subclasses of tuple.
   This means that C structures like those returned by :func:`os.stat`,
   :func:`time.gmtime`, and :attr:`sys.version_info` now work like a
-  :term:`named tuple` and now work with functions and methods that
+  :term:`命名元组` and now work with functions and methods that
   expect a tuple as an argument.  This is a big step forward in making the C
   structures as flexible as their pure Python counterparts:
 
@@ -589,7 +588,7 @@ Some smaller changes made to the core Python language are:
   set, all uncollectable objects are printed.  This is meant to make the
   programmer aware that their code contains object finalization issues.
 
-  A :exc:`ResourceWarning` is also issued when a :term:`file object` is destroyed
+  A :exc:`ResourceWarning` is also issued when a :term:`文件对象` is destroyed
   without having been explicitly closed.  While the deallocator for such
   object ensures it closes the underlying operating system resource
   (usually, a file descriptor), the delay in deallocating the object could
@@ -605,7 +604,7 @@ Some smaller changes made to the core Python language are:
 
 * :class:`range` objects now support *index* and *count* methods. This is part
   of an effort to make more objects fully implement the
-  :class:`collections.Sequence` :term:`abstract base class`.  As a result, the
+  :class:`collections.Sequence` :term:`虚基类`.  As a result, the
   language will have a more uniform API.  In addition, :class:`range` objects
   now support slicing and negative indices, even with values larger than
   :attr:`sys.maxsize`.  This makes *range* more interoperable with lists::
@@ -623,7 +622,7 @@ Some smaller changes made to the core Python language are:
   in :issue:`2690`, and by Nick Coghlan in :issue:`10889`.)
 
 * The :func:`callable` builtin function from Py2.x was resurrected.  It provides
-  a concise, readable alternative to using an :term:`abstract base class` in an
+  a concise, readable alternative to using an :term:`虚基类` in an
   expression like ``isinstance(x, collections.Callable)``:
 
   >>> callable(max)
@@ -659,7 +658,7 @@ Windows MBCS encoding, locale-aware encodings, or UTF-8.
 Another significant win is the addition of substantially better support for
 *SSL* connections and security certificates.
 
-In addition, more classes now implement a :term:`context manager` to support
+In addition, more classes now implement a :term:`上下文管理器` to support
 convenient and reliable resource clean-up using a :keyword:`with` statement.
 
 email
@@ -810,7 +809,7 @@ functools
 
 * To aid in porting programs from Python 2, the :func:`functools.cmp_to_key`
   function converts an old-style comparison function to
-  modern :term:`key function`:
+  modern :term:`键函数`:
 
   >>> # locale-aware sort order
   >>> sorted(iterable, key=cmp_to_key(locale.strcoll))
@@ -1072,7 +1071,7 @@ abc
 The :mod:`abc` module now supports :func:`~abc.abstractclassmethod` and
 :func:`~abc.abstractstaticmethod`.
 
-These tools make it possible to define an :term:`abstract base class` that
+These tools make it possible to define an :term:`虚基类` that
 requires a particular :func:`classmethod` or :func:`staticmethod` to be
 implemented::
 
@@ -1210,7 +1209,7 @@ contextlib
 
 There is a new and slightly mind-blowing tool
 :class:`~contextlib.ContextDecorator` that is helpful for creating a
-:term:`context manager` that does double duty as a function decorator.
+:term:`上下文管理器` that does double duty as a function decorator.
 
 As a convenience, this new functionality is used by
 :func:`~contextlib.contextmanager` so that no extra effort is needed to support
@@ -1373,7 +1372,7 @@ gzip and zipfile
 ----------------
 
 :class:`gzip.GzipFile` now implements the :class:`io.BufferedIOBase`
-:term:`abstract base class` (except for ``truncate()``).  It also has a
+:term:`虚基类` (except for ``truncate()``).  It also has a
 :meth:`~gzip.GzipFile.peek` method and supports unseekable as well as
 zero-padded file objects.
 
@@ -1415,7 +1414,7 @@ to be edited.
 
 The new *filter* option replaces the older, less flexible *exclude* parameter
 which is now deprecated.  If specified, the optional *filter* parameter needs to
-be a :term:`keyword argument`.  The user-supplied filter function accepts a
+be a :term:`关键字参数 <实参>`.  The user-supplied filter function accepts a
 :class:`~tarfile.TarInfo` object and returns an updated
 :class:`~tarfile.TarInfo` object, or if it wants the file to be excluded, the
 function can return *None*::
@@ -1690,9 +1689,9 @@ Support for certificate checking and HTTPS virtual hosts were added to
 :class:`~http.client.HTTPSConnection`.
 
 The :meth:`~http.client.HTTPConnection.request` method on connection objects
-allowed an optional *body* argument so that a :term:`file object` could be used
+allowed an optional *body* argument so that a :term:`文件对象` could be used
 to supply the content of the request.  Conveniently, the *body* argument now
-also accepts an :term:`iterable` object so long as it includes an explicit
+also accepts an :term:`可迭代对象` object so long as it includes an explicit
 ``Content-Length`` header.  This extended interface is much more flexible than
 before.
 
@@ -2191,7 +2190,7 @@ The :func:`~urllib.parse.urlparse` function now supports `IPv6
                 query='',
                 fragment='')
 
-The :func:`~urllib.parse.urldefrag` function now returns a :term:`named tuple`::
+The :func:`~urllib.parse.urldefrag` function now returns a :term:`命名元组`::
 
     >>> r = urllib.parse.urldefrag('http://python.org/about/#target')
     >>> r
@@ -2273,7 +2272,7 @@ Multi-threading
 ===============
 
 * The mechanism for serializing execution of concurrently running Python threads
-  (generally known as the :term:`GIL` or :term:`Global Interpreter Lock`) has
+  (generally known as the :term:`GIL` or :term:`解释器全局锁`) has
   been rewritten.  Among the objectives were more predictable switching
   intervals and reduced overhead due to lock contention and the number of
   ensuing system calls.  The notion of a "check interval" to allow thread
@@ -2330,7 +2329,7 @@ A number of small performance enhancements have been added:
 
 * The `Timsort algorithm <http://en.wikipedia.org/wiki/Timsort>`_ used in
   :meth:`list.sort` and :func:`sorted` now runs faster and uses less memory
-  when called with a :term:`key function`.  Previously, every element of
+  when called with a :term:`键函数`.  Previously, every element of
   a list was wrapped with a temporary object that remembered the key value
   associated with each element.  Now, two arrays of keys and values are
   sorted in parallel.  This saves the memory consumed by the sort wrappers,

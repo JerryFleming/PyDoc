@@ -202,7 +202,7 @@ Some tips for experts:
 * When the Python interpreter is invoked with the :option:`-O` flag, optimized
   code is generated and stored in :file:`.pyo` files.  The optimizer currently
   doesn't help much; it only removes :keyword:`assert` statements.  When
-  :option:`-O` is used, *all* :term:`bytecode` is optimized; ``.pyc`` files are
+  :option:`-O` is used, *all* :term:`字节码` is optimized; ``.pyc`` files are
   ignored and ``.py`` files are compiled to optimized bytecode.
 
 * Passing two :option:`-O` flags to the Python interpreter (:option:`-OO`) will

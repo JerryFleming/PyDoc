@@ -229,7 +229,7 @@ in the top-level :mod:`email` package namespace.
 .. function:: message_from_file(fp, _class=email.message.Message, *, \
                                 policy=policy.default)
 
-   Return a message object structure tree from an open :term:`file object`.
+   Return a message object structure tree from an open :term:`文件对象`.
    This is exactly equivalent to ``Parser().parse(fp)``.  *_class*
    and *policy* are interpreted as with the :class:`Parser` class constructor.
 
@@ -239,8 +239,7 @@ in the top-level :mod:`email` package namespace.
 .. function:: message_from_binary_file(fp, _class=email.message.Message, *, \
                                        policy=policy.default)
 
-   Return a message object structure tree from an open binary :term:`file
-   object`.  This is exactly equivalent to ``BytesParser().parse(fp)``.
+   Return a message object structure tree from an open binary :term:`文件对象`.  This is exactly equivalent to ``BytesParser().parse(fp)``.
    *_class* and *policy* are interpreted as with the :class:`Parser`
    class constructor.
 

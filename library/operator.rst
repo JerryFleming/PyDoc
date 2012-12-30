@@ -408,7 +408,7 @@ Inplace Operators
 
 Many operations have an "in-place" version.  Listed below are functions
 providing a more primitive access to in-place operators than the usual syntax
-does; for example, the :term:`statement` ``x += y`` is equivalent to
+does; for example, the :term:`语句` ``x += y`` is equivalent to
 ``x = operator.iadd(x, y)``.  Another way to put it is to say that
 ``z = operator.iadd(x, y)`` is equivalent to the compound statement
 ``z = x; z += y``.

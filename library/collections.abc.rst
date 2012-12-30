@@ -19,7 +19,7 @@
 
 --------------
 
-This module provides :term:`abstract base classes <abstract base class>` that
+This module provides :term:`abstract base classes <虚基类>` that
 can be used to test whether a class provides a particular interface; for
 example, whether it is hashable or whether it is a mapping.
 
@@ -29,7 +29,7 @@ example, whether it is hashable or whether it is a mapping.
 Collections Abstract Base Classes
 ---------------------------------
 
-The collections module offers the following :term:`ABCs <abstract base class>`:
+The collections module offers the following :term:`ABCs <虚基类>`:
 
 =========================  =====================  ======================  ====================================================
 ABC                        Inherits from          Abstract Methods        Mixin Methods
@@ -86,17 +86,17 @@ ABC                        Inherits from          Abstract Methods        Mixin 
 .. class:: Iterable
 
    ABC for classes that provide the :meth:`__iter__` method.
-   See also the definition of :term:`iterable`.
+   See also the definition of :term:`迭代器`.
 
 .. class:: Iterator
 
    ABC for classes that provide the :meth:`__iter__` and :meth:`next` methods.
-   See also the definition of :term:`iterator`.
+   See also the definition of :term:`可迭代对象`.
 
 .. class:: Sequence
            MutableSequence
 
-   ABCs for read-only and mutable :term:`sequences <sequence>`.
+   ABCs for read-only and mutable :term:`sequences <序列>`.
 
 .. class:: Set
            MutableSet
@@ -106,14 +106,14 @@ ABC                        Inherits from          Abstract Methods        Mixin 
 .. class:: Mapping
            MutableMapping
 
-   ABCs for read-only and mutable :term:`mappings <mapping>`.
+   ABCs for read-only and mutable :term:`mappings <映射>`.
 
 .. class:: MappingView
            ItemsView
            KeysView
            ValuesView
 
-   ABCs for mapping, items, keys, and values :term:`views <view>`.
+   ABCs for mapping, items, keys, and values :term:`views <视图>`.
 
 
 These ABCs allow us to ask classes or instances if they provide

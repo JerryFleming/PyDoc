@@ -427,7 +427,7 @@ The constructor has a number of handy options:
 * *preexec_fn* is a function that gets called before the child is started.
 
 * *universal_newlines* opens the child's input and output using Python's
-  :term:`universal newlines` feature.
+  :term:`万能换行符` feature.
 
 Once you've created the :class:`Popen` instance,  you can call its :meth:`wait`
 method to pause until the subprocess has exited, :meth:`poll` to check if it's

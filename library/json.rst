@@ -123,7 +123,7 @@ Basic Usage
                    sort_keys=False, **kw)
 
    Serialize *obj* as a JSON formatted stream to *fp* (a ``.write()``-supporting
-   :term:`file-like object`).
+   :term:`类文件对象`).
 
    If *skipkeys* is ``True`` (default: ``False``), then dict keys that are not
    of a basic type (:class:`str`, :class:`int`, :class:`float`, :class:`bool`,
@@ -202,7 +202,7 @@ Basic Usage
 
 .. function:: load(fp, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None, **kw)
 
-   Deserialize *fp* (a ``.read()``-supporting :term:`file-like object`
+   Deserialize *fp* (a ``.read()``-supporting :term:`类文件对象`
    containing a JSON document) to a Python object.
 
    *object_hook* is an optional function that will be called with the result of

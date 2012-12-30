@@ -129,7 +129,7 @@
          >>> __future__.division
          _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 8192)
 
-   垃圾清理
+   垃圾回收
       在内存不在使用时就把它释放的过程。Python 通过引用记数以及一个周期性运行的垃圾清理程序来进行垃圾清理，这个清理程序能够检测和打破引用循环。
 
       .. index:: single: 生成函数
@@ -191,12 +191,12 @@
 
       更多信息参见\ :ref:`typeiter`\ 。
 
-   关键字函数
-      关键字函数，又叫整理函数，是一个返回值可以用来排序的函数。例如，:func:`locale.strxfrm` 被用来生成一个排序键值，这个值知道语言区域相关的惯例。
+   键函数
+      键函数，又叫整理函数，是一个返回值可以用来排序的函数。例如，:func:`locale.strxfrm` 被用来生成一个排序键值，这个值知道语言区域相关的惯例。
 
-      Python 中有许多函数接受关键字函数来控制元素的排序或者分组，包括 :func:`min` 、\ :func:`max` 、\ :func:`sorted` 、\ :meth:`list.sort` 、\ :func:`heapq.nsmallest` 、\ :func:`heapq.nlargest` 、以及\ :func:`itertools.groupby` 。
+      Python 中有许多函数接受键函数来控制元素的排序或者分组，包括 :func:`min` 、\ :func:`max` 、\ :func:`sorted` 、\ :meth:`list.sort` 、\ :func:`heapq.nsmallest` 、\ :func:`heapq.nlargest` 、以及\ :func:`itertools.groupby` 。
 
-      创建关键字函数的方法有好几种。例如，\ :meth:`str.lower` 方法可以作为不区分大小写排序的关键字函数。还可以用 :keyword:`lambda` 表达式临时创建一个关键字函数，例如 ``lambda r: (r[0], r[2])`` 。此外，\ :mod:`operator` 模块提供了三个关键字函数构造方法：\ :func:`~operator.attrgetter` ，\ :func:`~operator.itemgetter` 和 :func:`~operator.methodcaller` 。关于如何创建和使用关键字函数，参见\ :ref:`怎么排序<sortinghowto>` 。
+      创建键函数的方法有好几种。例如，\ :meth:`str.lower` 方法可以作为不区分大小写排序的键函数。还可以用 :keyword:`lambda` 表达式临时创建一个键函数，例如 ``lambda r: (r[0], r[2])`` 。此外，\ :mod:`operator` 模块提供了三个键函数构造方法：\ :func:`~operator.attrgetter` ，\ :func:`~operator.itemgetter` 和 :func:`~operator.methodcaller` 。关于如何创建和使用键函数，参见\ :ref:`怎么排序<sortinghowto>` 。
 
    命名实参
       参见\ :term:`实参`\ 。

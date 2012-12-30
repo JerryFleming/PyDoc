@@ -255,7 +255,7 @@ any that have been added to the map during asynchronous service) is closed.
 
 .. class:: file_dispatcher()
 
-   A file_dispatcher takes a file descriptor or :term:`file object` along
+   A file_dispatcher takes a file descriptor or :term:`文件对象` along
    with an optional map argument and wraps it for use with the :c:func:`poll`
    or :c:func:`loop` functions.  If provided a file object or anything with a
    :c:func:`fileno` method, that method will be called and passed to the

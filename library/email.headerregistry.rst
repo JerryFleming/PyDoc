@@ -11,12 +11,12 @@
 .. note::
 
    The headerregistry module has been included in the standard library on a
-   :term:`provisional basis <provisional package>`. Backwards incompatible
+   :term:`provisional basis <临时包>`. Backwards incompatible
    changes (up to and including removal of the module) may occur if deemed
    necessary by the core developers.
 
 .. versionadded:: 3.3
-   as a :term:`provisional module <provisional package>`.
+   as a :term:`provisional module <临时包>`.
 
 Headers are represented by customized subclasses of :class:`str`.  The
 particular class used to represent a given header is determined by the

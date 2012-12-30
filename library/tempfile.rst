@@ -33,7 +33,7 @@ The module defines the following user-callable items:
 
 .. function:: TemporaryFile(mode='w+b', buffering=None, encoding=None, newline=None, suffix='', prefix='tmp', dir=None)
 
-   Return a :term:`file-like object` that can be used as a temporary storage area.
+   Return a :term:`类文件对象` that can be used as a temporary storage area.
    The file is created using :func:`mkstemp`. It will be destroyed as soon
    as it is closed (including an implicit close when the object is garbage
    collected).  Under Unix, the directory entry for the file is removed

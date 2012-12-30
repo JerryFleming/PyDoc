@@ -52,9 +52,8 @@ The :mod:`csv` module defines the following functions:
 .. function:: reader(csvfile, dialect='excel', **fmtparams)
 
    Return a reader object which will iterate over lines in the given *csvfile*.
-   *csvfile* can be any object which supports the :term:`iterator` protocol and returns a
-   string each time its :meth:`!__next__` method is called --- :term:`file objects
-   <file object>` and list objects are both suitable.   If *csvfile* is a file object,
+   *csvfile* can be any object which supports the :term:`迭代器` protocol and returns a
+   string each time its :meth:`!__next__` method is called --- :term:`file objects <文件对象>` and list objects are both suitable.   If *csvfile* is a file object,
    it should be opened with ``newline=''``. [1]_  An optional
    *dialect* parameter can be given which is used to define a set of parameters
    specific to a particular CSV dialect.  It may be an instance of a subclass of
@@ -497,4 +496,4 @@ done::
    will not be interpreted correctly, and on platforms that use ``\r\n`` linendings
    on write an extra ``\r`` will be added.  It should always be safe to specify
    ``newline=''``, since the csv module does its own
-   (:term:`universal <universal newlines>`) newline handling.
+   (:term:`universal <万能换行符>`) newline handling.

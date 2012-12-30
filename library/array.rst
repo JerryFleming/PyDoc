@@ -161,7 +161,7 @@ The following data items and methods are also supported:
 
 .. method:: array.fromfile(f, n)
 
-   Read *n* items (as machine values) from the :term:`file object` *f* and append
+   Read *n* items (as machine values) from the :term:`文件对象` *f* and append
    them to the end of the array.  If less than *n* items are available,
    :exc:`EOFError` is raised, but the items that were available are still
    inserted into the array. *f* must be a real built-in file object; something
@@ -228,7 +228,7 @@ The following data items and methods are also supported:
 
 .. method:: array.tofile(f)
 
-   Write all items (as machine values) to the :term:`file object` *f*.
+   Write all items (as machine values) to the :term:`文件对象` *f*.
 
 
 .. method:: array.tolist()

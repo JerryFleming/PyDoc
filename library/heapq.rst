@@ -84,7 +84,7 @@ The module also offers three general purpose functions based on heaps.
 .. function:: merge(*iterables)
 
    Merge multiple sorted inputs into a single sorted output (for example, merge
-   timestamped entries from multiple log files).  Returns an :term:`iterator`
+   timestamped entries from multiple log files).  Returns an :term:`迭代器`
    over the sorted values.
 
    Similar to ``sorted(itertools.chain(*iterables))`` but returns an iterable, does

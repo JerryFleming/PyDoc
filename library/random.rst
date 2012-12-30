@@ -144,7 +144,7 @@ Functions for sequences:
    (the sample) to be partitioned into grand prize and second place winners (the
    subslices).
 
-   Members of the population need not be :term:`hashable` or unique.  If the population
+   Members of the population need not be :term:`可散列对象` or unique.  If the population
    contains repeats, then each occurrence is a possible selection in the sample.
 
    To choose a sample from a range of integers, use an :func:`range` object as an

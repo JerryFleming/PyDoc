@@ -24,8 +24,7 @@ sending a graphics file.
 .. function:: decode(input, output, header=False)
 
    Decode the contents of the *input* file and write the resulting decoded binary
-   data to the *output* file. *input* and *output* must be :term:`file objects
-   <file object>`.  *input* will be read until ``input.readline()`` returns an
+   data to the *output* file. *input* and *output* must be :term:`file objects <文件对象>`.  *input* will be read until ``input.readline()`` returns an
    empty string. If the optional argument *header* is present and true, underscore
    will be decoded as space. This is used to decode "Q"-encoded headers as
    described in :rfc:`1522`: "MIME (Multipurpose Internet Mail Extensions)
@@ -35,8 +34,7 @@ sending a graphics file.
 .. function:: encode(input, output, quotetabs, header=False)
 
    Encode the contents of the *input* file and write the resulting quoted-printable
-   data to the *output* file. *input* and *output* must be :term:`file objects
-   <file object>`.  *input* will be read until ``input.readline()`` returns an
+   data to the *output* file. *input* and *output* must be :term:`file objects <文件对象>`.  *input* will be read until ``input.readline()`` returns an
    empty string. *quotetabs* is a flag which controls whether to encode embedded
    spaces and tabs; when true it encodes such embedded whitespace, and when
    false it leaves them unencoded.  Note that spaces and tabs appearing at the

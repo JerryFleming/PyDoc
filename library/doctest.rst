@@ -1106,7 +1106,7 @@ capabilities, then you should use the advanced API.
 The advanced API revolves around two container classes, which are used to store
 the interactive examples extracted from doctest cases:
 
-* :class:`Example`: A single Python :term:`statement`, paired with its expected
+* :class:`Example`: A single Python :term:`语句`, paired with its expected
   output.
 
 * :class:`DocTest`: A collection of :class:`Example`\ s, typically extracted
@@ -1476,7 +1476,7 @@ DocTestRunner objects
    .. method:: summarize(verbose=None)
 
       Print a summary of all the test cases that have been run by this DocTestRunner,
-      and return a :term:`named tuple` ``TestResults(failed, attempted)``.
+      and return a :term:`命名元组` ``TestResults(failed, attempted)``.
 
       The optional *verbose* argument controls how detailed the summary is.  If the
       verbosity is not specified, then the :class:`DocTestRunner`'s verbosity is

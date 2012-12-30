@@ -105,7 +105,7 @@ process and user.
 
 .. data:: environ
 
-   A :term:`mapping` object representing the string environment. For example,
+   A :term:`映射` object representing the string environment. For example,
    ``environ['HOME']`` is the pathname of your home directory (on some platforms),
    and is equivalent to ``getenv("HOME")`` in C.
 
@@ -145,7 +145,7 @@ process and user.
 
 .. data:: environb
 
-   Bytes version of :data:`environ`: a :term:`mapping` object representing the
+   Bytes version of :data:`environ`: a :term:`映射` object representing the
    environment as byte strings. :data:`environ` and :data:`environb` are
    synchronized (modify :data:`environb` updates :data:`environ`, and vice
    versa).
@@ -616,7 +616,7 @@ process and user.
 File Object Creation
 --------------------
 
-This function creates new :term:`file objects <file object>`.  (See also
+This function creates new :term:`file objects <文件对象>`.  (See also
 :func:`~os.open` for opening file descriptors.)
 
 
@@ -643,7 +643,7 @@ is slightly deceptive; on Unix platforms, sockets and pipes are also referenced
 by file descriptors.
 
 The :meth:`~file.fileno` method can be used to obtain the file descriptor
-associated with a :term:`file object` when required.  Note that using the file
+associated with a :term:`文件对象` when required.  Note that using the file
 descriptor directly will bypass the file object methods, ignoring aspects such
 as internal buffering of data.
 
@@ -768,7 +768,7 @@ as internal buffering of data.
    Force write of file with filedescriptor *fd* to disk.  On Unix, this calls the
    native :c:func:`fsync` function; on Windows, the MS :c:func:`_commit` function.
 
-   If you're starting with a buffered Python :term:`file object` *f*, first do
+   If you're starting with a buffered Python :term:`文件对象` *f*, first do
    ``f.flush()``, and then do ``os.fsync(f.fileno())``, to ensure that all internal
    buffers associated with *f* are written to disk.
 
@@ -861,7 +861,7 @@ as internal buffering of data.
    .. note::
 
       This function is intended for low-level I/O.  For normal usage, use the
-      built-in function :func:`open`, which returns a :term:`file object` with
+      built-in function :func:`open`, which returns a :term:`文件对象` with
       :meth:`~file.read` and :meth:`~file.write` methods (and many more).  To
       wrap a file descriptor in a file object, use :func:`fdopen`.
 

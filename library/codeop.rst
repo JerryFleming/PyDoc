@@ -38,7 +38,7 @@ To do just the former:
    :exc:`OverflowError` or :exc:`ValueError` if there is an invalid literal.
 
    The *symbol* argument determines whether *source* is compiled as a statement
-   (``'single'``, the default) or as an :term:`expression` (``'eval'``).  Any
+   (``'single'``, the default) or as an :term:`表达式` (``'eval'``).  Any
    other value will cause :exc:`ValueError` to  be raised.
 
    .. note::

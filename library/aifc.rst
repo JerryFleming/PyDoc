@@ -45,7 +45,7 @@ Module :mod:`aifc` defines the following function:
 
    Open an AIFF or AIFF-C file and return an object instance with methods that are
    described below.  The argument *file* is either a string naming a file or a
-   :term:`file object`.  *mode* must be ``'r'`` or ``'rb'`` when the file must be
+   :term:`文件对象`.  *mode* must be ``'r'`` or ``'rb'`` when the file must be
    opened for reading, or ``'w'``  or ``'wb'`` when the file must be opened for writing.
    If omitted, ``file.mode`` is used if it exists, otherwise ``'rb'`` is used.  When
    used for writing, the file object should be seekable, unless you know ahead of

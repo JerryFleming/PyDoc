@@ -34,7 +34,7 @@ Here are the public methods of the :class:`Generator` class, imported from the
 
 .. class:: Generator(outfp, mangle_from_=True, maxheaderlen=78, *, policy=None)
 
-   The constructor for the :class:`Generator` class takes a :term:`file-like object`
+   The constructor for the :class:`Generator` class takes a :term:`类文件对象`
    called *outfp* for an argument.  *outfp* must support the :meth:`write` method
    and be usable as the output file for the :func:`print` function.
 
@@ -115,7 +115,7 @@ formatted string representation of a message object.  For more detail, see
                           policy=policy.default)
 
    The constructor for the :class:`BytesGenerator` class takes a binary
-   :term:`file-like object` called *outfp* for an argument.  *outfp* must
+   :term:`类文件对象` called *outfp* for an argument.  *outfp* must
    support a :meth:`write` method that accepts binary data.
 
    Optional *mangle_from_* is a flag that, when ``True``, puts a ``>``

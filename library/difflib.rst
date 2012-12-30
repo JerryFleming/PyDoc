@@ -21,7 +21,7 @@ diffs. For comparing directories and files, see also, the :mod:`filecmp` module.
 .. class:: SequenceMatcher
 
    This is a flexible class for comparing pairs of sequences of any type, so long
-   as the sequence elements are :term:`hashable`.  The basic algorithm predates, and is a
+   as the sequence elements are :term:`可散列对象`.  The basic algorithm predates, and is a
    little fancier than, an algorithm published in the late 1980's by Ratcliff and
    Obershelp under the hyperbolic name "gestalt pattern matching."  The idea is to
    find the longest contiguous matching subsequence that contains no "junk"
@@ -134,7 +134,7 @@ diffs. For comparing directories and files, see also, the :mod:`filecmp` module.
 
 .. function:: context_diff(a, b, fromfile='', tofile='', fromfiledate='', tofiledate='', n=3, lineterm='\\n')
 
-   Compare *a* and *b* (lists of strings); return a delta (a :term:`generator`
+   Compare *a* and *b* (lists of strings); return a delta (a :term:`生成函数`
    generating the delta lines) in context diff format.
 
    Context diffs are a compact way of showing just the lines that have changed plus
@@ -206,7 +206,7 @@ diffs. For comparing directories and files, see also, the :mod:`filecmp` module.
 .. function:: ndiff(a, b, linejunk=None, charjunk=IS_CHARACTER_JUNK)
 
    Compare *a* and *b* (lists of strings); return a :class:`Differ`\ -style
-   delta (a :term:`generator` generating the delta lines).
+   delta (a :term:`生成函数` generating the delta lines).
 
    Optional keyword parameters *linejunk* and *charjunk* are for filter functions
    (or ``None``):
@@ -265,7 +265,7 @@ diffs. For comparing directories and files, see also, the :mod:`filecmp` module.
 
 .. function:: unified_diff(a, b, fromfile='', tofile='', fromfiledate='', tofiledate='', n=3, lineterm='\\n')
 
-   Compare *a* and *b* (lists of strings); return a delta (a :term:`generator`
+   Compare *a* and *b* (lists of strings); return a delta (a :term:`生成函数`
    generating the delta lines) in unified diff format.
 
    Unified diffs are a compact way of showing just the lines that have changed plus
@@ -350,7 +350,7 @@ The :class:`SequenceMatcher` class has this constructor:
    on blanks or hard tabs.
 
    The optional arguments *a* and *b* are sequences to be compared; both default to
-   empty strings.  The elements of both sequences must be :term:`hashable`.
+   empty strings.  The elements of both sequences must be :term:`可散列对象`.
 
    The optional argument *autojunk* can be used to disable the automatic junk
    heuristic.
@@ -427,7 +427,7 @@ The :class:`SequenceMatcher` class has this constructor:
 
       If no blocks match, this returns ``(alo, blo, 0)``.
 
-      This method returns a :term:`named tuple` ``Match(a, b, size)``.
+      This method returns a :term:`命名元组` ``Match(a, b, size)``.
 
 
    .. method:: get_matching_blocks()
@@ -496,7 +496,7 @@ The :class:`SequenceMatcher` class has this constructor:
 
    .. method:: get_grouped_opcodes(n=3)
 
-      Return a :term:`generator` of groups with up to *n* lines of context.
+      Return a :term:`生成函数` of groups with up to *n* lines of context.
 
       Starting with the groups returned by :meth:`get_opcodes`, this method
       splits out smaller change clusters and eliminates intervening ranges which

@@ -23,7 +23,7 @@ by a weak reference.
 
 A weak reference to an object is not enough to keep the object alive: when the
 only remaining references to a referent are weak references,
-:term:`garbage collection` is free to destroy the referent and reuse its memory
+:term:`垃圾回收` is free to destroy the referent and reuse its memory
 for something else.  However, until the object is actually destroyed the weak
 reference may return the object even if there are no strong references to it.
 
@@ -58,7 +58,7 @@ is exposed by the :mod:`weakref` module for the benefit of advanced uses.
 
 Not all objects can be weakly referenced; those objects which can include class
 instances, functions written in Python (but not in C), instance methods, sets,
-frozensets, some :term:`file objects <file object>`, :term:`generator`\s, type
+frozensets, some :term:`file objects <文件对象>`, :term:`生成函数`\s, type
 objects, sockets, arrays, deques, regular expression pattern objects, and code
 objects.
 
@@ -99,7 +99,7 @@ Extension types can easily be made to support weak references; see
    but cannot be propagated; they are handled in exactly the same way as exceptions
    raised from an object's :meth:`__del__` method.
 
-   Weak references are :term:`hashable` if the *object* is hashable.  They will
+   Weak references are :term:`可散列对象` if the *object* is hashable.  They will
    maintain their hash value even after the *object* was deleted.  If
    :func:`hash` is called the first time only after the *object* was deleted,
    the call will raise :exc:`TypeError`.
@@ -118,7 +118,7 @@ Extension types can easily be made to support weak references; see
    the proxy in most contexts instead of requiring the explicit dereferencing used
    with weak reference objects.  The returned object will have a type of either
    ``ProxyType`` or ``CallableProxyType``, depending on whether *object* is
-   callable.  Proxy objects are not :term:`hashable` regardless of the referent; this
+   callable.  Proxy objects are not :term:`可散列对象` regardless of the referent; this
    avoids a number of problems related to their fundamentally mutable nature, and
    prevent their use as dictionary keys.  *callback* is the same as the parameter
    of the same name to the :func:`ref` function.

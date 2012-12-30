@@ -14,5 +14,5 @@ Copyright © 1991-1995 Stichting Mathematisch Centrum. 保留所有权。
 
 -------
 
-关于授权和许可的详情，请参见 :ref:`history-and-license`。
+关于授权和许可的详情，请参见 :ref:`history-and-license`\ 。
 

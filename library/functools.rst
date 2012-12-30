@@ -59,7 +59,7 @@ The :mod:`functools` module defines the following functions:
 
    To help measure the effectiveness of the cache and tune the *maxsize*
    parameter, the wrapped function is instrumented with a :func:`cache_info`
-   function that returns a :term:`named tuple` showing *hits*, *misses*,
+   function that returns a :term:`命名元组` showing *hits*, *misses*,
    *maxsize* and *currsize*.  In a multi-threaded environment, the hits
    and misses are approximate.
 
@@ -203,7 +203,7 @@ The :mod:`functools` module defines the following functions:
    automatically adds a __wrapped__ attribute to the wrapper that refers to
    the original function.
 
-   The main intended use for this function is in :term:`decorator` functions which
+   The main intended use for this function is in :term:`修饰函数` functions which
    wrap the decorated function and return the wrapper. If the wrapper function is
    not updated, the metadata of the returned function will reflect the wrapper
    definition rather than the original function definition, which is typically less

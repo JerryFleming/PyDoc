@@ -449,7 +449,7 @@ Decimal objects
 
    .. method:: as_tuple()
 
-      Return a :term:`named tuple` representation of the number:
+      Return a :term:`命名元组` representation of the number:
       ``DecimalTuple(sign, digits, exponent)``.
 
 

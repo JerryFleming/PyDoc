@@ -89,8 +89,7 @@ The class can be used to simulate nested scopes and is useful in templating.
         Property returning a new :class:`ChainMap` containing all of the maps in
         the current instance except the first one.  This is useful for skipping
         the first map in the search.  Use cases are similar to those for the
-        :keyword:`nonlocal` keyword used in :term:`nested scopes <nested
-        scope>`.  The use cases also parallel those for the built-in
+        :keyword:`nonlocal` keyword used in :term:`nested scopes <嵌套作用域>`.  The use cases also parallel those for the built-in
         :func:`super` function.  A reference to ``d.parents`` is equivalent to:
         ``ChainMap(*d.maps[1:])``.
 
@@ -921,8 +920,8 @@ and more efficient to use a simple class declaration:
 
     * `Recipe for named tuple abstract base class with a metaclass mix-in
       <http://code.activestate.com/recipes/577629-namedtupleabc-abstract-base-class-mix-in-for-named/>`_
-      by Jan Kaliszewski.  Besides providing an :term:`abstract base class` for
-      named tuples, it also supports an alternate :term:`metaclass`-based
+      by Jan Kaliszewski.  Besides providing an :term:`虚基类` for
+      named tuples, it also supports an alternate :term:`元类`-based
       constructor that is convenient for use cases where named tuples are being
       subclassed.
 

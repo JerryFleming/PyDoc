@@ -109,7 +109,7 @@ There are currently 4 different protocols which can be used for pickling.
   earlier versions of Python.
 
 * Protocol version 2 was introduced in Python 2.3.  It provides much more
-  efficient pickling of :term:`new-style class`\es.  Refer to :pep:`307` for
+  efficient pickling of :term:`新式类`\es.  Refer to :pep:`307` for
   information about improvements brought by protocol 2.
 
 * Protocol version 3 was added in Python 3.  It has explicit support for
@@ -145,7 +145,7 @@ process more convenient:
 
 .. function:: dump(obj, file, protocol=None, \*, fix_imports=True)
 
-   Write a pickled representation of *obj* to the open :term:`file object` *file*.
+   Write a pickled representation of *obj* to the open :term:`文件对象` *file*.
    This is equivalent to ``Pickler(file, protocol).dump(obj)``.
 
    The optional *protocol* argument tells the pickler to use the given protocol;
@@ -184,7 +184,7 @@ process more convenient:
 
 .. function:: load(file, \*, fix_imports=True, encoding="ASCII", errors="strict")
 
-   Read a pickled object representation from the open :term:`file object` *file*
+   Read a pickled object representation from the open :term:`文件对象` *file*
    and return the reconstituted object hierarchy specified therein.  This is
    equivalent to ``Unpickler(file).load()``.
 

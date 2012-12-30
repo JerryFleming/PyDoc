@@ -825,7 +825,7 @@ correspond to Unix system calls applicable to sockets.
 
    .. index:: single: I/O control; buffering
 
-   Return a :term:`file object` associated with the socket.  The exact returned
+   Return a :term:`文件对象` associated with the socket.  The exact returned
    type depends on the arguments given to :meth:`makefile`.  These arguments are
    interpreted the same way as by the built-in :func:`open` function.
 

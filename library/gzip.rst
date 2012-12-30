@@ -17,7 +17,7 @@ The :mod:`gzip` module provides the :class:`GzipFile` class, as well as the
 :func:`.open`, :func:`compress` and :func:`decompress` convenience functions.
 The :class:`GzipFile` class reads and writes :program:`gzip`\ -format files,
 automatically compressing or decompressing the data so that it looks like an
-ordinary :term:`file object`.
+ordinary :term:`文件对象`.
 
 Note that additional file formats which can be decompressed by the
 :program:`gzip` and :program:`gunzip` programs, such  as those produced by
@@ -28,8 +28,7 @@ The module defines the following items:
 
 .. function:: open(filename, mode='rb', compresslevel=9, encoding=None, errors=None, newline=None)
 
-   Open a gzip-compressed file in binary or text mode, returning a :term:`file
-   object`.
+   Open a gzip-compressed file in binary or text mode, returning a :term:`文件对象`.
 
    The *filename* argument can be an actual filename (a :class:`str` or
    :class:`bytes` object), or an existing file object to read from or write to.
@@ -57,7 +56,7 @@ The module defines the following items:
 .. class:: GzipFile(filename=None, mode=None, compresslevel=9, fileobj=None, mtime=None)
 
    Constructor for the :class:`GzipFile` class, which simulates most of the
-   methods of a :term:`file object`, with the exception of the :meth:`truncate`
+   methods of a :term:`文件对象`, with the exception of the :meth:`truncate`
    method.  At least one of *fileobj* and *filename* must be given a non-trivial
    value.
 

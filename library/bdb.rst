@@ -327,7 +327,7 @@ The :mod:`bdb` module also defines two classes:
 
 
    The following two methods can be called by clients to use a debugger to debug
-   a :term:`statement`, given as a string.
+   a :term:`语句`, given as a string.
 
    .. method:: run(cmd, globals=None, locals=None)
 

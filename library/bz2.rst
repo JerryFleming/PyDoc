@@ -29,8 +29,7 @@ All of the classes in this module may safely be accessed from multiple threads.
 
 .. function:: open(filename, mode='r', compresslevel=9, encoding=None, errors=None, newline=None)
 
-   Open a bzip2-compressed file in binary or text mode, returning a :term:`file
-   object`.
+   Open a bzip2-compressed file in binary or text mode, returning a :term:`文件对象`.
 
    As with the constructor for :class:`BZ2File`, the *filename* argument can be
    an actual filename (a :class:`str` or :class:`bytes` object), or an existing
@@ -60,7 +59,7 @@ All of the classes in this module may safely be accessed from multiple threads.
    Open a bzip2-compressed file in binary mode.
 
    If *filename* is a :class:`str` or :class:`bytes` object, open the named file
-   directly. Otherwise, *filename* should be a :term:`file object`, which will
+   directly. Otherwise, *filename* should be a :term:`文件对象`, which will
    be used to read or write the compressed data.
 
    The *mode* argument can be either ``'r'`` for reading (default), ``'w'`` for
@@ -101,7 +100,7 @@ All of the classes in this module may safely be accessed from multiple threads.
       :meth:`read1` and :meth:`readinto` methods were added.
 
    .. versionchanged:: 3.3
-      Support was added for *filename* being a :term:`file object` instead of an
+      Support was added for *filename* being a :term:`文件对象` instead of an
       actual filename.
 
    .. versionchanged:: 3.3

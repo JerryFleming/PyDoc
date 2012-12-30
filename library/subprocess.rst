@@ -289,7 +289,7 @@ default values. The arguments that are most commonly needed are:
       single: universal newlines; subprocess module
 
    If *universal_newlines* is ``True``, the file objects *stdin*, *stdout* and
-   *stderr* will be opened as text streams in :term:`universal newlines` mode
+   *stderr* will be opened as text streams in :term:`万能换行符` mode
    using the encoding returned by :func:`locale.getpreferredencoding(False)
    <locale.getpreferredencoding>`.  For *stdin*, line ending characters
    ``'\n'`` in the input will be converted to the default line separator
@@ -455,7 +455,7 @@ functions.
    *stdin*, *stdout* and *stderr* specify the executed program's standard input,
    standard output and standard error file handles, respectively.  Valid values
    are :data:`PIPE`, :data:`DEVNULL`, an existing file descriptor (a positive
-   integer), an existing :term:`file object`, and ``None``.  :data:`PIPE`
+   integer), an existing :term:`文件对象`, and ``None``.  :data:`PIPE`
    indicates that a new pipe to the child should be created.  :data:`DEVNULL`
    indicates that the special file :data:`os.devnull` will be used. With the
    default settings of ``None``, no redirection will occur; the child's file
@@ -698,20 +698,17 @@ The following attributes are also available:
 
 .. attribute:: Popen.stdin
 
-   If the *stdin* argument was :data:`PIPE`, this attribute is a :term:`file
-   object` that provides input to the child process.  Otherwise, it is ``None``.
+   If the *stdin* argument was :data:`PIPE`, this attribute is a :term:`文件对象` that provides input to the child process.  Otherwise, it is ``None``.
 
 
 .. attribute:: Popen.stdout
 
-   If the *stdout* argument was :data:`PIPE`, this attribute is a :term:`file
-   object` that provides output from the child process.  Otherwise, it is ``None``.
+   If the *stdout* argument was :data:`PIPE`, this attribute is a :term:`文件对象` that provides output from the child process.  Otherwise, it is ``None``.
 
 
 .. attribute:: Popen.stderr
 
-   If the *stderr* argument was :data:`PIPE`, this attribute is a :term:`file
-   object` that provides error output from the child process.  Otherwise, it is
+   If the *stderr* argument was :data:`PIPE`, this attribute is a :term:`文件对象` that provides error output from the child process.  Otherwise, it is
    ``None``.
 
 

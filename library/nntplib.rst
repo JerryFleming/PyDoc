@@ -176,7 +176,7 @@ code.  If the server's response indicates an error, the method raises one of
 the above exceptions.
 
 Many of the following methods take an optional keyword-only argument *file*.
-When the *file* argument is supplied, it must be either a :term:`file object`
+When the *file* argument is supplied, it must be either a :term:`文件对象`
 opened for binary writing, or the name of an on-disk file to be written to.
 The method will then write any data returned by the server (except for the
 response line and the terminating dot) to the file; any list of lines,
@@ -445,7 +445,7 @@ tuples or objects that the method normally returns will be empty.
 .. method:: NNTP.post(data)
 
    Post an article using the ``POST`` command.  The *data* argument is either
-   a :term:`file object` opened for binary reading, or any iterable of bytes
+   a :term:`文件对象` opened for binary reading, or any iterable of bytes
    objects (representing raw lines of the article to be posted).  It should
    represent a well-formed news article, including the required headers.  The
    :meth:`post` method automatically escapes lines beginning with ``.`` and
@@ -497,7 +497,7 @@ them have been superseded by newer commands in :rfc:`3977`.
    the requested header for that article. If the *file* parameter is supplied, then
    the output of the  ``XHDR`` command is stored in a file.  If *file* is a string,
    then the method will open a file with that name, write to it  then close it.
-   If *file* is a :term:`file object`, then it will start calling :meth:`write` on
+   If *file* is a :term:`文件对象`, then it will start calling :meth:`write` on
    it to store the lines of the command output. If *file* is supplied, then the
    returned *list* is an empty list.
 
@@ -529,7 +529,7 @@ them have been superseded by newer commands in :rfc:`3977`.
       *list* is a list of tuples containing ``(name, title)``. If the *file* parameter
       is supplied, then the output of the  ``XGTITLE`` command is stored in a file.
       If *file* is a string,  then the method will open a file with that name, write
-      to it  then close it.  If *file* is a :term:`file object`, then it will start
+      to it  then close it.  If *file* is a :term:`文件对象`, then it will start
       calling :meth:`write` on it to store the lines of the command output. If *file*
       is supplied, then the returned *list* is an empty list. This is an optional NNTP
       extension, and may not be supported by all servers.

@@ -12,7 +12,7 @@
 .. note::
 
    The ``ipaddress`` module has been included in the standard library on a
-   :term:`provisional basis <provisional package>`. Backwards incompatible
+   :term:`provisional basis <临时包>`. Backwards incompatible
    changes (up to and including removal of the package) may occur if deemed
    necessary by the core developers.
 

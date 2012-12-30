@@ -96,7 +96,7 @@ passed along to the registered function when it is called::
    # or:
    atexit.register(goodbye, adjective='nice', name='Donny')
 
-Usage as a :term:`decorator`::
+Usage as a :term:`修饰函数`::
 
    import atexit
 

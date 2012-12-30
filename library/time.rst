@@ -516,8 +516,7 @@ The module defines the following functions and data items:
 .. class:: struct_time
 
    The type of the time value sequence returned by :func:`gmtime`,
-   :func:`localtime`, and :func:`strptime`.  It is an object with a :term:`named
-   tuple` interface: values can be accessed by index and by attribute name.  The
+   :func:`localtime`, and :func:`strptime`.  It is an object with a :term:`命名元组` interface: values can be accessed by index and by attribute name.  The
    following values are present:
 
    +-------+-------------------+---------------------------------+

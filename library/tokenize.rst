@@ -18,12 +18,12 @@ colorizers for on-screen displays.
 To simplify token stream handling, all :ref:`operators` and :ref:`delimiters`
 tokens are returned using the generic :data:`token.OP` token type.  The exact
 type can be determined by checking the ``exact_type`` property on the
-:term:`named tuple` returned from :func:`tokenize.tokenize`.
+:term:`命名元组` returned from :func:`tokenize.tokenize`.
 
 Tokenizing Input
 ----------------
 
-The primary entry point is a :term:`generator`:
+The primary entry point is a :term:`生成函数`:
 
 .. function:: tokenize(readline)
 
@@ -38,10 +38,10 @@ The primary entry point is a :term:`generator`:
    ints specifying the row and column where the token ends in the source; and
    the line on which the token was found. The line passed (the last tuple item)
    is the *logical* line; continuation lines are included.  The 5 tuple is
-   returned as a :term:`named tuple` with the field names:
+   returned as a :term:`命名元组` with the field names:
    ``type string start end line``.
 
-   The returned :term:`named tuple` has a additional property named
+   The returned :term:`命名元组` has a additional property named
    ``exact_type`` that contains the exact operator type for
    :data:`token.OP` tokens.  For all other token types ``exact_type``
    equals the named tuple ``type`` field.

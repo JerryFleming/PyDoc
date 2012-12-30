@@ -8,7 +8,7 @@
 
 --------------
 
-The :mod:`dis` module supports the analysis of CPython :term:`bytecode` by
+The :mod:`dis` module supports the analysis of CPython :term:`字节码` by
 disassembling it. The CPython bytecode which this module takes as an
 input is defined in the file :file:`Include/opcode.h` and used by the compiler
 and the interpreter.
@@ -428,12 +428,12 @@ the stack so that it is available for further iterations of the loop.
 
 .. opcode:: YIELD_VALUE
 
-   Pops ``TOS`` and yields it from a :term:`generator`.
+   Pops ``TOS`` and yields it from a :term:`生成函数`.
 
 
 .. opcode:: YIELD_FROM
 
-   Pops ``TOS`` and delegates to it as a subiterator from a :term:`generator`.
+   Pops ``TOS`` and delegates to it as a subiterator from a :term:`生成函数`.
 
    .. versionadded:: 3.3
 
@@ -660,7 +660,7 @@ the more significant byte last.
 
 .. opcode:: FOR_ITER (delta)
 
-   ``TOS`` is an :term:`iterator`.  Call its :meth:`~iterator.__next__` method.
+   ``TOS`` is an :term:`迭代器`.  Call its :meth:`~iterator.__next__` method.
    If this yields a new value, push it on the stack (leaving the iterator below
    it).  If the iterator indicates it is exhausted ``TOS`` is popped, and the
    byte code counter is incremented by *delta*.
@@ -755,7 +755,7 @@ the more significant byte last.
 .. opcode:: MAKE_FUNCTION (argc)
 
    Pushes a new function object on the stack.  TOS is the
-   :term:`qualified name` of the function; TOS1 is the code associated with
+   :term:`限定名字` of the function; TOS1 is the code associated with
    the function.  The function object is defined to have *argc* default parameters,
    which are found below TOS1.
 
@@ -763,7 +763,7 @@ the more significant byte last.
 .. opcode:: MAKE_CLOSURE (argc)
 
    Creates a new function object, sets its *__closure__* slot, and pushes it on
-   the stack.  TOS is the :term:`qualified name` of the function, TOS1 is the
+   the stack.  TOS is the :term:`限定名字` of the function, TOS1 is the
    code associated with the function, and TOS2 is the tuple containing cells for
    the closure's free variables.  The function also has *argc* default parameters,
    which are found below the cells.

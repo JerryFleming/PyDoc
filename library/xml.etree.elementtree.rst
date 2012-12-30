@@ -369,13 +369,13 @@ Functions
 .. function:: iterparse(source, events=None, parser=None)
 
    Parses an XML section into an element tree incrementally, and reports what's
-   going on to the user.  *source* is a filename or :term:`file object`
+   going on to the user.  *source* is a filename or :term:`文件对象`
    containing XML data.  *events* is a list of events to report back.  The
    supported events are the strings ``"start"``, ``"end"``, ``"start-ns"``
    and ``"end-ns"`` (the "ns" events are used to get detailed namespace
    information).  If *events* is omitted, only ``"end"`` events are reported.
    *parser* is an optional parser instance.  If not given, the standard
-   :class:`XMLParser` parser is used.  Returns an :term:`iterator` providing
+   :class:`XMLParser` parser is used.  Returns an :term:`迭代器` providing
    ``(event, elem)`` pairs.
 
    .. note::
@@ -613,7 +613,7 @@ Element Objects
 
    .. method:: iter(tag=None)
 
-      Creates a tree :term:`iterator` with the current element as the root.
+      Creates a tree :term:`迭代器` with the current element as the root.
       The iterator iterates over this element and all elements below it, in
       document (depth first) order.  If *tag* is not ``None`` or ``'*'``, only
       elements whose tag equals *tag* are returned from the iterator.  If the
@@ -736,7 +736,7 @@ ElementTree Objects
    .. method:: parse(source, parser=None)
 
       Loads an external XML section into this element tree.  *source* is a file
-      name or :term:`file object`.  *parser* is an optional parser instance.
+      name or :term:`文件对象`.  *parser* is an optional parser instance.
       If not given, the standard :class:`XMLParser` parser is used.  Returns the
       section root element.
 
@@ -745,7 +745,7 @@ ElementTree Objects
                      method="xml")
 
       Writes the element tree to a file, as XML.  *file* is a file name, or a
-      :term:`file object` opened for writing.  *encoding* [1]_ is the output
+      :term:`文件对象` opened for writing.  *encoding* [1]_ is the output
       encoding (default is US-ASCII).
       *xml_declaration* controls if an XML declaration should be added to the
       file.  Use ``False`` for never, ``True`` for always, ``None``
@@ -757,7 +757,7 @@ ElementTree Objects
       This is controlled by the *encoding* argument.  If *encoding* is
       ``"unicode"``, the output is a string; otherwise, it's binary.  Note that
       this may conflict with the type of *file* if it's an open
-      :term:`file object`; make sure you do not try to write a string to a
+      :term:`文件对象`; make sure you do not try to write a string to a
       binary stream and vice versa.
 
 

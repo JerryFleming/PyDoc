@@ -35,7 +35,7 @@ some cases, including bug compatibility) with the pre-Python3.3 version of the
 email package.
 
 The first part of this documentation covers the features of :class:`Policy`, an
-:term:`abstract base class`  that defines the features that are common to all
+:term:`虚基类`  that defines the features that are common to all
 policy objects, including :const:`compat32`.  This includes certain hook
 methods that are called internally by the email package, which a custom policy
 could override to obtain different behavior.
@@ -107,7 +107,7 @@ added matters.  To illustrate::
 
 .. class:: Policy(**kw)
 
-   This is the :term:`abstract base class` for all policy classes.  It provides
+   This is the :term:`虚基类` for all policy classes.  It provides
    default implementations for a couple of trivial methods, as well as the
    implementation of the immutability property, the :meth:`clone` method, and
    the constructor semantics.
@@ -333,7 +333,7 @@ added matters.  To illustrate::
 .. note::
 
    The documentation below describes new policies that are included in the
-   standard library on a :term:`provisional basis <provisional package>`.
+   standard library on a :term:`provisional basis <临时包>`.
    Backwards incompatible changes (up to and including removal of the feature)
    may occur if deemed necessary by the core developers.
 

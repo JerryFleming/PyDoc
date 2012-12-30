@@ -83,7 +83,7 @@ Standard names are defined for the following types:
 
 .. data:: GeneratorType
 
-   The type of :term:`generator`-iterator objects, produced by calling a
+   The type of :term:`生成函数`-iterator objects, produced by calling a
    generator function.
 
 

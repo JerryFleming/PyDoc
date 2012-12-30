@@ -6,7 +6,7 @@
 
 
 Memory-mapped file objects behave like both :class:`bytearray` and like
-:term:`file objects <file object>`.  You can use mmap objects in most places
+:term:`file objects <文件对象>`.  You can use mmap objects in most places
 where :class:`bytearray` are expected; for example, you can use the :mod:`re`
 module to search through a memory-mapped file.  You can also change a single
 byte by doing ``obj[index] = 97``, or change a subsequence by assigning to a

@@ -71,7 +71,7 @@ example::
        c.execute('insert into stocks values (?,?,?,?,?)', t)
 
 To retrieve data after executing a SELECT statement, you can either treat the
-cursor as an :term:`iterator`, call the cursor's :meth:`~Cursor.fetchone` method to
+cursor as an :term:`迭代器`, call the cursor's :meth:`~Cursor.fetchone` method to
 retrieve a single matching row, or call :meth:`~Cursor.fetchall` to get a list of the
 matching rows.
 
@@ -502,11 +502,11 @@ Cursor Objects
 
       Executes an SQL command against all parameter sequences or mappings found in
       the sequence *sql*.  The :mod:`sqlite3` module also allows using an
-      :term:`iterator` yielding parameters instead of a sequence.
+      :term:`迭代器` yielding parameters instead of a sequence.
 
       .. literalinclude:: ../includes/sqlite3/executemany_1.py
 
-      Here's a shorter example using a :term:`generator`:
+      Here's a shorter example using a :term:`生成函数`:
 
       .. literalinclude:: ../includes/sqlite3/executemany_2.py
 

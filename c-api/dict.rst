@@ -63,7 +63,7 @@ Dictionary Objects
 .. c:function:: int PyDict_SetItem(PyObject *p, PyObject *key, PyObject *val)
 
    Insert *value* into the dictionary *p* with a key of *key*.  *key* must be
-   :term:`hashable`; if it isn't, :exc:`TypeError` will be raised. Return
+   :term:`可散列对象`; if it isn't, :exc:`TypeError` will be raised. Return
    ``0`` on success or ``-1`` on failure.
 
 

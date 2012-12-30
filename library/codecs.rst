@@ -258,14 +258,14 @@ utility functions:
 .. function:: iterencode(iterator, encoding, errors='strict', **kwargs)
 
    Uses an incremental encoder to iteratively encode the input provided by
-   *iterator*. This function is a :term:`generator`.  *errors* (as well as any
+   *iterator*. This function is a :term:`生成函数`.  *errors* (as well as any
    other keyword argument) is passed through to the incremental encoder.
 
 
 .. function:: iterdecode(iterator, encoding, errors='strict', **kwargs)
 
    Uses an incremental decoder to iteratively decode the input provided by
-   *iterator*. This function is a :term:`generator`.  *errors* (as well as any
+   *iterator*. This function is a :term:`生成函数`.  *errors* (as well as any
    other keyword argument) is passed through to the incremental decoder.
 
 

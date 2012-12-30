@@ -462,7 +462,7 @@ only when the function is called. [#]_
 .. index::
   statement: @
 
-A function definition may be wrapped by one or more :term:`decorator` expressions.
+A function definition may be wrapped by one or more :term:`修饰函数` expressions.
 Decorator expressions are evaluated when the function is defined, in the scope
 that contains the function definition.  The result must be a callable, which is
 invoked with the function object as the only argument. The returned value is
@@ -641,8 +641,8 @@ can be used to create instance variables with different implementation details.
 
 .. [#] A string literal appearing as the first statement in the function body is
    transformed into the function's ``__doc__`` attribute and therefore the
-   function's :term:`docstring`.
+   function's :term:`文档字符串`.
 
 .. [#] A string literal appearing as the first statement in the class body is
    transformed into the namespace's ``__doc__`` item and therefore the class's
-   :term:`docstring`.
+   :term:`文档字符串`.

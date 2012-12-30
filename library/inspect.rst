@@ -66,7 +66,7 @@ attributes:
 +-----------+-----------------+---------------------------+
 |           | __code__        | code object containing    |
 |           |                 | compiled function         |
-|           |                 | :term:`bytecode`          |
+|           |                 | :term:`字节码`            |
 +-----------+-----------------+---------------------------+
 |           | __defaults__    | tuple of any default      |
 |           |                 | values for arguments      |
@@ -179,7 +179,7 @@ attributes:
 
 .. function:: getmoduleinfo(path)
 
-   Returns a :term:`named tuple` ``ModuleInfo(name, suffix, mode, module_type)``
+   Returns a :term:`命名元组` ``ModuleInfo(name, suffix, mode, module_type)``
    of values that describe how Python will interpret the file identified by
    *path* if it is a module, or ``None`` if it would not be identified as a
    module.  In that tuple, *name* is the name of the module without the name of
@@ -672,7 +672,7 @@ Classes and functions
 .. function:: getargspec(func)
 
    Get the names and default values of a Python function's arguments. A
-   :term:`named tuple` ``ArgSpec(args, varargs, keywords, defaults)`` is
+   :term:`命名元组` ``ArgSpec(args, varargs, keywords, defaults)`` is
    returned. *args* is a list of the argument names. *varargs* and *keywords*
    are the names of the ``*`` and ``**`` arguments or ``None``. *defaults* is a
    tuple of default argument values or ``None`` if there are no default
@@ -687,7 +687,7 @@ Classes and functions
 .. function:: getfullargspec(func)
 
    Get the names and default values of a Python function's arguments.  A
-   :term:`named tuple` is returned:
+   :term:`命名元组` is returned:
 
    ``FullArgSpec(args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults,
    annotations)``
@@ -710,7 +710,7 @@ Classes and functions
 .. function:: getargvalues(frame)
 
    Get information about arguments passed into a particular frame.  A
-   :term:`named tuple` ``ArgInfo(args, varargs, keywords, locals)`` is
+   :term:`命名元组` ``ArgInfo(args, varargs, keywords, locals)`` is
    returned. *args* is a list of the argument names.  *varargs* and *keywords*
    are the names of the ``*`` and ``**`` arguments or ``None``.  *locals* is the
    locals dictionary of the given frame.
@@ -783,7 +783,7 @@ Classes and functions
 
    Get the mapping of external name references in a Python function or
    method *func* to their current values. A
-   :term:`named tuple` ``ClosureVars(nonlocals, globals, builtins, unbound)``
+   :term:`命名元组` ``ClosureVars(nonlocals, globals, builtins, unbound)``
    is returned. *nonlocals* maps referenced names to lexical closure
    variables, *globals* to the function's module globals and *builtins* to
    the builtins visible from the function body. *unbound* is the set of names
@@ -834,7 +834,7 @@ line.
 
 .. function:: getframeinfo(frame, context=1)
 
-   Get information about a frame or traceback object.  A :term:`named tuple`
+   Get information about a frame or traceback object.  A :term:`命名元组`
    ``Traceback(filename, lineno, function, code_context, index)`` is returned.
 
 
@@ -970,7 +970,7 @@ updated as expected:
    This is the equivalent of calling :func:`locals` in the body of the
    generator, and all the same caveats apply.
 
-   If *generator* is a :term:`generator` with no currently associated frame,
+   If *generator* is a :term:`生成函数` with no currently associated frame,
    then an empty dictionary is returned.  :exc:`TypeError` is raised if
    *generator* is not a Python generator object.
 

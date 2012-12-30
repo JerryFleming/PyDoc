@@ -1074,7 +1074,7 @@ the :mod:`io` module:
 
 * :class:`TextIOBase`: Provides functions for reading and writing
   strings (remember, strings will be Unicode in Python 3.0),
-  and supporting :term:`universal newlines`.  :class:`TextIOBase` defines
+  and supporting :term:`万能换行符`.  :class:`TextIOBase` defines
   the :meth:`readline` method and supports iteration upon
   objects.
 

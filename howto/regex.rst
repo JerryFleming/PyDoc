@@ -350,7 +350,7 @@ for a complete listing.
 |                  | returns them as a list.                       |
 +------------------+-----------------------------------------------+
 | ``finditer()``   | Find all substrings where the RE matches, and |
-|                  | returns them as an :term:`iterator`.          |
+|                  | returns them as an :term:`迭代器`.            |
 +------------------+-----------------------------------------------+
 
 :meth:`match` and :meth:`search` return ``None`` if no match can be found.  If
@@ -455,7 +455,7 @@ Two pattern methods return all of the matches for a pattern.
 
 :meth:`findall` has to create the entire list before it can be returned as the
 result.  The :meth:`finditer` method returns a sequence of :class:`MatchObject`
-instances as an :term:`iterator`::
+instances as an :term:`迭代器`::
 
    >>> iterator = p.finditer('12 drummers drumming, 11 ... 10 ...')
    >>> iterator  #doctest: +ELLIPSIS

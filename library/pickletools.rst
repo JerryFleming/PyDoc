@@ -95,7 +95,7 @@ Programmatic Interface
 
 .. function:: genops(pickle)
 
-   Provides an :term:`iterator` over all of the opcodes in a pickle, returning a
+   Provides an :term:`迭代器` over all of the opcodes in a pickle, returning a
    sequence of ``(opcode, arg, pos)`` triples.  *opcode* is an instance of an
    :class:`OpcodeInfo` class; *arg* is the decoded value, as a Python object, of
    the opcode's argument; *pos* is the position at which this opcode is located.

@@ -136,7 +136,7 @@ always available.
    handler (which is probably ``'strict'``), encode it to
    ``sys.stdout.encoding`` with ``'backslashreplace'`` error handler.
 
-   ``sys.displayhook`` is called on the result of evaluating an :term:`expression`
+   ``sys.displayhook`` is called on the result of evaluating an :term:`表达式`
    entered in an interactive Python session.  The display of these values can be
    customized by assigning another one-argument function to ``sys.displayhook``.
 
@@ -282,7 +282,7 @@ always available.
 
 .. data:: flags
 
-   The :term:`struct sequence` *flags* exposes the status of command line
+   The :term:`结构体序列` *flags* exposes the status of command line
    flags. The attributes are read only.
 
    ============================= =============================
@@ -314,7 +314,7 @@ always available.
 
 .. data:: float_info
 
-   A :term:`struct sequence` holding information about the float type. It
+   A :term:`结构体序列` holding information about the float type. It
    contains low level information about the precision and internal
    representation.  The values correspond to the various floating-point
    constants defined in the standard header file :file:`float.h` for the 'C'
@@ -572,7 +572,7 @@ always available.
 
 .. data:: hash_info
 
-   A :term:`struct sequence` giving parameters of the numeric hash
+   A :term:`结构体序列` giving parameters of the numeric hash
    implementation.  For more details about hashing of numeric types, see
    :ref:`numeric-hash`.
 
@@ -609,7 +609,7 @@ always available.
 
    This is called ``hexversion`` since it only really looks meaningful when viewed
    as the result of passing it to the built-in :func:`hex` function.  The
-   :term:`struct sequence`  :data:`sys.version_info` may be used for a more
+   :term:`结构体序列`  :data:`sys.version_info` may be used for a more
    human-friendly encoding of the same information.
 
    The ``hexversion`` is a 32-bit number with the following layout:
@@ -679,7 +679,7 @@ always available.
 
 .. data:: int_info
 
-   A :term:`struct sequence` that holds information about Python's internal
+   A :term:`结构体序列` that holds information about Python's internal
    representation of integers.  The attributes are read only.
 
    +-------------------------+----------------------------------------------+
@@ -746,13 +746,13 @@ always available.
 
 .. data:: meta_path
 
-    A list of :term:`finder` objects that have their :meth:`find_module`
+    A list of :term:`查找器` objects that have their :meth:`find_module`
     methods called to see if one of the objects can find the module to be
     imported. The :meth:`find_module` method is called at least with the
     absolute name of the module being imported. If the module to be imported is
     contained in package then the parent package's :attr:`__path__` attribute
     is passed in as a second argument. The method returns ``None`` if
-    the module cannot be found, else returns a :term:`loader`.
+    the module cannot be found, else returns a :term:`加载器`.
 
     :data:`sys.meta_path` is searched before any implicit default finders or
     :data:`sys.path`.
@@ -795,7 +795,7 @@ always available.
 .. data:: path_hooks
 
     A list of callables that take a path argument to try to create a
-    :term:`finder` for the path. If a finder can be created, it is to be
+    :term:`查找器` for the path. If a finder can be created, it is to be
     returned by the callable, else raise :exc:`ImportError`.
 
     Originally specified in :pep:`302`.
@@ -803,7 +803,7 @@ always available.
 
 .. data:: path_importer_cache
 
-    A dictionary acting as a cache for :term:`finder` objects. The keys are
+    A dictionary acting as a cache for :term:`查找器` objects. The keys are
     paths that have been passed to :data:`sys.path_hooks` and the values are
     the finders that are found. If a path is a valid file system path but no
     explicit finder is found on :data:`sys.path_hooks` then ``None`` is
@@ -1046,12 +1046,12 @@ always available.
           stdout
           stderr
 
-   :term:`File objects <file object>` used by the interpreter for standard
+   :term:`File objects <文件对象>` used by the interpreter for standard
    input, output and errors:
 
    * ``stdin`` is used for all interactive input (including calls to
      :func:`input`);
-   * ``stdout`` is used for the output of :func:`print` and :term:`expression`
+   * ``stdout`` is used for the output of :func:`print` and :term:`表达式`
      statements and for the prompts of :func:`input`;
    * The interpreter's own prompts and its error messages go to ``stderr``.
 
@@ -1109,7 +1109,7 @@ always available.
 
 .. data:: thread_info
 
-   A :term:`struct sequence` holding information about the thread
+   A :term:`结构体序列` holding information about the thread
    implementation.
 
    +------------------+---------------------------------------------------------+

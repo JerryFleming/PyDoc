@@ -100,8 +100,7 @@ The module defines the following:
       single: socket() (in module socket)
       single: popen() (in module os)
 
-   Among the acceptable object types in the sequences are Python :term:`file
-   objects <file object>` (e.g. ``sys.stdin``, or objects returned by
+   Among the acceptable object types in the sequences are Python :term:`file objects <文件对象>` (e.g. ``sys.stdin``, or objects returned by
    :func:`open` or :func:`os.popen`), socket objects returned by
    :func:`socket.socket`.  You may also define a :dfn:`wrapper` class yourself,
    as long as it has an appropriate :meth:`fileno` method (that really returns

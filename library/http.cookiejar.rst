@@ -138,7 +138,7 @@ The following classes are provided:
 CookieJar and FileCookieJar Objects
 -----------------------------------
 
-:class:`CookieJar` objects support the :term:`iterator` protocol for iterating over
+:class:`CookieJar` objects support the :term:`迭代器` protocol for iterating over
 contained :class:`Cookie` objects.
 
 :class:`CookieJar` has the following methods:

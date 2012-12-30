@@ -28,7 +28,7 @@ in this chapter is:
 
    Module :mod:`os`
       Operating system interfaces, including functions to work with files at a
-      lower level than Python :term:`file objects <file object>`.
+      lower level than Python :term:`file objects <文件对象>`.
 
    Module :mod:`io`
       Python's built-in I/O library, including both abstract classes and

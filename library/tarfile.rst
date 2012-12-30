@@ -78,7 +78,7 @@ Some facts and figures:
    :exc:`ReadError` is raised. Use *mode* ``'r'`` to avoid this.  If a
    compression method is not supported, :exc:`CompressionError` is raised.
 
-   If *fileobj* is specified, it is used as an alternative to a :term:`file object`
+   If *fileobj* is specified, it is used as an alternative to a :term:`文件对象`
    opened in binary mode for *name*. It is supposed to be at position 0.
 
    For special purposes, there is a second format for *mode*:
@@ -87,7 +87,7 @@ Some facts and figures:
    be done on the file. If given, *fileobj* may be any object that has a
    :meth:`read` or :meth:`write` method (depending on the *mode*). *bufsize*
    specifies the blocksize and defaults to ``20 * 512`` bytes. Use this variant
-   in combination with e.g. ``sys.stdin``, a socket :term:`file object` or a tape
+   in combination with e.g. ``sys.stdin``, a socket :term:`文件对象` or a tape
    device. However, such a :class:`TarFile` object is limited in that it does
    not allow to be accessed randomly, see :ref:`tar-examples`.  The currently
    possible modes:
@@ -421,8 +421,7 @@ be finalized; only the internally used file object will be closed. See the
 
 .. method:: TarFile.gettarinfo(name=None, arcname=None, fileobj=None)
 
-   Create a :class:`TarInfo` object for either the file *name* or the :term:`file
-   object` *fileobj* (using :func:`os.fstat` on its file descriptor).  You can modify
+   Create a :class:`TarInfo` object for either the file *name* or the :term:`文件对象` *fileobj* (using :func:`os.fstat` on its file descriptor).  You can modify
    some of the :class:`TarInfo`'s attributes before you add it using :meth:`addfile`.
    If given, *arcname* specifies an alternative name for the file in the archive.
 

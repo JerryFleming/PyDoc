@@ -85,7 +85,7 @@ Significantly Improved Library Modules:
 
 * C Accelerator for the :ref:`decimal <new-decimal>` module.
 * Better unicode handling in the :ref:`email <new-email>` module
-  (:term:`provisional <provisional package>`).
+  (:term:`provisional <临时包>`).
 
 Security improvements:
 
@@ -705,8 +705,8 @@ making the import statement work. That means the various importers that were
 once implicit are now fully exposed as part of the :mod:`importlib` package.
 
 The abstract base classes defined in :mod:`importlib.abc` have been expanded
-to properly delineate between :term:`meta path finders <meta path finder>`
-and :term:`path entry finders <path entry finder>` by introducing
+to properly delineate between :term:`meta path finders <元路径查找器>`
+and :term:`path entry finders <路径条目查找器>` by introducing
 :class:`importlib.abc.MetaPathFinder` and
 :class:`importlib.abc.PathEntryFinder`, respectively. The old ABC of
 :class:`importlib.abc.Finder` is now only provided for backwards-compatibility
@@ -1248,8 +1248,7 @@ While the policy framework is worthwhile all by itself, the main motivation for
 introducing it is to allow the creation of new policies that implement new
 features for the email package in a way that maintains backward compatibility
 for those who do not use the new policies.  Because the new policies introduce a
-new API, we are releasing them in Python 3.3 as a :term:`provisional policy
-<provisional package>`.  Backwards incompatible changes (up to and including
+new API, we are releasing them in Python 3.3 as a :term:`provisional policy <临时包>`.  Backwards incompatible changes (up to and including
 removal of the code) may occur if deemed necessary by the core developers.
 
 The new policies are instances of :class:`~email.policy.EmailPolicy`,
@@ -1993,8 +1992,7 @@ platform-independent fashion.  (Contributed by Ross Lagerwall in
 sys
 ---
 
-The :mod:`sys` module has a new :data:`~sys.thread_info` :term:`struct
-sequence` holding informations about the thread implementation
+The :mod:`sys` module has a new :data:`~sys.thread_info` :term:`结构体序列` holding informations about the thread implementation
 (:issue:`11223`).
 
 
@@ -2384,7 +2382,7 @@ Porting Python code
   method that must be implemented. If you were relying on subclasses to
   implement that method, make sure to check for the method's existence first.
   You will probably want to check for `find_loader()` first, though, in the
-  case of working with :term:`path entry finders <path entry finder>`.
+  case of working with :term:`path entry finders <路径条目查找器>`.
 
 * :mod:`pkgutil` has been converted to use :mod:`importlib` internally. This
   eliminates many edge cases where the old behaviour of the PEP 302 import

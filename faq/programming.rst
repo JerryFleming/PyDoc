@@ -318,8 +318,8 @@ calling another function by using ``*`` and ``**``::
 What is the difference between arguments and parameters?
 --------------------------------------------------------
 
-:term:`Parameters <parameter>` are defined by the names that appear in a
-function definition, whereas :term:`arguments <argument>` are the values
+:term:`Parameters <形参>` are defined by the names that appear in a
+function definition, whereas :term:`arguments <实参>` are the values
 actually passed to a function when calling it.  Parameters define what types of
 arguments a function can accept.  For example, given the function definition::
 
@@ -964,7 +964,7 @@ list, deleting duplicates as you go::
                last = mylist[i]
 
 If all elements of the list may be used as set keys (i.e. they are all
-:term:`hashable`) this is often faster ::
+:term:`可散列对象`) this is often faster ::
 
    mylist = list(set(mylist))
 

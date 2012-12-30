@@ -12,7 +12,7 @@
    from itertools import *
 
 
-This module implements a number of :term:`iterator` building blocks inspired
+This module implements a number of :term:`迭代器` building blocks inspired
 by constructs from APL, Haskell, and SML.  Each has been recast in a form
 suitable for Python.
 
@@ -641,7 +641,7 @@ The superior memory performance is kept by processing elements one at a time
 rather than bringing the whole iterable into memory all at once. Code volume is
 kept small by linking the tools together in a functional style which helps
 eliminate temporary variables.  High speed is retained by preferring
-"vectorized" building blocks over the use of for-loops and :term:`generator`\s
+"vectorized" building blocks over the use of for-loops and :term:`生成函数`\s
 which incur interpreter overhead.
 
 .. testcode::

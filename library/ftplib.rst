@@ -270,7 +270,7 @@ followed by ``lines`` for the text version or ``binary`` for the binary version.
 .. method:: FTP.storbinary(cmd, file, blocksize=8192, callback=None, rest=None)
 
    Store a file in binary transfer mode.  *cmd* should be an appropriate
-   ``STOR`` command: ``"STOR filename"``. *file* is a :term:`file object`
+   ``STOR`` command: ``"STOR filename"``. *file* is a :term:`文件对象`
    (opened in binary mode) which is read until EOF using its :meth:`read`
    method in blocks of size *blocksize* to provide the data to be stored.
    The *blocksize* argument defaults to 8192.  *callback* is an optional single
@@ -285,7 +285,7 @@ followed by ``lines`` for the text version or ``binary`` for the binary version.
 
    Store a file in ASCII transfer mode.  *cmd* should be an appropriate
    ``STOR`` command (see :meth:`storbinary`).  Lines are read until EOF from the
-   :term:`file object` *file* (opened in binary mode) using its :meth:`readline`
+   :term:`文件对象` *file* (opened in binary mode) using its :meth:`readline`
    method to provide the data to be stored.  *callback* is an optional single
    parameter callable that is called on each line after it is sent.
 

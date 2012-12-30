@@ -443,8 +443,7 @@ Notes:
 Additional Methods on Integer Types
 -----------------------------------
 
-The int type implements the :class:`numbers.Integral` :term:`abstract base
-class`. In addition, it provides one more method:
+The int type implements the :class:`numbers.Integral` :term:`虚基类`. In addition, it provides one more method:
 
 .. method:: int.bit_length()
 
@@ -539,8 +538,7 @@ class`. In addition, it provides one more method:
 Additional Methods on Float
 ---------------------------
 
-The float type implements the :class:`numbers.Real` :term:`abstract base
-class`. float also has the following additional methods.
+The float type implements the :class:`numbers.Real` :term:`虚基类`. float also has the following additional methods.
 
 .. method:: float.as_integer_ratio()
 
@@ -789,7 +787,7 @@ Implementations that do not obey this property are deemed broken.
 Generator Types
 ---------------
 
-Python's :term:`generator`\s provide a convenient way to implement the iterator
+Python's :term:`生成函数`\s provide a convenient way to implement the iterator
 protocol.  If a container object's :meth:`__iter__` method is implemented as a
 generator, it will automatically return an iterator object (technically, a
 generator object) supplying the :meth:`__iter__` and :meth:`~generator.__next__`
@@ -1678,7 +1676,7 @@ expression support in the :mod:`re` module).
 .. method:: str.join(iterable)
 
    Return a string which is the concatenation of the strings in the
-   :term:`iterable` *iterable*.  A :exc:`TypeError` will be raised if there are
+   :term:`可迭代对象` *iterable*.  A :exc:`TypeError` will be raised if there are
    any non-string values in *iterable*, including :class:`bytes` objects.  The
    separator between elements is the string providing this method.
 
@@ -1823,7 +1821,7 @@ expression support in the :mod:`re` module).
 .. method:: str.splitlines([keepends])
 
    Return a list of the lines in the string, breaking at line boundaries.
-   This method uses the :term:`universal newlines` approach to splitting lines.
+   This method uses the :term:`万能换行符` approach to splitting lines.
    Line breaks are not included in the resulting list unless *keepends* is
    given and true.
 
@@ -2779,7 +2777,7 @@ Set Types --- :class:`set`, :class:`frozenset`
 
 .. index:: object: set
 
-A :dfn:`set` object is an unordered collection of distinct :term:`hashable` objects.
+A :dfn:`set` object is an unordered collection of distinct :term:`可散列对象` objects.
 Common uses include membership testing, removing duplicates from a sequence, and
 computing mathematical operations such as intersection, union, difference, and
 symmetric difference.
@@ -2795,7 +2793,7 @@ There are currently two built-in set types, :class:`set` and :class:`frozenset`.
 The :class:`set` type is mutable --- the contents can be changed using methods
 like :meth:`add` and :meth:`remove`.  Since it is mutable, it has no hash value
 and cannot be used as either a dictionary key or as an element of another set.
-The :class:`frozenset` type is immutable and :term:`hashable` --- its contents cannot be
+The :class:`frozenset` type is immutable and :term:`可散列对象` --- its contents cannot be
 altered after it is created; it can therefore be used as a dictionary key or as
 an element of another set.
 
@@ -2904,7 +2902,7 @@ The constructors for both classes work the same:
    Since sets only define partial ordering (subset relationships), the output of
    the :meth:`list.sort` method is undefined for lists of sets.
 
-   Set elements, like dictionary keys, must be :term:`hashable`.
+   Set elements, like dictionary keys, must be :term:`可散列对象`.
 
    Binary operations that mix :class:`set` instances with :class:`frozenset`
    return the type of the first operand.  For example: ``frozenset('ab') |
@@ -2981,14 +2979,14 @@ Mapping Types --- :class:`dict`
    statement: del
    builtin: len
 
-A :term:`mapping` object maps :term:`hashable` values to arbitrary objects.
+A :term:`映射` object maps :term:`可散列对象` values to arbitrary objects.
 Mappings are mutable objects.  There is currently only one standard mapping
 type, the :dfn:`dictionary`.  (For other containers see the built-in
 :class:`list`, :class:`set`, and :class:`tuple` classes, and the
 :mod:`collections` module.)
 
 A dictionary's keys are *almost* arbitrary values.  Values that are not
-:term:`hashable`, that is, values containing lists, dictionaries or other
+:term:`可散列对象`, that is, values containing lists, dictionaries or other
 mutable types (that are compared by value rather than by object identity) may
 not be used as keys.  Numeric types used for keys obey the normal rules for
 numeric comparison: if two numbers compare equal (such as ``1`` and ``1.0``)
@@ -3010,7 +3008,7 @@ pairs within braces, for example: ``{'jack': 4098, 'sjoerd': 4127}`` or ``{4098:
    If no positional argument is given, an empty dictionary is created.
    If a positional argument is given and it is a mapping object, a dictionary
    is created with the same key-value pairs as the mapping object.  Otherwise,
-   the positional argument must be an :term:`iterator` object.  Each item in
+   the positional argument must be an :term:`迭代器` object.  Each item in
    the iterable must itself be an iterator with exactly two objects.  The
    first object of each item becomes a key in the new dictionary, and the
    second object the corresponding value.  If a key occurs more than once, the
@@ -3264,7 +3262,7 @@ before the statement body is executed and exited when the statement ends:
    the identifier in the :keyword:`as` clause of :keyword:`with` statements using
    this context manager.
 
-   An example of a context manager that returns itself is a :term:`file object`.
+   An example of a context manager that returns itself is a :term:`文件对象`.
    File objects return themselves from __enter__() to allow :func:`open` to be
    used as the context expression in a :keyword:`with` statement.
 
@@ -3302,7 +3300,7 @@ decimal arithmetic context. The specific types are not treated specially beyond
 their implementation of the context management protocol. See the
 :mod:`contextlib` module for some examples.
 
-Python's :term:`generator`\s and the :class:`contextlib.contextmanager` decorator
+Python's :term:`生成函数`\s and the :class:`contextlib.contextmanager` decorator
 provide a convenient way to implement these protocols.  If a generator function is
 decorated with the :class:`contextlib.contextmanager` decorator, it will return a
 context manager implementing the necessary :meth:`__enter__` and
@@ -3562,7 +3560,7 @@ types, where they are relevant.  Some of these are not reported by the
 
 .. attribute:: class.__qualname__
 
-   The :term:`qualified name` of the class or type.
+   The :term:`限定名字` of the class or type.
 
    .. versionadded:: 3.3
 

@@ -423,7 +423,7 @@ remote server into a single request [#]_.
    return ``None``, and only store the call name and parameters in the
    :class:`MultiCall` object. Calling the object itself causes all stored calls to
    be transmitted as a single ``system.multicall`` request. The result of this call
-   is a :term:`generator`; iterating over this generator yields the individual
+   is a :term:`生成函数`; iterating over this generator yields the individual
    results.
 
 A usage example of this class follows.  The server code ::

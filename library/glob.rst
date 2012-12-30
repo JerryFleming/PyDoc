@@ -34,7 +34,7 @@ For example, ``'[?]'`` matches the character ``'?'``.
 
 .. function:: iglob(pathname)
 
-   Return an :term:`iterator` which yields the same values as :func:`glob`
+   Return an :term:`迭代器` which yields the same values as :func:`glob`
    without actually storing them all simultaneously.
 
 

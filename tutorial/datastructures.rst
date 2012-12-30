@@ -374,10 +374,10 @@ objects, such as lists.
 
 Though tuples may seem similar to lists, they are often used in different
 situations and for different purposes.
-Tuples are :term:`immutable`, and usually contain an heterogeneous sequence of
+Tuples are :term:`不可变对象`, and usually contain an heterogeneous sequence of
 elements that are accessed via unpacking (see later in this section) or indexing
 (or even by attribute in the case of :func:`namedtuples <collections.namedtuple>`).
-Lists are :term:`mutable`, and their elements are usually homogeneous and are
+Lists are :term:`可变对象`, and their elements are usually homogeneous and are
 accessed by iterating over the list.
 
 A special problem is the construction of tuples containing 0 or 1 items: the

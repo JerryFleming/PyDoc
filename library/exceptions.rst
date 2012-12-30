@@ -162,7 +162,7 @@ The following exceptions are the exceptions that are usually raised.
 
 .. exception:: GeneratorExit
 
-   Raise when a :term:`generator`\'s :meth:`close` method is called.  It
+   Raise when a :term:`生成函数`\'s :meth:`close` method is called.  It
    directly inherits from :exc:`BaseException` instead of :exc:`Exception` since
    it is technically not an error.
 
@@ -288,7 +288,7 @@ The following exceptions are the exceptions that are usually raised.
 
 .. exception:: StopIteration
 
-   Raised by built-in function :func:`next` and an :term:`iterator`\'s
+   Raised by built-in function :func:`next` and an :term:`迭代器`\'s
    :meth:`~iterator.__next__` method to signal that there are no further
    items produced by the iterator.
 

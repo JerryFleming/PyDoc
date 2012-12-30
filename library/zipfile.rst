@@ -206,7 +206,7 @@ ZipFile Objects
    is the name of the file in the archive, or a :class:`ZipInfo` object. The
    *mode* parameter, if included, must be one of the following: ``'r'`` (the
    default), ``'U'``, or ``'rU'``. Choosing ``'U'`` or  ``'rU'`` will enable
-   :term:`universal newlines` support in the read-only object.  *pwd* is the
+   :term:`万能换行符` support in the read-only object.  *pwd* is the
    password used for encrypted files.  Calling  :meth:`.open` on a closed
    ZipFile will raise a  :exc:`RuntimeError`.
 

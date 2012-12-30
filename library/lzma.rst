@@ -31,8 +31,7 @@ Reading and writing compressed files
 
 .. function:: open(filename, mode="rb", \*, format=None, check=-1, preset=None, filters=None, encoding=None, errors=None, newline=None)
 
-   Open an LZMA-compressed file in binary or text mode, returning a :term:`file
-   object`.
+   Open an LZMA-compressed file in binary or text mode, returning a :term:`文件对象`.
 
    The *filename* argument can be either an actual file name (given as a
    :class:`str` or :class:`bytes` object), in which case the named file is
@@ -62,7 +61,7 @@ Reading and writing compressed files
 
    Open an LZMA-compressed file in binary mode.
 
-   An :class:`LZMAFile` can wrap an already-open :term:`file object`, or operate
+   An :class:`LZMAFile` can wrap an already-open :term:`文件对象`, or operate
    directly on a named file. The *filename* argument specifies either the file
    object to wrap, or the name of the file to open (as a :class:`str` or
    :class:`bytes` object). When wrapping an existing file object, the wrapped

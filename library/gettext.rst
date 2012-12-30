@@ -176,7 +176,7 @@ class can also install themselves in the built-in namespace as the function
    associated :file:`.mo` file paths.  Instances with identical :file:`.mo` file
    names are cached.  The actual class instantiated is either *class_* if
    provided, otherwise :class:`GNUTranslations`.  The class's constructor must
-   take a single :term:`file object` argument.  If provided, *codeset* will change
+   take a single :term:`文件对象` argument.  If provided, *codeset* will change
    the charset used to encode translated strings in the :meth:`lgettext` and
    :meth:`lngettext` methods.
 
@@ -225,7 +225,7 @@ are the methods of :class:`NullTranslations`:
 
 .. class:: NullTranslations(fp=None)
 
-   Takes an optional :term:`file object` *fp*, which is ignored by the base class.
+   Takes an optional :term:`文件对象` *fp*, which is ignored by the base class.
    Initializes "protected" instance variables *_info* and *_charset* which are set
    by derived classes, as well as *_fallback*, which is set through
    :meth:`add_fallback`.  It then calls ``self._parse(fp)`` if *fp* is not

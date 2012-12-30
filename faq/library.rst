@@ -358,7 +358,7 @@ class provides a featureful interface.
 What kinds of global value mutation are thread-safe?
 ----------------------------------------------------
 
-A :term:`global interpreter lock` (GIL) is used internally to ensure that only one
+A :term:`解释器全局锁` (GIL) is used internally to ensure that only one
 thread runs in the Python VM at a time.  In general, Python offers to switch
 among threads only between bytecode instructions; how frequently it switches can
 be set via :func:`sys.setswitchinterval`.  Each bytecode instruction and
@@ -403,7 +403,7 @@ Can't we get rid of the Global Interpreter Lock?
 
 .. XXX link to dbeazley's talk about GIL?
 
-The :term:`global interpreter lock` (GIL) is often seen as a hindrance to Python's
+The :term:`解释器全局锁` (GIL) is often seen as a hindrance to Python's
 deployment on high-end multiprocessor server machines, because a multi-threaded
 Python program effectively only uses one CPU, due to the insistence that
 (almost) all Python code can only run while the GIL is held.
@@ -617,7 +617,7 @@ For Unix, see a Usenet post by Mitch Chapman:
 Why doesn't closing sys.stdout (stdin, stderr) really close it?
 ---------------------------------------------------------------
 
-Python :term:`file objects <file object>` are a high-level layer of
+Python :term:`file objects <文件对象>` are a high-level layer of
 abstraction on low-level C file descriptors.
 
 For most file objects you create in Python via the built-in :func:`open`

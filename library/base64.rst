@@ -133,8 +133,7 @@ The legacy interface:
 .. function:: decode(input, output)
 
    Decode the contents of the binary *input* file and write the resulting binary
-   data to the *output* file. *input* and *output* must be :term:`file objects
-   <file object>`. *input* will be read until ``input.read()`` returns an empty
+   data to the *output* file. *input* and *output* must be :term:`file objects <文件对象>`. *input* will be read until ``input.read()`` returns an empty
    bytes object.
 
 
@@ -151,8 +150,7 @@ The legacy interface:
 .. function:: encode(input, output)
 
    Encode the contents of the binary *input* file and write the resulting base64
-   encoded data to the *output* file. *input* and *output* must be :term:`file
-   objects <file object>`. *input* will be read until ``input.read()`` returns
+   encoded data to the *output* file. *input* and *output* must be :term:`file objects <文件对象>`. *input* will be read until ``input.read()`` returns
    an empty bytes object. :func:`encode` returns the encoded data plus a trailing
    newline character (``b'\n'``).
 

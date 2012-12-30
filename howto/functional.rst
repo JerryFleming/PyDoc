@@ -8,7 +8,7 @@
 In this document, we'll take a tour of Python's features suitable for
 implementing programs in a functional style.  After an introduction to the
 concepts of functional programming, we'll look at language features such as
-:term:`iterator`\s and :term:`generator`\s and relevant library modules such as
+:term:`迭代器`\s and :term:`生成函数`\s and relevant library modules such as
 :mod:`itertools` and :mod:`functools`.
 
 
@@ -191,7 +191,7 @@ The built-in :func:`iter` function takes an arbitrary object and tries to return
 an iterator that will return the object's contents or elements, raising
 :exc:`TypeError` if the object doesn't support iteration.  Several of Python's
 built-in data types support iteration, the most common being lists and
-dictionaries.  An object is called :term:`iterable` if you can get an iterator
+dictionaries.  An object is called :term:`可迭代对象` if you can get an iterator
 for it.
 
 You can experiment with the iteration interface manually:
@@ -447,7 +447,7 @@ Here's the simplest example of a generator function:
     ...        yield i
 
 Any function containing a :keyword:`yield` keyword is a generator function;
-this is detected by Python's :term:`bytecode` compiler which compiles the
+this is detected by Python's :term:`字节码` compiler which compiles the
 function specially as a result.
 
 When you call a generator function, it doesn't return a single value; instead it

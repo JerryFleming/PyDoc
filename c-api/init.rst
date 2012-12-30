@@ -362,8 +362,7 @@ Thread State and the Global Interpreter Lock
    single: lock, interpreter
 
 The Python interpreter is not fully thread-safe.  In order to support
-multi-threaded Python programs, there's a global lock, called the :term:`global
-interpreter lock` or :term:`GIL`, that must be held by the current thread before
+multi-threaded Python programs, there's a global lock, called the :term:`解释器全局锁` or :term:`GIL`, that must be held by the current thread before
 it can safely access Python objects. Without the lock, even the simplest
 operations could cause problems in a multi-threaded program: for example, when
 two threads simultaneously increment the reference count of the same object, the

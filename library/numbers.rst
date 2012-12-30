@@ -6,7 +6,7 @@
 
 
 The :mod:`numbers` module (:pep:`3141`) defines a hierarchy of numeric
-:term:`abstract base classes <abstract base class>` which progressively define
+:term:`abstract base classes <虚基类>` which progressively define
 more operations.  None of the types defined in this module can be instantiated.
 
 

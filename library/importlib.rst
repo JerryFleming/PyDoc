@@ -22,7 +22,7 @@ comprehend than one implemented in a programming language other than Python.
 
 Two, the components to implement :keyword:`import` are exposed in this
 package, making it easier for users to create their own custom objects (known
-generically as an :term:`importer`) to participate in the import process.
+generically as an :term:`导入器`) to participate in the import process.
 Details on custom importers can be found in :pep:`302`.
 
 .. seealso::
@@ -138,28 +138,28 @@ ABC hierarchy::
 
 .. class:: Finder
 
-   An abstract base class representing a :term:`finder`.
+   An abstract base class representing a :term:`查找器`.
 
    .. deprecated:: 3.3
       Use :class:`MetaPathFinder` or :class:`PathEntryFinder` instead.
 
    .. method:: find_module(fullname, path=None)
 
-      An abstact method for finding a :term:`loader` for the specified
+      An abstact method for finding a :term:`加载器` for the specified
       module.  Originally specified in :pep:`302`, this method was meant
       for use in :data:`sys.meta_path` and in the path-based import subsystem.
 
 
 .. class:: MetaPathFinder
 
-   An abstract base class representing a :term:`meta path finder`. For
+   An abstract base class representing a :term:`元路径查找器`. For
    compatibility, this is a subclass of :class:`Finder`.
 
    .. versionadded:: 3.3
 
    .. method:: find_module(fullname, path)
 
-      An abstract method for finding a :term:`loader` for the specified
+      An abstract method for finding a :term:`加载器` for the specified
       module.  If this is a top-level import, *path* will be ``None``.
       Otherwise, this is a search for a subpackage or module and *path*
       will be the value of :attr:`__path__` from the parent
@@ -174,7 +174,7 @@ ABC hierarchy::
 
 .. class:: PathEntryFinder
 
-   An abstract base class representing a :term:`path entry finder`.  Though
+   An abstract base class representing a :term:`路径条目查找器`.  Though
    it bears some similarities to :class:`MetaPathFinder`, ``PathEntryFinder``
    is meant for use only within the path-based import subsystem provided
    by :class:`PathFinder`. This ABC is a subclass of :class:`Finder` for
@@ -184,7 +184,7 @@ ABC hierarchy::
 
    .. method:: find_loader(fullname):
 
-      An abstract method for finding a :term:`loader` for the specified
+      An abstract method for finding a :term:`加载器` for the specified
       module.  Returns a 2-tuple of ``(loader, portion)`` where ``portion``
       is a sequence of file system locations contributing to part of a namespace
       package. The loader may be ``None`` while specifying ``portion`` to
@@ -208,7 +208,7 @@ ABC hierarchy::
 
 .. class:: Loader
 
-    An abstract base class for a :term:`loader`.
+    An abstract base class for a :term:`加载器`.
     See :pep:`302` for the exact definition for a loader.
 
     .. method:: load_module(fullname)
@@ -251,7 +251,7 @@ ABC hierarchy::
         - :attr:`__loader__`
             The loader used to load the module.
             (This is not set by the built-in import machinery,
-            but it should be set whenever a :term:`loader` is used.)
+            but it should be set whenever a :term:`加载器` is used.)
 
     .. method:: module_repr(module)
 
@@ -263,7 +263,7 @@ ABC hierarchy::
 
 .. class:: ResourceLoader
 
-    An abstract base class for a :term:`loader` which implements the optional
+    An abstract base class for a :term:`加载器` which implements the optional
     :pep:`302` protocol for loading arbitrary resources from the storage
     back-end.
 
@@ -280,7 +280,7 @@ ABC hierarchy::
 
 .. class:: InspectLoader
 
-    An abstract base class for a :term:`loader` which implements the optional
+    An abstract base class for a :term:`加载器` which implements the optional
     :pep:`302` protocol for loaders that inspect modules.
 
     .. method:: get_code(fullname)
@@ -296,7 +296,7 @@ ABC hierarchy::
     .. method:: get_source(fullname)
 
         An abstract method to return the source of a module. It is returned as
-        a text string using :term:`universal newlines`, translating all
+        a text string using :term:`万能换行符`, translating all
         recognized line separators into ``'\n'`` characters.  Returns ``None``
         if no source is available (e.g. a built-in module). Raises
         :exc:`ImportError` if the loader cannot find the module specified.
@@ -305,7 +305,7 @@ ABC hierarchy::
 
         An abstract method to return a true value if the module is a package, a
         false value otherwise. :exc:`ImportError` is raised if the
-        :term:`loader` cannot find the module.
+        :term:`加载器` cannot find the module.
 
 
 .. class:: ExecutionLoader
@@ -624,7 +624,7 @@ find and load modules.
 
 .. class:: BuiltinImporter
 
-    An :term:`importer` for built-in modules. All known built-in modules are
+    An :term:`导入器` for built-in modules. All known built-in modules are
     listed in :data:`sys.builtin_module_names`. This class implements the
     :class:`importlib.abc.MetaPathFinder` and
     :class:`importlib.abc.InspectLoader` ABCs.
@@ -635,7 +635,7 @@ find and load modules.
 
 .. class:: FrozenImporter
 
-    An :term:`importer` for frozen modules. This class implements the
+    An :term:`导入器` for frozen modules. This class implements the
     :class:`importlib.abc.MetaPathFinder` and
     :class:`importlib.abc.InspectLoader` ABCs.
 
@@ -645,7 +645,7 @@ find and load modules.
 
 .. class:: WindowsRegistryFinder
 
-   :term:`Finder` for modules declared in the Windows registry.  This class
+   :term:`查找器` for modules declared in the Windows registry.  This class
    implements the :class:`importlib.abc.Finder` ABC.
 
    Only class methods are defined by this class to alleviate the need for
@@ -656,7 +656,7 @@ find and load modules.
 
 .. class:: PathFinder
 
-   A :term:`Finder` for :data:`sys.path` and package ``__path__`` attributes.
+   A :term:`查找器` for :data:`sys.path` and package ``__path__`` attributes.
    This class implements the :class:`importlib.abc.MetaPathFinder` ABC.
 
    Only class methods are defined by this class to alleviate the need for
@@ -664,11 +664,11 @@ find and load modules.
 
    .. classmethod:: find_module(fullname, path=None)
 
-     Class method that attempts to find a :term:`loader` for the module
+     Class method that attempts to find a :term:`加载器` for the module
      specified by *fullname* on :data:`sys.path` or, if defined, on
      *path*. For each path entry that is searched,
      :data:`sys.path_importer_cache` is checked. If a non-false object is
-     found then it is used as the :term:`finder` to look for the module
+     found then it is used as the :term:`查找器` to look for the module
      being searched for. If no entry is found in
      :data:`sys.path_importer_cache`, then :data:`sys.path_hooks` is
      searched for a finder for the path entry and, if found, is stored in
@@ -835,7 +835,7 @@ find and load modules.
     :synopsis: Utility code for importers
 
 This module contains the various objects that help in the construction of
-an :term:`importer`.
+an :term:`导入器`.
 
 .. function:: resolve_name(name, package)
 
@@ -855,7 +855,7 @@ an :term:`importer`.
 
 .. decorator:: module_for_loader
 
-    A :term:`decorator` for a :term:`loader` method,
+    A :term:`修饰函数` for a :term:`加载器` method,
     to handle selecting the proper
     module object to load with. The decorated method is expected to have a call
     signature taking two positional arguments
@@ -865,7 +865,7 @@ an :term:`importer`.
     assumption of two arguments.
 
     The decorated method will take in the **name** of the module to be loaded
-    as expected for a :term:`loader`. If the module is not found in
+    as expected for a :term:`加载器`. If the module is not found in
     :data:`sys.modules` then a new one is constructed with its
     :attr:`__name__` attribute set to **name**, :attr:`__loader__` set to
     **self**, and :attr:`__package__` set if
@@ -888,7 +888,7 @@ an :term:`importer`.
 
 .. decorator:: set_loader
 
-    A :term:`decorator` for a :term:`loader` method,
+    A :term:`修饰函数` for a :term:`加载器` method,
     to set the :attr:`__loader__`
     attribute on loaded modules. If the attribute is already set the decorator
     does nothing. It is assumed that the first positional argument to the
@@ -902,7 +902,7 @@ an :term:`importer`.
 
 .. decorator:: set_package
 
-    A :term:`decorator` for a :term:`loader` to set the :attr:`__package__`
+    A :term:`修饰函数` for a :term:`加载器` to set the :attr:`__package__`
     attribute on the module returned by the loader. If :attr:`__package__` is
     set and has a value other than ``None`` it will not be changed.
     Note that the module returned by the loader is what has the attribute

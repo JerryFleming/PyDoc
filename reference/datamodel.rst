@@ -385,7 +385,7 @@ Set types
 
       These represent an immutable set.  They are created by the built-in
       :func:`frozenset` constructor.  As a frozenset is immutable and
-      :term:`hashable`, it can be used again as an element of another set, or as
+      :term:`可散列对象`, it can be used again as an element of another set, or as
       a dictionary key.
 
 Mappings
@@ -458,7 +458,7 @@ Callable types
       | :attr:`__name__`        | The function's name           | Writable  |
       +-------------------------+-------------------------------+-----------+
       | :attr:`__qualname__`    | The function's                | Writable  |
-      |                         | :term:`qualified name`        |           |
+      |                         | :term:`限定名字`              |           |
       |                         |                               |           |
       |                         | .. versionadded:: 3.3         |           |
       +-------------------------+-------------------------------+-----------+
@@ -808,7 +808,7 @@ I/O objects (also known as file objects)
       single: stdout (in module sys)
       single: stderr (in module sys)
 
-   A :term:`file object` represents an open file.  Various shortcuts are
+   A :term:`文件对象` represents an open file.  Various shortcuts are
    available to create file objects: the :func:`open` built-in function, and
    also :func:`os.popen`, :func:`os.fdopen`, and the :meth:`makefile` method
    of socket objects (and perhaps by other functions or methods provided
@@ -834,7 +834,7 @@ Internal types
          single: bytecode
          object: code
 
-      Code objects represent *byte-compiled* executable Python code, or :term:`bytecode`.
+      Code objects represent *byte-compiled* executable Python code, or :term:`字节码`.
       The difference between a code object and a function object is that the function
       object contains an explicit reference to the function's globals (the module in
       which it was defined), while a code object contains no context; also the default
@@ -1240,7 +1240,7 @@ Basic customization
    of ``x==y`` does not imply that ``x!=y`` is false.  Accordingly, when
    defining :meth:`__eq__`, one should also define :meth:`__ne__` so that the
    operators will behave as expected.  See the paragraph on :meth:`__hash__` for
-   some important notes on creating :term:`hashable` objects which support
+   some important notes on creating :term:`可散列对象` objects which support
    custom comparison operations and are usable as dictionary keys.
 
    There are no swapped-argument versions of these methods (to be used when the

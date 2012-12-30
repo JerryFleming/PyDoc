@@ -687,7 +687,7 @@ likely don't need it.
    a local variable that persists outside of the ``except`` block, the
    traceback will create a reference cycle with the current frame and its
    dictionary of local variables.  This will delay reclaiming dead
-   resources until the next cyclic :term:`garbage collection` pass.
+   resources until the next cyclic :term:`垃圾回收` pass.
 
    In Python 2, this problem only occurs if you save the traceback itself
    (e.g. the third element of the tuple returned by :func:`sys.exc_info`)

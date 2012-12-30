@@ -20,7 +20,7 @@ Functions and classes provided:
 
 .. decorator:: contextmanager
 
-   This function is a :term:`decorator` that can be used to define a factory
+   This function is a :term:`修饰函数` that can be used to define a factory
    function for :keyword:`with` statement context managers, without needing to
    create a class or separate :meth:`__enter__` and :meth:`__exit__` methods.
 
@@ -41,7 +41,7 @@ Functions and classes provided:
       foo
       </h1>
 
-   The function being decorated must return a :term:`generator`-iterator when
+   The function being decorated must return a :term:`生成函数`-iterator when
    called. This iterator must yield exactly one value, which will be bound to
    the targets in the :keyword:`with` statement's :keyword:`as` clause, if any.
 

@@ -23,7 +23,7 @@ The :mod:`io` module provides Python's main facilities for dealing with various
 types of I/O.  There are three main types of I/O: *text I/O*, *binary I/O*
 and *raw I/O*.  These are generic categories, and various backing stores can
 be used for each of them.  A concrete object belonging to any of these
-categories is called a :term:`file object`.  Other common terms are *stream*
+categories is called a :term:`文件对象`.  Other common terms are *stream*
 and *file-like object*.
 
 Independently of its category, each concrete stream object will also have
@@ -148,7 +148,7 @@ Class hierarchy
 ---------------
 
 The implementation of I/O streams is organized as a hierarchy of classes.  First
-:term:`abstract base classes <abstract base class>` (ABCs), which are used to
+:term:`abstract base classes <虚基类>` (ABCs), which are used to
 specify the various categories of streams, then concrete classes providing the
 standard stream implementations.
 
@@ -801,7 +801,7 @@ Text I/O
    ``''``, ``'\n'``, ``'\r'``, and ``'\r\n'``.  It works as follows:
 
    * When reading input from the stream, if *newline* is ``None``,
-     :term:`universal newlines` mode is enabled.  Lines in the input can end in
+     :term:`万能换行符` mode is enabled.  Lines in the input can end in
      ``'\n'``, ``'\r'``, or ``'\r\n'``, and these are translated into ``'\n'``
      before being returned to the caller.  If it is ``''``, universal newlines
      mode is enabled, but line endings are returned to the caller untranslated.
@@ -878,7 +878,7 @@ Text I/O
 
 .. class:: IncrementalNewlineDecoder
 
-   A helper codec that decodes newlines for :term:`universal newlines` mode.
+   A helper codec that decodes newlines for :term:`万能换行符` mode.
    It inherits :class:`codecs.IncrementalDecoder`.
 
 
