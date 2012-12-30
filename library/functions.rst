@@ -137,7 +137,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
           @classmethod
           def f(cls, arg1, arg2, ...): ...
 
-   这里的 ``@classmethod`` 形式是个函数\ :term:`描述符` --- 详情参见\ :ref:`function`\ 中对函数定义的描述。
+   这里的 ``@classmethod`` 形式是个函数\ :term:`修饰函数` --- 详情参见\ :ref:`function`\ 中对函数定义的描述。
 
    它既可以用类(例如 ``C.f()``)也可以用实例(例如 ``C().f()``)来调用。对于实例，仅使用其类而忽略其它。如果在派生类中调用类方法，则把派生类对象作为隐含是第一个参数。
 
@@ -183,7 +183,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: delattr(object, name)
 
-   它和 :func:`setattr` 相关联，其参数是一个对象 object 和字符串 name。name 必须是 object 一个属性的名字。如果允许，函数会删除对象的指定的属性。例如，\ ``delattr(x, 'foobar')`` 相当于 ``del x.foobar`` 。
+   它和 :func:`setattr` 相关联，其参数是一个对象 object 和字符串 name 。name 必须是 object 一个属性的名字。如果允许，函数会删除对象的指定的属性。例如，\ ``delattr(x, 'foobar')`` 相当于 ``del x.foobar`` 。
 
 
 .. _func-dict:
@@ -643,11 +643,9 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: property(fget=None, fset=None, fdel=None, doc=None)
 
-   Return a property attribute.
+   返回一个 property 属性。
 
-   *fget* is a function for getting an attribute value, likewise *fset* is a
-   function for setting, and *fdel* a function for del'ing, an attribute.  Typical
-   use is to define a managed attribute ``x``::
+   *fget* 是个可以获取某个属性的函数。类似的 *fset* 是个设置函数，而 *fdel* 是个使用 del 删除属性的函数。它的典型的应用是定义一个可控的属性 ``x``::
 
       class C:
           def __init__(self):
@@ -661,12 +659,9 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
               del self._x
           x = property(getx, setx, delx, "I'm the 'x' property.")
 
-   If then *c* is an instance of *C*, ``c.x`` will invoke the getter,
-   ``c.x = value`` will invoke the setter and ``del c.x`` the deleter.
+   如果这时 *c* 是 *C* 的一个实例，则 ``c.x`` 会调用 getter ，\ ``c.x = value`` 会调用 setter ，而 ``del c.x`` 会调用 deleter 。
 
-   If given, *doc* will be the docstring of the property attribute. Otherwise, the
-   property will copy *fget*'s docstring (if it exists).  This makes it possible to
-   create read-only properties easily using :func:`property` as a :term:`迭代器`::
+   如果指定 *doc* ，它就会用作该 property 属性的文档字符串。否则，这个 property 将会复制 *fget* 的文档字符串(如果有的话)。这就让创建只读的 property 容易通过使用 :func:`property` 作为\ :term:`修饰函数`\ 来实现::
 
       class Parrot:
           def __init__(self):
@@ -677,13 +672,9 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
               """Get the current voltage."""
               return self._voltage
 
-   turns the :meth:`voltage` method into a "getter" for a read-only attribute
-   with the same name.
+   这就把 :meth:`voltage` 方法变成一个与之同名的只读属性的"getter"。
 
-   A property object has :attr:`getter`, :attr:`setter`, and :attr:`deleter`
-   methods usable as decorators that create a copy of the property with the
-   corresponding accessor function set to the decorated function.  This is
-   best explained with an example::
+   一个 property 对象有 :attr:`getter` 、\ :attr:`setter` 、\ :attr:`deleter` 方法，可以用作修饰函数；它把相应的访问函数设置成被修饰的函数，从而返回该 property 的副本。这点最好用例子来说明::
 
       class C:
           def __init__(self):
@@ -702,12 +693,9 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
           def x(self):
               del self._x
 
-   This code is exactly equivalent to the first example.  Be sure to give the
-   additional functions the same name as the original property (``x`` in this
-   case.)
+   这个例子和第一个例子是完全等价的。注意，增加的函数要和原来的 property 有相同的名字(这里是 ``x``)。
 
-   The returned property also has the attributes ``fget``, ``fset``, and
-   ``fdel`` corresponding to the constructor arguments.
+   返回的 property 也有 ``fget`` 、\ ``fset`` 、和 ``fdel`` 属性，和其构造函数的参数对应。
 
 
 .. _func-range:
@@ -715,71 +703,42 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
               range(start, stop[, step])
    :noindex:
 
-   Rather than being a function, :class:`range` is actually an immutable
-   sequence type, as documented in :ref:`typesseq-range` and :ref:`typesseq`.
+   :class:`range` 不仅是个函数，还是一个不可变的序列类型，在\ :ref:`typesseq-range`\ 和\ :ref:`typesseq`\ 中介绍。
 
 
 .. function:: repr(object)
 
-   Return a string containing a printable representation of an object.  For many
-   types, this function makes an attempt to return a string that would yield an
-   object with the same value when passed to :func:`eval`, otherwise the
-   representation is a string enclosed in angle brackets that contains the name
-   of the type of the object together with additional information often
-   including the name and address of the object.  A class can control what this
-   function returns for its instances by defining a :meth:`__repr__` method.
+   返回一个字符串，其中包含 object 的可打印形式。对很多类型，这个函数会试图返回一个与对它进行 :func:`eval` 结果一样的字符串；不然这就是一个由尖括号包围的字符串，中间是 object 的类型名称以及额外的信息，通常这这些信息是 object 的名称和地址。一个类可以定义 :meth:`__repr__` 方法来控制这个函数的返回值。
 
 
 .. function:: reversed(seq)
 
-   Return a reverse :term:`迭代器`.  *seq* must be an object which has
-   a :meth:`__reversed__` method or supports the sequence protocol (the
-   :meth:`__len__` method and the :meth:`__getitem__` method with integer
-   arguments starting at ``0``).
+   返回一个置反的\ :term:`迭代器`\ 。\ *seq* 必须是带有 :meth:`__reversed__` 方法的对象，或者支持序列协议(即 :meth:`__len__` 方法和 :meth:`__getitem__` 方法，其参数为整数且从 ``0`` 开始)。
 
 
 .. function:: round(number[, ndigits])
 
-   Return the floating point value *number* rounded to *ndigits* digits after
-   the decimal point.  If *ndigits* is omitted, it defaults to zero. Delegates
-   to ``number.__round__(ndigits)``.
+   返回浮点数，它是 *number* 保留小数点后 *ndigits* 个数字的进位后得到的。如果省略 *ndigits* ，则默认其为零。实际调用 ``number.__round__(ndigits)``\ 。
 
-   For the built-in types supporting :func:`round`, values are rounded to the
-   closest multiple of 10 to the power minus *ndigits*; if two multiples are
-   equally close, rounding is done toward the even choice (so, for example,
-   both ``round(0.5)`` and ``round(-0.5)`` are ``0``, and ``round(1.5)`` is
-   ``2``).  The return value is an integer if called with one argument,
-   otherwise of the same type as *number*.
+   对于支持 :func:`round` 的内置类型，这个值是最接近于 10 的负 *ndigits* 次方的整数倍；如果有两个倍数一栏相近，则进位时取偶数(所以 ``round(0.5)`` 和 ``round(-0.5)`` 都是 ``0``\ ，而 ``round(1.5)`` 是 ``2``)。如果调用时只有一个参数，则返回整数，否则返回和 *number* 类型相同的值。
 
    .. note::
 
-      The behavior of :func:`round` for floats can be surprising: for example,
-      ``round(2.675, 2)`` gives ``2.67`` instead of the expected ``2.68``.
-      This is not a bug: it's a result of the fact that most decimal fractions
-      can't be represented exactly as a float.  See :ref:`tut-fp-issues` for
-      more information.
+      对浮点数，\ :func:`round` 的行为可能让人惊讶。例如，\ ``round(2.675, 2)`` 是结果是 ``2.67`` 而不是期待的 ``2.68``\ 。这不是 bug ，而是由于大部分十进制小数都不能准确的用浮点数来表示。更多信息参见\ :ref:`tut-fp-issues`\ 。
 
 
 .. _func-set:
 .. function:: set([iterable])
    :noindex:
 
-   Return a new :class:`set` object, optionally with elements taken from
-   *iterable*.  ``set`` is a built-in class.  See :class:`set` and
-   :ref:`types-set` for documentation about this class.
+   返回一个新的 :class:`set` 对象，其中的元素是可选的并且来自 *iterable*\ 。\ ``set`` 是个内置的类。其文档参见 :class:`set` 和\ :ref:`types-set`\ 。
 
-   For other containers see the built-in :class:`frozenset`, :class:`list`,
-   :class:`tuple`, and :class:`dict` classes, as well as the :mod:`collections`
-   module.
+   关于其它容器参见内置的 :class:`frozenset` 、\ :class:`list` 、\ :class:`tuple` 、和 :class:`dict` 类，以及 :mod:`collections` 模块。
 
 
 .. function:: setattr(object, name, value)
 
-   This is the counterpart of :func:`getattr`.  The arguments are an object, a
-   string and an arbitrary value.  The string may name an existing attribute or a
-   new attribute.  The function assigns the value to the attribute, provided the
-   object allows it.  For example, ``setattr(x, 'foobar', 123)`` is equivalent to
-   ``x.foobar = 123``.
+   它和 :func:`getattr` 对应。其参数是一个对象 object ，一个字符串 name 和一个任意值 value 。这个字符串可以指定一个已有的或者新的属性名称。如果允许，整个函数会把 value 给 name 赋值。例如，\ ``setattr(x, 'foobar', 123)`` 相当于 ``x.foobar = 123`` 。
 
 
 .. function:: slice(stop)
@@ -828,7 +787,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
           @staticmethod
           def f(arg1, arg2, ...): ...
 
-   The ``@staticmethod`` form is a function :term:`迭代器` -- see the
+   The ``@staticmethod`` form is a function :term:`修饰函数` -- see the
    description of function definitions in :ref:`function` for details.
 
    It can be called either on the class (such as ``C.f()``) or on an instance (such
