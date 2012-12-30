@@ -237,7 +237,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: divmod(a, b)
 
-   接受两个(不是复数的)数值参数，返回一对数值，其中分别是其整除时的商和余数。对于混合的操作数类型，还会应用二进制算术运算规则。对于整数，结果和 ``(a // b, a % b)`` 是一样的。对于浮点数，结果是 ``(q, a % b)`` ，其中的 *q* 通常是 ``math.floor(a /
+   接受两个(不是复数的)数值参数，返回一对数值，其中分别是其整除时的商和余数。如果操作数类型不同，则会应用二元运算符的精度转换规则。对于整数，结果和 ``(a // b, a % b)`` 是一样的。对于浮点数，结果是 ``(q, a % b)`` ，其中的 *q* 通常是 ``math.floor(a /
    b)`` ，但也有可能比之小 1 。在任何情况下，\ ``q * b + a % b`` 都和 *a* 相当接近，如果 ``a % b`` 不为零就会和 *b* 正负符号相同，还有 ``0 <= abs(a % b) < abs(b)`` 。
 
 
@@ -619,47 +619,26 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 .. XXX works for bytes too, but should it?
 .. function:: ord(c)
 
-   Given a string representing one Unicode character, return an integer
-   representing the Unicode code
-   point of that character.  For example, ``ord('a')`` returns the integer ``97``
-   and ``ord('\u2020')`` returns ``8224``.  This is the inverse of :func:`chr`.
+   对于一个字符串表示的 Unicode 字符，返回该 Unicode 的整数编号。例如，\ ``ord('a')`` 返回整数 ``97`` 而 ``ord('\u2020')`` 返回 ``8224`` 。它和 :func:`chr` 不好相反。
 
 
 .. function:: pow(x, y[, z])
 
-   Return *x* to the power *y*; if *z* is present, return *x* to the power *y*,
-   modulo *z* (computed more efficiently than ``pow(x, y) % z``). The two-argument
-   form ``pow(x, y)`` is equivalent to using the power operator: ``x**y``.
+   返回 *x* 的 *y* 次方。如果有 *z* ，则返回 *x* 的 *y* 次方与 *z* 整除的结果(计算时比 ``pow(x, y) % z`` 效率更高)。两个参数的形式 ``pow(x, y)`` 和使用乘方运算符 ``x**y`` 是等价的。
 
-   The arguments must have numeric types.  With mixed operand types, the
-   coercion rules for binary arithmetic operators apply.  For :class:`int`
-   operands, the result has the same type as the operands (after coercion)
-   unless the second argument is negative; in that case, all arguments are
-   converted to float and a float result is delivered.  For example, ``10**2``
-   returns ``100``, but ``10**-2`` returns ``0.01``.  If the second argument is
-   negative, the third argument must be omitted.  If *z* is present, *x* and *y*
-   must be of integer types, and *y* must be non-negative.
+   参数必须是数值类型。如果操作数类型不同，则会应用二元运算符的精度转换规则。对于 :class:`int` 操作数，结果(精度提升后)和操作数的类型相同，除非第二个参数是负数；如果第二个参数是负数，则所有参数都转化为浮点数，并返回浮点数结果。例如，\ ``10**2`` 返回 ``100`` 而 ``10**-2`` 返回 ``0.01`` 。如果第二个参数是负数，则必须省略第三个参数。如果有 *z* ，则 *x* 和 *y* 必须是整数类型，并且 *y* 必须不能为负数。
 
 
 .. function:: print(*objects, sep=' ', end='\\n', file=sys.stdout, flush=False)
 
-   Print *objects* to the stream *file*, separated by *sep* and followed by
-   *end*.  *sep*, *end* and *file*, if present, must be given as keyword
-   arguments.
+   把 *objects* 输出到流 *file* ，中间用 *sep* 分隔，后面加上 *end* 。如果有 *sep* 、\ *end* 、\ *file* ，则必须是关键字参数。
 
-   All non-keyword arguments are converted to strings like :func:`str` does and
-   written to the stream, separated by *sep* and followed by *end*.  Both *sep*
-   and *end* must be strings; they can also be ``None``, which means to use the
-   default values.  If no *objects* are given, :func:`print` will just write
-   *end*.
+   所有非关键字参数都会转化成字符串，像 :func:`str` 那样，并且输出到流中，中间用 *sep* 分隔，后面加上 *end* 。\ *sep* 和 *end* 必须都是字符串，或者 ``None`` ，表示使用默认值。如果没有指定 *objects* ，则 :func:`print` 会只输出 *end* 。
 
-   The *file* argument must be an object with a ``write(string)`` method; if it
-   is not present or ``None``, :data:`sys.stdout` will be used.  Whether output
-   is buffered is usually determined by *file*, but if the  *flush* keyword
-   argument is true, the stream is forcibly flushed.
+   *file* 参数必须是个支持 ``write(string)`` 方法的对象。如果没有指定或者为 ``None`` ，则使用 :data:`sys.stdout` 。输出是否有缓冲区通常是由 *file* 决定，但如果关键字参数 *flush* 为真，则流会强制刷新。
 
    .. versionchanged:: 3.3
-      Added the *flush* keyword argument.
+      增加关键字参数 *flush* 。
 
 
 .. function:: property(fget=None, fset=None, fdel=None, doc=None)
