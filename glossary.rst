@@ -65,10 +65,10 @@
    CPython
       Python 编程语言的标准实现，发布在 `python.org <http://python.org>`_ 新闻组。"CPython" 这个词用来在必要的时候区别标准实现与其它实现，例如 Jython 或者 IronPython。
 
-   修饰函数
-      能够返回另外一个函数的函数，通常使用 ``@wrapper`` 的语法形式作为函数的转化器。常见的修饰函数有 :func:`classmethod` 和 :func:`staticmethod` 。
+   修饰符
+      能够返回另外一个函数的函数，通常使用 ``@wrapper`` 的语法形式作为函数的转化器。常见的修饰符有 :func:`classmethod` 和 :func:`staticmethod` 。
 
-      修饰函数的语法只是一种语法简记形式。下面两种函数定义在语法上是等价的::
+      修饰符的语法只是一种语法简记形式。下面两种函数定义在语法上是等价的::
 
          def f(...):
              ...

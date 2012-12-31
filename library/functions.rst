@@ -137,7 +137,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
           @classmethod
           def f(cls, arg1, arg2, ...): ...
 
-   这里的 ``@classmethod`` 形式是个函数\ :term:`修饰函数` --- 详情参见\ :ref:`function`\ 中对函数定义的描述。
+   这里的 ``@classmethod`` 形式是个函数\ :term:`修饰符` --- 详情参见\ :ref:`function`\ 中对函数定义的描述。
 
    它既可以用类(例如 ``C.f()``)也可以用实例(例如 ``C().f()``)来调用。对于实例，仅使用其类而忽略其它。如果在派生类中调用类方法，则把派生类对象作为隐含是第一个参数。
 
@@ -661,7 +661,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    如果这时 *c* 是 *C* 的一个实例，则 ``c.x`` 会调用 getter ，\ ``c.x = value`` 会调用 setter ，而 ``del c.x`` 会调用 deleter 。
 
-   如果指定 *doc* ，它就会用作该 property 属性的文档字符串。否则，这个 property 将会复制 *fget* 的文档字符串(如果有的话)。这就让创建只读的 property 容易通过使用 :func:`property` 作为\ :term:`修饰函数`\ 来实现::
+   如果指定 *doc* ，它就会用作该 property 属性的文档字符串。否则，这个 property 将会复制 *fget* 的文档字符串(如果有的话)。这就让创建只读的 property 容易通过使用 :func:`property` 作为\ :term:`修饰符`\ 来实现::
 
       class Parrot:
           def __init__(self):
@@ -674,7 +674,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    这就把 :meth:`voltage` 方法变成一个与之同名的只读属性的"getter"。
 
-   一个 property 对象有 :attr:`getter` 、\ :attr:`setter` 、\ :attr:`deleter` 方法，可以用作修饰函数；它把相应的访问函数设置成被修饰的函数，从而返回该 property 的副本。这点最好用例子来说明::
+   一个 property 对象有 :attr:`getter` 、\ :attr:`setter` 、\ :attr:`deleter` 方法，可以用作修饰符；它把相应的访问函数设置成被修饰的函数，从而返回该 property 的副本。这点最好用例子来说明::
 
       class C:
           def __init__(self):
@@ -746,62 +746,42 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    .. index:: single: Numerical Python
 
-   Return a :term:`切片` object representing the set of indices specified by
-   ``range(start, stop, step)``.  The *start* and *step* arguments default to
-   ``None``.  Slice objects have read-only data attributes :attr:`start`,
-   :attr:`stop` and :attr:`step` which merely return the argument values (or their
-   default).  They have no other explicit functionality; however they are used by
-   Numerical Python and other third party extensions.  Slice objects are also
-   generated when extended indexing syntax is used.  For example:
-   ``a[start:stop:step]`` or ``a[start:stop, i]``.  See :func:`itertools.islice`
+   返回一个\ :term:`切片`\ 对象，表示由 ``range(start, stop, step)`` 下标指定的元素。\ *start* 和 *step* 参数默认为 ``None`` 。切片对象有只读的属性 :attr:`start` 、\ :attr:`stop` 、和 :attr:`step` ，它们只返回其参数值(或者默认值)。这个函数没有其它明确的功能，但却用于 Numerical Python 和其它第三方扩展中。如果使用扩展的下标语法也会生成切片对象，例如：``a[start:stop:step]`` 或者 ``a[start:stop, i]`` 。参见其另外一个实现 :func:`itertools.islice` ，它返回一个迭代器。
    for an alternate version that returns an iterator.
 
 
 .. function:: sorted(iterable[, key][, reverse])
 
-   Return a new sorted list from the items in *iterable*.
+   从 *iterable* 的元素中返回一个新的已排序的列表。它有两个可选的参数，必须以关键字参数的形式指定。
 
-   Has two optional arguments which must be specified as keyword arguments.
+   *key* 指定只有单个参数的函数作为参数，这个函数用来从每个列表元素中取出用于比较的键，例如 ``key=str.lower`` ，它的默认值是 ``None`` (这时直接比较元素)。
 
-   *key* specifies a function of one argument that is used to extract a comparison
-   key from each list element: ``key=str.lower``.  The default value is ``None``
-   (compare the elements directly).
+   *reverse* 是个布尔值。如果为 ``True`` ，则每个元素在排序时好像其比较结果都置反了。
 
-   *reverse* is a boolean value.  If set to ``True``, then the list elements are
-   sorted as if each comparison were reversed.
+   可以用 :func:`functools.cmp_to_key` 把旧式的 *cmp* 函数转化为 *key* 函数。
 
-   Use :func:`functools.cmp_to_key` to convert an old-style *cmp* function to a
-   *key* function.
-
-   For sorting examples and a brief sorting tutorial, see `Sorting HowTo
-   <http://wiki.python.org/moin/HowTo/Sorting/>`_\.
+   关于排序的例子及其简单介绍，参见\ `怎么排序 <http://wiki.python.org/moin/HowTo/Sorting/>`_\ 。
 
 .. function:: staticmethod(function)
 
-   Return a static method for *function*.
+   为 *function* 返回一个静态方法。
 
-   A static method does not receive an implicit first argument. To declare a static
-   method, use this idiom::
+   静态方法没有隐含的第一个参数。要声明静态方法，可以使用这样的成规::
 
       class C:
           @staticmethod
           def f(arg1, arg2, ...): ...
 
-   The ``@staticmethod`` form is a function :term:`修饰函数` -- see the
-   description of function definitions in :ref:`function` for details.
+   ``@staticmethod`` 形式是个函数\ :term:`修饰符` --- 详情参见\ :ref:`function`\ 中的函数定义。
 
-   It can be called either on the class (such as ``C.f()``) or on an instance (such
-   as ``C().f()``).  The instance is ignored except for its class.
+   静态方法可以用类调用(例如 ``C.f()``)，也可以用实例调用(例如 ``C().f()``)。调用时忽略实例，只用其类信息。
 
-   Static methods in Python are similar to those found in Java or C++. Also see
-   :func:`classmethod` for a variant that is useful for creating alternate class
-   constructors.
+   Python 中的静态方法和 Java 或 C++ 中的类似。另见 :func:`classmethod` ，这个方法用于创建另外一种类构造函数。
 
-   For more information on static methods, consult the documentation on the
-   standard type hierarchy in :ref:`types`.
+   关于静态方法的更多信息，参阅标准类型体系\ :ref:`types`\ 的文档。
 
    .. index::
-      single: string; str() (built-in function)
+      single: string; str() (内置函数)
 
 
 .. _func-str:
@@ -809,87 +789,48 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
               str(object=b'', encoding='utf-8', errors='strict')
    :noindex:
 
-   Return a :class:`str` version of *object*.  See :func:`str` for details.
+   返回 *object* 的 :class:`str` 形式。详情参见 :func:`str` 。
 
-   ``str`` is the built-in string :term:`类`.  For general information
-   about strings, see :ref:`textseq`.
+   ``str`` 是内置的字符串\ :term:`类`\ 。关于字符串的一般信息，参见\ :ref:`textseq`\ 。
 
 
 .. function:: sum(iterable[, start])
 
-   Sums *start* and the items of an *iterable* from left to right and returns the
-   total.  *start* defaults to ``0``. The *iterable*'s items are normally numbers,
-   and the start value is not allowed to be a string.
+   把 *iterable* 中的元素从 *start* 开始从左向右加起来，然后返回其和。\ *start* 默认为 ``0`` 。\ *iterable* 中的项通常都是数值，而 start 的值不能是字符串。
 
-   For some use cases, there are good alternatives to :func:`sum`.
-   The preferred, fast way to concatenate a sequence of strings is by calling
-   ``''.join(sequence)``.  To add floating point values with extended precision,
-   see :func:`math.fsum`\.  To concatenate a series of iterables, consider using
-   :func:`itertools.chain`.
+   有些情况下，还有比 :func:`sum` 更好的方法。连接字符串更好也更快的方法是调用 ``''.join(sequence)`` 。把浮点数相加并保留扩展的精度，可参见 :func:`math.fsum`\ 。如果要连接一系列可迭代对象，可以考虑使用 :func:`itertools.chain` 。
 
 .. function:: super([type[, object-or-type]])
 
-   Return a proxy object that delegates method calls to a parent or sibling
-   class of *type*.  This is useful for accessing inherited methods that have
-   been overridden in a class. The search order is same as that used by
-   :func:`getattr` except that the *type* itself is skipped.
+   返回一个代理对象，能把方法调用转化为对 *type* 的父类或兄弟类的调用。这对于访问类中那些被继承并重载的方法来说很有用。它的搜索顺序和 :func:`getattr` 使用的顺序一样，只不过会忽略 *type* 本身。
 
-   The :attr:`__mro__` attribute of the *type* lists the method resolution
-   search order used by both :func:`getattr` and :func:`super`.  The attribute
-   is dynamic and can change whenever the inheritance hierarchy is updated.
+   *type* 的 :attr:`__mro__` 属性列出 :func:`getattr` 和 :func:`super` 所使用的方法解析顺序。这个属性是动态的，每当继承体系更新时这个属性也随之更新。
 
-   If the second argument is omitted, the super object returned is unbound.  If
-   the second argument is an object, ``isinstance(obj, type)`` must be true.  If
-   the second argument is a type, ``issubclass(type2, type)`` must be true (this
-   is useful for classmethods).
+   如果忽略第二个参数，则返回的 super 对象就是没有绑定的。如果第二个参数是个对象，则 ``isinstance(obj, type)`` 必须为真。如果第二个参数是个类型，则 ``issubclass(type2, type)`` 必须为真(这对类方法来说很有用)。
 
-   There are two typical use cases for *super*.  In a class hierarchy with
-   single inheritance, *super* can be used to refer to parent classes without
-   naming them explicitly, thus making the code more maintainable.  This use
-   closely parallels the use of *super* in other programming languages.
+   *super* 有两个典型的应用场景。在单继承的类体系中，\ *super* 可以用来指代父类而不需要明确指定名称，从而让代码更易于维护。这个用法和其它编程语言中的 *super* 最接近。
 
-   The second use case is to support cooperative multiple inheritance in a
-   dynamic execution environment.  This use case is unique to Python and is
-   not found in statically compiled languages or languages that only support
-   single inheritance.  This makes it possible to implement "diamond diagrams"
-   where multiple base classes implement the same method.  Good design dictates
-   that this method have the same calling signature in every case (because the
-   order of calls is determined at runtime, because that order adapts
-   to changes in the class hierarchy, and because that order can include
-   sibling classes that are unknown prior to runtime).
+   第二种应用场景是在动态执行环境中支持多继承协作。这个用法是 Python 特有的，而静态编译地语言和只支持单继承的语言中是没有的。这就让多个基类实现同一方法的"棱形模式"易于实现。良好的设计保证这个方法在每次调用时都使用同样的调用界面(因为调用的顺序在运行时决定，也因为这个顺序会随着类体系一起更新，还因为这个顺序中可能包含在运行之前无法得知的兄弟类)。
 
-   For both use cases, a typical superclass call looks like this::
+   对于这两种应用场景，对 super 类的调用都像下面的典型例子::
 
       class C(B):
           def method(self, arg):
-              super().method(arg)    # This does the same thing as:
+              super().method(arg)    # 它的作用和下面一样：
                                      # super(C, self).method(arg)
 
-   Note that :func:`super` is implemented as part of the binding process for
-   explicit dotted attribute lookups such as ``super().__getitem__(name)``.
-   It does so by implementing its own :meth:`__getattribute__` method for searching
-   classes in a predictable order that supports cooperative multiple inheritance.
-   Accordingly, :func:`super` is undefined for implicit lookups using statements or
-   operators such as ``super()[name]``.
+   注意，\ :func:`super` 的实现是绑定过程的一部分，这样才便于带点属性的查找，例如 ``super().__getitem__(name)`` 。它的做法是实现自己的 :meth:`__getattribute__` 方法用来按照可预见的顺序查找类，这个查找方法支持多继承协作。相应的，对于使用语句或运算符的隐式查找，例如 ``super()[name]`` ，\ :func:`super`\ 是末定义的。
 
-   Also note that, aside from the zero argument form, :func:`super` is not
-   limited to use inside methods.  The two argument form specifies the
-   arguments exactly and makes the appropriate references.  The zero
-   argument form only works inside a class definition, as the compiler fills
-   in the necessary details to correctly retrieve the class being defined,
-   as well as accessing the current instance for ordinary methods.
+   还要注意，除了零参数的形式，\ :func:`super` 在方法内部的使用是不受限制的。两个参数的形式明确指定了参数，并进行适当的引用。零参数的形式只能在类定义中使用，因为编译器会提供必须的细节来得到当前定义的类，以及访问当前实例的普通方法。
 
-   For practical suggestions on how to design cooperative classes using
-   :func:`super`, see `guide to using super()
-   <http://rhettinger.wordpress.com/2011/05/26/super-considered-super/>`_.
+   对于如何用 :func:`super` 设计多类协作的实用建议，参见 super() 使用指南 <http://rhettinger.wordpress.com/2011/05/26/super-considered-super/>`_ 。
 
 
 .. _func-tuple:
 .. function:: tuple([iterable])
    :noindex:
 
-   Rather than being a function, :class:`tuple` is actually an immutable
-   sequence type, as documented in :ref:`typesseq-tuple` and :ref:`typesseq`.
+   它不仅是函数，还是 :class:`tuple` 一个不可变的序列类型，在\ :ref:`typesseq-tuple`\ 和\ :ref:`typesseq`\ 介绍。
 
 
 .. function:: type(object)
@@ -898,49 +839,34 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
    .. index:: object: type
 
 
-   With one argument, return the type of an *object*.  The return value is a
-   type object and generally the same object as returned by ``object.__class__``.
+   对于单参数形式，则返回 *object* 的类型。返回的值是个类型对象，它通常和 ``object.__class__`` 的返回值是同样的对象。
 
-   The :func:`isinstance` built-in function is recommended for testing the type
-   of an object, because it takes subclasses into account.
+   推荐使用内置函数 :func:`isinstance` 来检测一个对象的类型，因为它还会考虑子类。
 
-
-   With three arguments, return a new type object.  This is essentially a
-   dynamic form of the :keyword:`class` statement. The *name* string is the
-   class name and becomes the :attr:`__name__` attribute; the *bases* tuple
-   itemizes the base classes and becomes the :attr:`__bases__` attribute;
-   and the *dict* dictionary is the namespace containing definitions for class
-   body and becomes the :attr:`__dict__` attribute.  For example, the
-   following two statements create identical :class:`type` objects:
+   对于三个参数的形式，则返回一个新的 type 对象。这在本质上说是 :keyword:`class` 语句的动态形式。\ *name* 字符串是类的名字，并成为该类的 :attr:`__name__` 属性；\ *bases* 元组列出基类，并成为 :attr:`__bases__` 属性；而 *dict* 字典指定定义类体的命名空间并成为 :attr:`__dict__` 属性。例如，下面两个语句创建了完全一样的 :class:`type` 对象::
 
       >>> class X:
       ...     a = 1
       ...
       >>> X = type('X', (object,), dict(a=1))
 
-   See also :ref:`bltin-type-objects`.
+   另见\ :ref:`bltin-type-objects`\ 。
 
 
 .. function:: vars([object])
 
-   Without an argument, act like :func:`locals`.
+   没有参数时作用和 :func:`locals` 相似。
 
-   With a module, class or class instance object as argument (or anything else that
-   has a :attr:`__dict__` attribute), return that attribute.
+   如果带有模块、类、类实例对象作为参数(或者任何其它有 :attr:`__dict__` 属性的对象)，则返回其 :attr:`__dict__` 属性。
 
    .. note::
-      The returned dictionary should not be modified:
-      the effects on the corresponding symbol table are undefined. [#]_
+      不应该修改返回的字典，因为修改对这个符号个的作用是未定义的。 [#]_
 
 .. function:: zip(*iterables)
 
-   Make an iterator that aggregates elements from each of the iterables.
+   创建一个迭代器，它能够聚合每个 iterable 的元素。
 
-   Returns an iterator of tuples, where the *i*-th tuple contains
-   the *i*-th element from each of the argument sequences or iterables.  The
-   iterator stops when the shortest input iterable is exhausted. With a single
-   iterable argument, it returns an iterator of 1-tuples.  With no arguments,
-   it returns an empty iterator.  Equivalent to::
+   返回一个元组迭代器，其中的第 *i* 个元素是由每个序列或可迭代参数的第 *i* 个元素组成的元组。当最短的输入迭代器穷尽时，返回的迭代器也会结束。如果只有一个可迭代参数，则返回一个单元素元组的迭代器。如果没有参数，则返回一个空的迭代器。它相当于::
 
         def zip(*iterables):
             # zip('ABCD', 'xy') --> Ax By
@@ -955,16 +881,11 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
                     result.append(elem)
                 yield tuple(result)
 
-   The left-to-right evaluation order of the iterables is guaranteed. This
-   makes possible an idiom for clustering a data series into n-length groups
-   using ``zip(*[iter(s)]*n)``.
+   它保证从左到右到每个 iterable 进行求值。这就可以把一系列数据转化为长度为 n 的分组：\ ``zip(*[iter(s)]*n)`` ；这种用法也是 Python 的习惯。
 
-   :func:`zip` should only be used with unequal length inputs when you don't
-   care about trailing, unmatched values from the longer iterables.  If those
-   values are important, use :func:`itertools.zip_longest` instead.
+   如果你不关心结尾部分长的 iterable 没有匹配的内容，这时才应该使用 :func:`zip` 来处理长度不等的参数。如果那些多余的值很重要，则应该使用 :func:`itertools.zip_longest` 。
 
-   :func:`zip` in conjunction with the ``*`` operator can be used to unzip a
-   list::
+   :func:`zip` 配合 ``*`` 运算符可以对列表进行分解::
 
       >>> x = [1, 2, 3]
       >>> y = [4, 5, 6]
@@ -984,64 +905,38 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    .. note::
 
-      This is an advanced function that is not needed in everyday Python
-      programming, unlike :func:`importlib.import_module`.
+      这是一个高级的函数，它不像 :func:`importlib.import_module` 那样需要在日常的 Python 编程中使用。
 
-   This function is invoked by the :keyword:`import` statement.  It can be
-   replaced (by importing the :mod:`builtins` module and assigning to
-   ``builtins.__import__``) in order to change semantics of the
-   :keyword:`import` statement, but nowadays it is usually simpler to use import
-   hooks (see :pep:`302`) to attain the same goals.  Direct use of
-   :func:`__import__` is entirely discouraged in favor of
-   :func:`importlib.import_module`.
+   这个函数会由 :keyword:`import` 语句启用。可以(通过导入 :mod:`builtins` 模块并给 ``builtins.__import__`` 赋值)改变这个函数从而改变 :keyword:`import` 语句的主义，但现在使用导入钩子通常会更容易(参见 :pep:`302`)完成同样的功能。直接使用 :func:`__import__` 是绝对不推荐的，而应该使用 :func:`importlib.import_module` 。
 
-   The function imports the module *name*, potentially using the given *globals*
-   and *locals* to determine how to interpret the name in a package context.
-   The *fromlist* gives the names of objects or submodules that should be
-   imported from the module given by *name*.  The standard implementation does
-   not use its *locals* argument at all, and uses its *globals* only to
-   determine the package context of the :keyword:`import` statement.
+   这个函数导入模块 *name* ，这时可能使用指定的 *globals* 和 *locals* 来决定怎么在包上下文中解析名字。\ *fromlist* 指定需要从 *name* 中导入的对象或模块的名称。标准的实现根本不使用 *locals* 参数，而只用 *globals* 来决定 :keyword:`import` 语句的包上下文。
 
-   *level* specifies whether to use absolute or relative imports. ``0`` (the
-   default) means only perform absolute imports.  Positive values for
-   *level* indicate the number of parent directories to search relative to the
-   directory of the module calling :func:`__import__` (see :pep:`328` for the
-   details).
+   *level* 指定是否用相对或绝对导入。\ ``0`` (默认值)表示进行绝对导入。\ *level* 为正数值表示在相对于调用 :func:`__import__` 的模块，要上溯的父目录级数(详情参见 :pep:`328`)。
 
-   When the *name* variable is of the form ``package.module``, normally, the
-   top-level package (the name up till the first dot) is returned, *not* the
-   module named by *name*.  However, when a non-empty *fromlist* argument is
-   given, the module named by *name* is returned.
+   如果 *name* 变量的格式形如 ``package.module`` ，则通常只返回顶级包(第一个点号之前的名字)，而\ *不是*\ 由 *name* 指定的完整名字。但是如果指定了一个非空的 *fromlist* 参数，则返回 *name* 指定的模块。
 
-   For example, the statement ``import spam`` results in bytecode resembling the
-   following code::
+   例如，语句 ``import spam`` 产生的字节友和下面的代码类似::
 
       spam = __import__('spam', globals(), locals(), [], 0)
 
-   The statement ``import spam.ham`` results in this call::
+   而语句 ``import spam.ham`` 产生下面的调用::
 
       spam = __import__('spam.ham', globals(), locals(), [], 0)
 
-   Note how :func:`__import__` returns the toplevel module here because this is
-   the object that is bound to a name by the :keyword:`import` statement.
+   注意 :func:`__import__` 是如何返回顶级模块的，因为 :keyword:`import` 语句把顶级模块名绑定到了一个名字。
 
-   On the other hand, the statement ``from spam.ham import eggs, sausage as
-   saus`` results in ::
+   另一方面，语句 ``from spam.ham import eggs, sausage as saus`` 产生::
 
       _temp = __import__('spam.ham', globals(), locals(), ['eggs', 'sausage'], 0)
       eggs = _temp.eggs
       saus = _temp.sausage
 
-   Here, the ``spam.ham`` module is returned from :func:`__import__`.  From this
-   object, the names to import are retrieved and assigned to their respective
-   names.
+   这里，\ :func:`__import__` 返回 ``spam.ham`` 模块。从这个返回的对象中，取出要导入的名字并分别赋值到各自的名下。
 
-   If you simply want to import a module (potentially within a package) by name,
-   use :func:`importlib.import_module`.
+   如果你只想通过名字导入一个(可能在包中)模块，则应使用 :func:`importlib.import_module` 。
 
    .. versionchanged:: 3.3
-      Negative values for *level* are no longer supported (which also changes
-      the default value to 0).
+      负数的 *level* 不在支持(并把默认值改为 0)。
 
 
 .. rubric:: 脚注

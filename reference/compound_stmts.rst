@@ -462,7 +462,7 @@ only when the function is called. [#]_
 .. index::
   statement: @
 
-A function definition may be wrapped by one or more :term:`修饰函数` expressions.
+A function definition may be wrapped by one or more :term:`修饰符` expressions.
 Decorator expressions are evaluated when the function is defined, in the scope
 that contains the function definition.  The result must be a callable, which is
 invoked with the function object as the only argument. The returned value is

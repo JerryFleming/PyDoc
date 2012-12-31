@@ -20,7 +20,7 @@ Functions and classes provided:
 
 .. decorator:: contextmanager
 
-   This function is a :term:`修饰函数` that can be used to define a factory
+   This function is a :term:`修饰符` that can be used to define a factory
    function for :keyword:`with` statement context managers, without needing to
    create a class or separate :meth:`__enter__` and :meth:`__exit__` methods.
 

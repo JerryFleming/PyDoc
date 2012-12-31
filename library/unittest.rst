@@ -606,7 +606,7 @@ tests.  In addition, it supports marking a test as a "expected failure," a test
 that is broken and will fail, but shouldn't be counted as a failure on a
 :class:`TestResult`.
 
-Skipping a test is simply a matter of using the :func:`skip` :term:`修饰函数`
+Skipping a test is simply a matter of using the :func:`skip` :term:`修饰符`
 or one of its conditional variants.
 
 Basic skipping looks like this: ::

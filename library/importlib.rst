@@ -855,7 +855,7 @@ an :term:`导入器`.
 
 .. decorator:: module_for_loader
 
-    A :term:`修饰函数` for a :term:`加载器` method,
+    A :term:`修饰符` for a :term:`加载器` method,
     to handle selecting the proper
     module object to load with. The decorated method is expected to have a call
     signature taking two positional arguments
@@ -888,7 +888,7 @@ an :term:`导入器`.
 
 .. decorator:: set_loader
 
-    A :term:`修饰函数` for a :term:`加载器` method,
+    A :term:`修饰符` for a :term:`加载器` method,
     to set the :attr:`__loader__`
     attribute on loaded modules. If the attribute is already set the decorator
     does nothing. It is assumed that the first positional argument to the
@@ -902,7 +902,7 @@ an :term:`导入器`.
 
 .. decorator:: set_package
 
-    A :term:`修饰函数` for a :term:`加载器` to set the :attr:`__package__`
+    A :term:`修饰符` for a :term:`加载器` to set the :attr:`__package__`
     attribute on the module returned by the loader. If :attr:`__package__` is
     set and has a value other than ``None`` it will not be changed.
     Note that the module returned by the loader is what has the attribute

@@ -203,7 +203,7 @@ The :mod:`functools` module defines the following functions:
    automatically adds a __wrapped__ attribute to the wrapper that refers to
    the original function.
 
-   The main intended use for this function is in :term:`修饰函数` functions which
+   The main intended use for this function is in :term:`修饰符` functions which
    wrap the decorated function and return the wrapper. If the wrapper function is
    not updated, the metadata of the returned function will reflect the wrapper
    definition rather than the original function definition, which is typically less
