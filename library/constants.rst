@@ -1,75 +1,58 @@
 .. _built-in-consts:
 
-Built-in Constants
+内置常量
 ==================
 
-A small number of constants live in the built-in namespace.  They are:
+内置命名空间中有少些常量，它们是：
 
 .. data:: False
 
-   The false value of the :class:`bool` type. Assignments to ``False``
-   are illegal and raise a :exc:`SyntaxError`.
+   :class:`bool` 类型的假值。对 ``False`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 。
 
 
 .. data:: True
 
-   The true value of the :class:`bool` type. Assignments to ``True``
-   are illegal and raise a :exc:`SyntaxError`.
+   :class:`bool` 类型的真值。对 ``True`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 。
 
 
 .. data:: None
 
-   The sole value of the type ``NoneType``.  ``None`` is frequently used to
-   represent the absence of a value, as when default arguments are not passed to a
-   function. Assignments to ``None`` are illegal and raise a :exc:`SyntaxError`.
+   类型 ``NoneType`` 唯一的值。\ ``None`` 经常用来表示没有值，例如不把默认的参数传给函数时。对 ``None`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 。
 
 
 .. data:: NotImplemented
 
-   Special value which can be returned by the "rich comparison" special methods
-   (:meth:`__eq__`, :meth:`__lt__`, and friends), to indicate that the comparison
-   is not implemented with respect to the other type.
+   一个特殊的值，会在特殊方法的"富比较"(:meth:`__eq__` 、\ :meth:`__lt__` 之类)中返回，以表示与其它类型的比较尚未实现。
 
 
 .. data:: Ellipsis
 
-   The same as ``...``.  Special value used mostly in conjunction with extended
-   slicing syntax for user-defined container data types.
+   与 ``...`` 相同。这是一个特殊的值，主要用于为用户自定义的容器类型扩展切片语法。
 
 
 .. data:: __debug__
 
-   This constant is true if Python was not started with an :option:`-O` option.
-   See also the :keyword:`assert` statement.
+   如果 Python 启动时没有带 :option:`-O` 选项，它就为真。参见 :keyword:`assert` 语句。
 
 
 .. note::
 
-   The names :data:`None`, :data:`False`, :data:`True` and :data:`__debug__`
-   cannot be reassigned (assignments to them, even as an attribute name, raise
-   :exc:`SyntaxError`), so they can be considered "true" constants.
+   不能对 :data:`None` 、\ :data:`False` 、\ :data:`True` 和 :data:`__debug__` 重新赋值(对它们赋值，即使是作为属性名字，也会抛出 :exc:`SyntaxError`)，所以可以认为它们是"真正的"常量。
 
 
-Constants added by the :mod:`site` module
+:mod:`site` 模块添加的常量
 -----------------------------------------
 
-The :mod:`site` module (which is imported automatically during startup, except
-if the :option:`-S` command-line option is given) adds several constants to the
-built-in namespace.  They are useful for the interactive interpreter shell and
-should not be used in programs.
+:mod:`site` 模块(启动时会自动导入，除非指定了 :option:`-S` 命令行选项)在内置命名空间中加入了几个常量。它们对交互式解释器有用，但不应该在程序中使用。
 
 .. data:: quit(code=None)
           exit(code=None)
 
-   Objects that when printed, print a message like "Use quit() or Ctrl-D
-   (i.e. EOF) to exit", and when called, raise :exc:`SystemExit` with the
-   specified exit code.
+   一个对象，如果打印它就会输出一条信息"Use quit() or Ctrl-D (i.e. EOF) to exit"，如果调用它就会抛出 :exc:`SystemExit` 并以指定返回码 code 返回。
 
 .. data:: copyright
           license
           credits
 
-   Objects that when printed, print a message like "Type license() to see the
-   full license text", and when called, display the corresponding text in a
-   pager-like fashion (one screen at a time).
+   一个对象，如果打印它就会输出一条信息"Type license() to see the full license text"，如果调用它就会显示相关的文本，带分页的功能(每次一屏)。
 

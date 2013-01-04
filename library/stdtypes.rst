@@ -4,31 +4,23 @@
 .. _bltin-types:
 
 **************
-Built-in Types
+内置类型
 **************
 
-The following sections describe the standard types that are built into the
-interpreter.
+下面的章节介绍内置于解释器中的标准类型。
 
-.. index:: pair: built-in; types
+.. index:: pair: 内置; 类型
 
-The principal built-in types are numerics, sequences, mappings, classes,
-instances and exceptions.
+内置类型中最主要的是数值、序列、映射、类、实例、以及异常。
 
-Some collection classes are mutable.  The methods that add, subtract, or
-rearrange their members in place, and don't return a specific item, never return
-the collection instance itself but ``None``.
+有些集合类是可变的。它们的添加、去除、重排序方法加在原地操纵其元素，而并不返回某个项，也从不返回整个集合实例自身，只返回 ``None`` 。
 
-Some operations are supported by several object types; in particular,
-practically all objects can be compared, tested for truth value, and converted
-to a string (with the :func:`repr` function or the slightly different
-:func:`str` function).  The latter function is implicitly used when an object is
-written by the :func:`print` function.
+有些操作被好几种对象类型支持。尤其是几乎所有的对象都可以时行比较、检测真值、转化为字符串(使用 :func:`repr` 函数或者稍稍不同的 :func:`str` 函数)。转化为字符串的函数在使用 :func:`print` 函数打印对象时会明确调用。
 
 
 .. _truth:
 
-Truth Value Testing
+检测真值
 ===================
 
 .. index::
