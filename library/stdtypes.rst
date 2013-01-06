@@ -26,36 +26,31 @@
 .. index::
    statement: if
    statement: while
-   pair: truth; value
-   pair: Boolean; operations
-   single: false
+   pair: 真值; 值
+   pair: 布尔; 运算
+   single: 假
 
-Any object can be tested for truth value, for use in an :keyword:`if` or
-:keyword:`while` condition or as operand of the Boolean operations below. The
-following values are considered false:
+任何对象都可以进行真值检测，以用于 :keyword:`if` 或者 :keyword:`while` 条件中，或者作为下述布尔运算的操作数。下面的值被认为是假：
 
-  .. index:: single: None (Built-in object)
+  .. index:: single: None (内置对象)
 
 * ``None``
 
-  .. index:: single: False (Built-in object)
+  .. index:: single: False (内置对象)
 
 * ``False``
 
-* zero of any numeric type, for example, ``0``, ``0.0``, ``0j``.
+* 任何数值类型中的零，例如 ``0`` 、\ ``0.0`` 、\ ``0j`` 。
 
-* any empty sequence, for example, ``''``, ``()``, ``[]``.
+* 任何空的序列，例如 ``''`` 、\ ``()`` 、\ ``[]`` 。
 
-* any empty mapping, for example, ``{}``.
+* 任何空的映射，例如 ``{}`` 。
 
-* instances of user-defined classes, if the class defines a :meth:`__bool__` or
-  :meth:`__len__` method, when that method returns the integer zero or
-  :class:`bool` value ``False``. [1]_
+* 对于用户自定义类的实例，如果这个类定义了 :meth:`__bool__` 或者 :meth:`__len__` 方法，当这些方法返回整数零或者 :class:`bool` 值 ``False`` 时。 [1]_
 
-.. index:: single: true
+.. index:: single: 真
 
-All other values are considered true --- so objects of many types are always
-true.
+所有其它的值都被当作真 --- 所以很多类型的对象总是真。
 
 .. index::
    operator: or
@@ -63,32 +58,29 @@ true.
    single: False
    single: True
 
-Operations and built-in functions that have a Boolean result always return ``0``
-or ``False`` for false and ``1`` or ``True`` for true, unless otherwise stated.
-(Important exception: the Boolean operations ``or`` and ``and`` always return
-one of their operands.)
+结果为布尔值的运算和内置函数，当为假的时候总是返回 ``0`` 或者 ``False`` ，为真时总是返回 ``1`` 或者 ``True`` ，除非特别说明。(重要反例：布尔运算符 ``or`` 和 ``and`` 总是返回其中一个操作数。)
 
 
 .. _boolean:
 
-Boolean Operations --- :keyword:`and`, :keyword:`or`, :keyword:`not`
+布尔运算 --- :keyword:`and` 、\ :keyword:`or` 、\ :keyword:`not`
 ====================================================================
 
-.. index:: pair: Boolean; operations
+.. index:: pair: 布尔; 运算符
 
-These are the Boolean operations, ordered by ascending priority:
+下面是布尔运算，按优先升序排列：
 
 +-------------+---------------------------------+-------+
-| Operation   | Result                          | Notes |
+| 运算        | 结果                            | 备注  |
 +=============+=================================+=======+
-| ``x or y``  | if *x* is false, then *y*, else | \(1)  |
+| ``x or y``  | 如果 *x* 为假则为 *y* ，否则为  | \(1)  |
 |             | *x*                             |       |
 +-------------+---------------------------------+-------+
-| ``x and y`` | if *x* is false, then *x*, else | \(2)  |
+| ``x and y`` | 如果 *x* 为假则为 *x* ，否则为  | \(2)  |
 |             | *y*                             |       |
 +-------------+---------------------------------+-------+
-| ``not x``   | if *x* is false, then ``True``, | \(3)  |
-|             | else ``False``                  |       |
+| ``not x``   | 如果 *x* 为假则为 ``True`` ，否 | \(3)  |
+|             | 则为 ``False``                  |       |
 +-------------+---------------------------------+-------+
 
 .. index::
@@ -96,19 +88,16 @@ These are the Boolean operations, ordered by ascending priority:
    operator: or
    operator: not
 
-Notes:
+备注：
 
 (1)
-   This is a short-circuit operator, so it only evaluates the second
-   argument if the first one is :const:`False`.
+   这是一个短路运算符，只有在第一个参数为 :const:`False` 时它才会对第二个参数时行求值。
 
 (2)
-   This is a short-circuit operator, so it only evaluates the second
-   argument if the first one is :const:`True`.
+   这是一个短路运算符，只有在第一个参数为 :const:`True` 时它才会对第二个参数时行求值。
 
 (3)
-   ``not`` has a lower priority than non-Boolean operators, so ``not a == b`` is
-   interpreted as ``not (a == b)``, and ``a == not b`` is a syntax error.
+   ``not`` 的优先级比非布尔运算符低，所以 ``not a == b`` 会解释为 ``not (a == b)`` ，而 ``a == not b`` 是语法错误。
 
 
 .. _stdcomparisons:
@@ -117,8 +106,8 @@ Comparisons
 ===========
 
 .. index::
-   pair: chaining; comparisons
-   pair: operator; comparison
+   pair: 级联; 比较
+   pair: 运算符; 比较
    operator: ==
    operator: <
    operator: <=
@@ -128,120 +117,86 @@ Comparisons
    operator: is
    operator: is not
 
-There are eight comparison operations in Python.  They all have the same
-priority (which is higher than that of the Boolean operations).  Comparisons can
-be chained arbitrarily; for example, ``x < y <= z`` is equivalent to ``x < y and
-y <= z``, except that *y* is evaluated only once (but in both cases *z* is not
-evaluated at all when ``x < y`` is found to be false).
+Python 中有八种比较运算，它们的优先级相同(都比布尔运算优先级高)。比较运算可以任意级联，例如 ``x < y <= z`` 相当于 ``x < y and
+y <= z`` ，区别在于 *y* 仅求值一次(如果发现 ``x < y`` ，则两者都不会对 *z* 求值)。
 
-This table summarizes the comparison operations:
+下表总结了比较运算：
 
 +------------+-------------------------+
-| Operation  | Meaning                 |
+| 运算       | 含义                    |
 +============+=========================+
-| ``<``      | strictly less than      |
+| ``<``      | 仅小于                  |
 +------------+-------------------------+
-| ``<=``     | less than or equal      |
+| ``<=``     | 小于或等于              |
 +------------+-------------------------+
-| ``>``      | strictly greater than   |
+| ``>``      | 仅大于                  |
 +------------+-------------------------+
-| ``>=``     | greater than or equal   |
+| ``>=``     | 大于或等于              |
 +------------+-------------------------+
-| ``==``     | equal                   |
+| ``==``     | 等于                    |
 +------------+-------------------------+
-| ``!=``     | not equal               |
+| ``!=``     | 不等于                  |
 +------------+-------------------------+
-| ``is``     | object identity         |
+| ``is``     | 对象身份识别            |
 +------------+-------------------------+
-| ``is not`` | negated object identity |
+| ``is not`` | 否定的对象身份识别      |
 +------------+-------------------------+
 
 .. index::
-   pair: object; numeric
-   pair: objects; comparing
+   pair: 对象; 数值
+   pair: 对象; 比较
 
-Objects of different types, except different numeric types, never compare equal.
-Furthermore, some types (for example, function objects) support only a degenerate
-notion of comparison where any two objects of that type are unequal.  The ``<``,
-``<=``, ``>`` and ``>=`` operators will raise a :exc:`TypeError` exception when
-comparing a complex number with another built-in numeric type, when the objects
-are of different types that cannot be compared, or in other cases where there is
-no defined ordering.
+不同类型的对象，除非是不同的数值类型，比较时都不相等。此外，有些类型(例如函数对象)仅支持弱化的比较，这时这种类型的任意两个对象都不相等。当把一个复数和其它内置的数值类型进行比较时，或不同类型且不能比较时，或者其它没有定义顺序的情况下，\ ``<`` 、\ ``<=`` 、\ ``>`` 和 ``>=`` 运算符会抛出 :exc:`TypeError` 异常。
 
 .. index::
-   single: __eq__() (instance method)
-   single: __ne__() (instance method)
-   single: __lt__() (instance method)
-   single: __le__() (instance method)
-   single: __gt__() (instance method)
-   single: __ge__() (instance method)
+   single: __eq__() (实例方法)
+   single: __ne__() (实例方法)
+   single: __lt__() (实例方法)
+   single: __le__() (实例方法)
+   single: __gt__() (实例方法)
+   single: __ge__() (实例方法)
 
-Non-identical instances of a class normally compare as non-equal unless the
-class defines the :meth:`__eq__` method.
+类中不是同一实例的比较时一般都不相等，除非该类定义了 :meth:`__eq__` 方法。
 
-Instances of a class cannot be ordered with respect to other instances of the
-same class, or other types of object, unless the class defines enough of the
-methods :meth:`__lt__`, :meth:`__le__`, :meth:`__gt__`, and :meth:`__ge__` (in
-general, :meth:`__lt__` and :meth:`__eq__` are sufficient, if you want the
-conventional meanings of the comparison operators).
+类的实例不能和该类的其它实例，或者其它类型的对象，进行排序，除非该类定义了足够全面的下述方法： :meth:`__lt__` 、\ :meth:`__le__` 、\ :meth:`__gt__` 、和 :meth:`__ge__` (通常 :meth:`__lt__` 和 :meth:`__eq__` 就已经足够了，如果你只需要传统意义上的比较运行符)。
 
-The behavior of the :keyword:`is` and :keyword:`is not` operators cannot be
-customized; also they can be applied to any two objects and never raise an
-exception.
+:keyword:`is` 和 :keyword:`is not` 运算符的行为不能自定义；它们可以应用于任何两个对象而不会抛出异常。
 
 .. index::
    operator: in
    operator: not in
 
-Two more operations with the same syntactic priority, :keyword:`in` and
-:keyword:`not in`, are supported only by sequence types (below).
+:keyword:`in` 和 :keyword:`not in` 是优先级相同的另外两种运算，它们只支持序列类型(见下面)。
 
 
 .. _typesnumeric:
 
-Numeric Types --- :class:`int`, :class:`float`, :class:`complex`
+数值类型 --- :class:`int` 、\ :class:`float` 、\ :class:`complex`
 ================================================================
 
 .. index::
-   object: numeric
-   object: Boolean
-   object: integer
-   object: floating point
-   object: complex number
-   pair: C; language
+   object: 数值
+   object: 布尔
+   object: 整数
+   object: 浮点数
+   object: 复数
+   pair: C; 语言
 
-There are three distinct numeric types: :dfn:`integers`, :dfn:`floating
-point numbers`, and :dfn:`complex numbers`.  In addition, Booleans are a
-subtype of integers.  Integers have unlimited precision.  Floating point
-numbers are usually implemented using :c:type:`double` in C; information
-about the precision and internal representation of floating point
-numbers for the machine on which your program is running is available
-in :data:`sys.float_info`.  Complex numbers have a real and imaginary
-part, which are each a floating point number.  To extract these parts
-from a complex number *z*, use ``z.real`` and ``z.imag``. (The standard
-library includes additional numeric types, :mod:`fractions` that hold
-rationals, and :mod:`decimal` that hold floating-point numbers with
-user-definable precision.)
+有三种不同的数值类型：\ :dfn:`integers` (整数形) 、\ :dfn:`floating point numbers` (浮点数型) 、和 :dfn:`complex numbers` (复数型)。此外，布尔型是整数型的子类型。整数型精度不受限制。浮点数通常是用 C 的 :c:type:`double` 实现，有关你运行程序的机器对浮点数的精度和内部表示形式的信息，参见 :data:`sys.float_info` 。复数有实部和虚部，它们都是浮点数；要得到一个浮点数 *z* 的实部和虚部，用 ``z.real`` 和 ``z.imag`` 。(标准库还包括其它数值类型：\ :mod:`fractions` 覆盖有理数，\ :mod:`decimal` 覆盖浮点数能让用户定义其精度。)
 
 .. index::
-   pair: numeric; literals
-   pair: integer; literals
-   pair: floating point; literals
-   pair: complex number; literals
-   pair: hexadecimal; literals
-   pair: octal; literals
-   pair: binary; literals
+   pair: 数值; 源常量
+   pair: 整数; 源常量
+   pair: 浮点; 源常量
+   pair: 复数; 源常量
+   pair: 十六进制数; 源常量
+   pair: 八进制数; 源常量
+   pair: 二进制数; 源常量
 
-Numbers are created by numeric literals or as the result of built-in functions
-and operators.  Unadorned integer literals (including hex, octal and binary
-numbers) yield integers.  Numeric literals containing a decimal point or an
-exponent sign yield floating point numbers.  Appending ``'j'`` or ``'J'`` to a
-numeric literal yields an imaginary number (a complex number with a zero real
-part) which you can add to an integer or float to get a complex number with real
-and imaginary parts.
+数值通过数值源常量创建，也可以是通过内置函数和运算符的返回值获得。不回修饰的整数型源常量(包括十六进制、八进制、二进制数)生成整数。带小数点和指数符号的数值源常量生成浮点数。在数值源常量后面加上 ``'j'`` 或者 ``'J'`` 生成虚数(实部为零的复数)，它可以和整数或浮点数相加得到同时有实部和虚部的复数。
 
 .. index::
-   single: arithmetic
+   single: 算术运算
    builtin: int
    builtin: float
    builtin: complex
@@ -253,186 +208,153 @@ and imaginary parts.
    operator: %
    operator: **
 
-Python fully supports mixed arithmetic: when a binary arithmetic operator has
-operands of different numeric types, the operand with the "narrower" type is
-widened to that of the other, where integer is narrower than floating point,
-which is narrower than complex.  Comparisons between numbers of mixed type use
-the same rule. [2]_ The constructors :func:`int`, :func:`float`, and
-:func:`complex` can be used to produce numbers of a specific type.
+Python 完全支持混合算术运算：如果一个二目算术运算符的两个操作数有不同的类型，则类型较"窄"的操作数就会扩展为另外一个操作数的类型；其中，整数型比浮点数型窄，浮点数型比复数型窄。混合类型的数值进行比较时也适用同样的规则。\ [2]_\ 构造函数 :func:`int` 、\ :func:`float` 、和 :func:`complex` 可以用来生成指定类型的数值。
 
-All numeric types (except complex) support the following operations, sorted by
-ascending priority (operations in the same box have the same priority; all
-numeric operations have a higher priority than comparison operations):
+所有的数值类型(复数除外)都支持下列运算，按优先级升序排列(同一单元格中的运算有相同的优先级；所有数值运算的优先级都比比较运算高)：
 
 +---------------------+---------------------------------+---------+--------------------+
-| Operation           | Result                          | Notes   | Full documentation |
+| 运算                | 结果                            | 备注    | 完整文档           |
 +=====================+=================================+=========+====================+
-| ``x + y``           | sum of *x* and *y*              |         |                    |
+| ``x + y``           | *x* 和 *y* 的和                 |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``x - y``           | difference of *x* and *y*       |         |                    |
+| ``x - y``           | *x* 和 *y* 的差                 |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``x * y``           | product of *x* and *y*          |         |                    |
+| ``x * y``           | *x* 和 *y* 的积                 |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``x / y``           | quotient of *x* and *y*         |         |                    |
+| ``x / y``           | *x* 和 *y* 的商                 |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``x // y``          | floored quotient of *x* and     | \(1)    |                    |
-|                     | *y*                             |         |                    |
+| ``x // y``          | *x* 和 *y* 的商向下取整         | \(1)    |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``x % y``           | remainder of ``x / y``          | \(2)    |                    |
+| ``x % y``           | ``x / y`` 的余数                | \(2)    |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``-x``              | *x* negated                     |         |                    |
+| ``-x``              | *x* 的相反数                    |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``+x``              | *x* unchanged                   |         |                    |
+| ``+x``              | *x* 自身                        |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``abs(x)``          | absolute value or magnitude of  |         | :func:`abs`        |
-|                     | *x*                             |         |                    |
+| ``abs(x)``          | *x* 的绝对值或者模              |         | :func:`abs`        |
 +---------------------+---------------------------------+---------+--------------------+
-| ``int(x)``          | *x* converted to integer        | \(3)\(6)| :func:`int`        |
+| ``int(x)``          | *x* 转化为整数                  | \(3)\(6)| :func:`int`        |
 +---------------------+---------------------------------+---------+--------------------+
-| ``float(x)``        | *x* converted to floating point | \(4)\(6)| :func:`float`      |
+| ``float(x)``        | *x* 转化为浮点数                | \(4)\(6)| :func:`float`      |
 +---------------------+---------------------------------+---------+--------------------+
-| ``complex(re, im)`` | a complex number with real part | \(6)    | :func:`complex`    |
-|                     | *re*, imaginary part *im*.      |         |                    |
-|                     | *im* defaults to zero.          |         |                    |
+| ``complex(re, im)`` | 实部为 *re* ，虚部为 *im* 的复  | \(6)    | :func:`complex`    |
+|                     | 数。\ *im* 默认为零。           |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-|  ``c.conjugate()``  | conjugate of the complex number |         |                    |
-|                     | *c*                             |         |                    |
+|  ``c.conjugate()``  | 复数 *c* 的共扼复数             |         |                    |
 +---------------------+---------------------------------+---------+--------------------+
-| ``divmod(x, y)``    | the pair ``(x // y, x % y)``    | \(2)    | :func:`divmod`     |
+| ``divmod(x, y)``    | 元组 ``(x // y, x % y)``        | \(2)    | :func:`divmod`     |
 +---------------------+---------------------------------+---------+--------------------+
-| ``pow(x, y)``       | *x* to the power *y*            | \(5)    | :func:`pow`        |
+| ``pow(x, y)``       | *x* 的 *y* 次方                 | \(5)    | :func:`pow`        |
 +---------------------+---------------------------------+---------+--------------------+
-| ``x ** y``          | *x* to the power *y*            | \(5)    |                    |
+| ``x ** y``          | *x* 的 *y* 次方                 | \(5)    |                    |
 +---------------------+---------------------------------+---------+--------------------+
 
 .. index::
-   triple: operations on; numeric; types
-   single: conjugate() (complex number method)
+   triple: 运算; 数值; 类型
+   single: conjugate() (复数方法)
 
-Notes:
+备注：
 
 (1)
-   Also referred to as integer division.  The resultant value is a whole
-   integer, though the result's type is not necessarily int.  The result is
-   always rounded towards minus infinity: ``1//2`` is ``0``, ``(-1)//2`` is
-   ``-1``, ``1//(-2)`` is ``-1``, and ``(-1)//(-2)`` is ``0``.
+   又叫整除，返回整数，尽量其类型不一定是整数。结果总是向负无穷进位：\ ``1//2`` 是 ``0`` 、\ ``(-1)//2`` 是 ``-1`` 、\ ``1//(-2)`` 是 ``-1`` 、则 ``(-1)//(-2)`` 是 ``0`` 。
 
 (2)
-   Not for complex numbers.  Instead convert to floats using :func:`abs` if
-   appropriate.
+   不适用于复数，而应该在适当的时候用 :func:`abs` 把它转化为浮点数。
 
 (3)
    .. index::
       module: math
-      single: floor() (in module math)
-      single: ceil() (in module math)
-      single: trunc() (in module math)
-      pair: numeric; conversions
-      pair: C; language
+      single: floor() (模块 math 中)
+      single: ceil() (模块 math 中)
+      single: trunc() (模块 math 中)
+      pair: 数值; 转换
+      pair: C; 语言
 
-   Conversion from floating point to integer may round or truncate
-   as in C; see functions :func:`floor` and :func:`ceil` in the :mod:`math` module
-   for well-defined conversions.
+   浮点数向整数的转换可能像 C 那样进位或者舍尾，具体规则参见模块 :mod:`math` 中的函数 :func:`floor` 和 :func:`ceil` 。
 
 (4)
-   float also accepts the strings "nan" and "inf" with an optional prefix "+"
-   or "-" for Not a Number (NaN) and positive or negative infinity.
+   float 的参数还可以是字符串 "nan" 和 "inf" ，它们前面可以有前缀 "+" 或 "-" ，表示非数值(NaN)和正负无穷。
 
 (5)
-   Python defines ``pow(0, 0)`` and ``0 ** 0`` to be ``1``, as is common for
-   programming languages.
+   Python 定义 ``pow(0, 0)`` 和 ``0 ** 0`` 为 ``1`` ，和其它编程语言一样。
 
 (6)
-   The numeric literals accepted include the digits ``0`` to ``9`` or any
-   Unicode equivalent (code points with the ``Nd`` property).
+   可以接受的数值源常量包括数字 ``0`` 到 ``9`` 或任何对等的 Unicode 字符(带 ``Nd`` 属性的字码)。
 
-   See http://www.unicode.org/Public/6.0.0/ucd/extracted/DerivedNumericType.txt
-   for a complete list of code points with the ``Nd`` property.
+   所有带 ``Nd`` 属性的字码，参见 http://www.unicode.org/Public/6.0.0/ucd/extracted/DerivedNumericType.txt 。
 
 
-All :class:`numbers.Real` types (:class:`int` and :class:`float`) also include
-the following operations:
+所有的 :class:`numbers.Real` 类型(:class:`int` 和 :class:`float`)还支持下列运算：
 
 +--------------------+------------------------------------+--------+
-| Operation          | Result                             | Notes  |
+| 运算               | 结果                               | 备注   |
 +====================+====================================+========+
-| ``math.trunc(x)``  | *x* truncated to Integral          |        |
+| ``math.trunc(x)``  | *x* 去尾成 Integral 类型           |        |
 +--------------------+------------------------------------+--------+
-| ``round(x[, n])``  | *x* rounded to n digits,           |        |
-|                    | rounding half to even. If n is     |        |
-|                    | omitted, it defaults to 0.         |        |
+| ``round(x[, n])``  | *x* 向小数点后 n 位进位，进位成偶  |        |
+|                    | 数。n 如果省略则默认为 0           |        |
 +--------------------+------------------------------------+--------+
-| ``math.floor(x)``  | the greatest integral float <= *x* |        |
+| ``math.floor(x)``  | 小于等于 *x* 的最大整数            |        |
 +--------------------+------------------------------------+--------+
-| ``math.ceil(x)``   | the least integral float >= *x*    |        |
+| ``math.ceil(x)``   | 大于等于 *x* 的最小整数            |        |
 +--------------------+------------------------------------+--------+
 
-For additional numeric operations see the :mod:`math` and :mod:`cmath`
-modules.
+更多数值运算参见 :mod:`math` 和 :mod:`cmath` 模块。
 
 .. XXXJH exceptions: overflow (when? what operations?) zerodivision
 
 
 .. _bitstring-ops:
 
-Bitwise Operations on Integer Types
+整数类型的位运算
 --------------------------------------
 
 .. index::
-   triple: operations on; integer; types
-   pair: bitwise; operations
-   pair: shifting; operations
-   pair: masking; operations
+   triple: 运算; 整数; 类型
+   pair: 按位; 运算
+   pair: 移位; 运算
+   pair: 遮位; 运算
    operator: ^
    operator: &
    operator: <<
    operator: >>
 
-Bitwise operations only make sense for integers.  Negative numbers are treated
-as their 2's complement value (this assumes a sufficiently large number of bits
-that no overflow occurs during the operation).
+按位运算只对整数有意义。负数在处理时使用其 2 的补码(这里假定数位足够多，在运算时不会发生溢出)。
 
-The priorities of the binary bitwise operations are all lower than the numeric
-operations and higher than the comparisons; the unary operation ``~`` has the
-same priority as the other unary numeric operations (``+`` and ``-``).
+二目按位运算的优先级都比数值运算的低，比比较运算高；单目运算 ``~`` 的优先级和其它单目运算(``+`` 和 ``-``)一样。
 
-This table lists the bitwise operations sorted in ascending priority
-(operations in the same box have the same priority):
+下表列出按位运算，并按优先级升序排列(同一单元格中的运算有相同的优先级)：
 
 +------------+--------------------------------+----------+
-| Operation  | Result                         | Notes    |
+| 运算       | 结果                           | 备注    |
 +============+================================+==========+
-| ``x | y``  | bitwise :dfn:`or` of *x* and   |          |
-|            | *y*                            |          |
+| ``x | y``  | *x* 和 *y* 的按位 :dfn:`or`    |          |
 +------------+--------------------------------+----------+
-| ``x ^ y``  | bitwise :dfn:`exclusive or` of |          |
-|            | *x* and *y*                    |          |
+| ``x ^ y``  | *x* 和 *y* 的按位              |          |
+|            |  :dfn:`exclusive or`           |          |
 +------------+--------------------------------+----------+
-| ``x & y``  | bitwise :dfn:`and` of *x* and  |          |
-|            | *y*                            |          |
+| ``x & y``  | *x* 和 *y* 按位 :dfn:`and`     |          |
 +------------+--------------------------------+----------+
-| ``x << n`` | *x* shifted left by *n* bits   | (1)(2)   |
+| ``x << n`` | *x* 向左移动 *n* 位            | (1)(2)   |
 +------------+--------------------------------+----------+
-| ``x >> n`` | *x* shifted right by *n* bits  | (1)(3)   |
+| ``x >> n`` | *x* 向右移动 *n* 位            | (1)(3)   |
 +------------+--------------------------------+----------+
-| ``~x``     | the bits of *x* inverted       |          |
+| ``~x``     | *x* 的各数位按位取反           |          |
 +------------+--------------------------------+----------+
 
-Notes:
+备注：
 
 (1)
-   Negative shift counts are illegal and cause a :exc:`ValueError` to be raised.
+   负的移动位数是非法的，会导致抛出 :exc:`ValueError` 。
 
 (2)
-   A left shift by *n* bits is equivalent to multiplication by ``pow(2, n)``
-   without overflow check.
+   向左移动 *n* 位相当于乘以 ``pow(2, n)`` 而不进行溢出检查。
 
 (3)
-   A right shift by *n* bits is equivalent to division by ``pow(2, n)`` without
-   overflow check.
+  向右移动 *n* 位相当于除以 ``pow(2, n)`` 而不进行溢出检查。
 
 
-Additional Methods on Integer Types
+整数类型的其它方法
 -----------------------------------
 
 The int type implements the :class:`numbers.Integral` :term:`虚基类`. In addition, it provides one more method:
