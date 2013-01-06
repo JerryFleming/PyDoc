@@ -357,12 +357,11 @@ Python 完全支持混合算术运算：如果一个二目算术运算符的两�
 整数类型的其它方法
 -----------------------------------
 
-The int type implements the :class:`numbers.Integral` :term:`虚基类`. In addition, it provides one more method:
+int 类型实现了 :class:`numbers.Integral` :term:`虚基类`\ 。此外，它还提供一个额外的方法：
 
 .. method:: int.bit_length()
 
-    Return the number of bits necessary to represent an integer in binary,
-    excluding the sign and leading zeros::
+    返回表示一个数所需要二进制的位数，不包括正负符号和前导的零::
 
         >>> n = -37
         >>> bin(n)
@@ -370,24 +369,20 @@ The int type implements the :class:`numbers.Integral` :term:`虚基类`. In addi
         >>> n.bit_length()
         6
 
-    More precisely, if ``x`` is nonzero, then ``x.bit_length()`` is the
-    unique positive integer ``k`` such that ``2**(k-1) <= abs(x) < 2**k``.
-    Equivalently, when ``abs(x)`` is small enough to have a correctly
-    rounded logarithm, then ``k = 1 + int(log(abs(x), 2))``.
-    If ``x`` is zero, then ``x.bit_length()`` returns ``0``.
+    准确的说，如果 ``x`` 非零，则 ``x.bit_length()`` 是唯一的正整数 ``k`` ，它满足 ``2**(k-1) <= abs(x) < 2**k`` 。等价的，当 ``abs(x)`` 足够小而有个进位正确的对数，则 ``k = 1 + int(log(abs(x), 2))`` 。如果 ``x`` 是零则 ``x.bit_length()`` 返回 ``0`` 。
 
-    Equivalent to::
+    相当于::
 
         def bit_length(self):
-            s = bin(self)       # binary representation:  bin(-37) --> '-0b100101'
-            s = s.lstrip('-0b') # remove leading zeros and minus sign
+            s = bin(self)       # 二进制形式： bin(-37) --> '-0b100101'
+            s = s.lstrip('-0b') # 去掉前导的零和负号
             return len(s)       # len('100101') --> 6
 
     .. versionadded:: 3.1
 
 .. method:: int.to_bytes(length, byteorder, \*, signed=False)
 
-    Return an array of bytes representing an integer.
+    返回一个表示整数的各字节的数组。
 
         >>> (1024).to_bytes(2, byteorder='big')
         b'\x04\x00'
@@ -399,21 +394,11 @@ The int type implements the :class:`numbers.Integral` :term:`虚基类`. In addi
         >>> x.to_bytes((x.bit_length() // 8) + 1, byteorder='little')
         b'\xe8\x03'
 
-    The integer is represented using *length* bytes.  An :exc:`OverflowError`
-    is raised if the integer is not representable with the given number of
-    bytes.
+    该整数用 *length* 个字节表示。如果指定的字节不能表示这个整数，则抛出 :exc:`OverflowError` 。
 
-    The *byteorder* argument determines the byte order used to represent the
-    integer.  If *byteorder* is ``"big"``, the most significant byte is at the
-    beginning of the byte array.  If *byteorder* is ``"little"``, the most
-    significant byte is at the end of the byte array.  To request the native
-    byte order of the host system, use :data:`sys.byteorder` as the byte order
-    value.
+    *byteorder* 参数决定表示该整数的字节先后顺序。如果 *byteorder* 是 ``"big"`` ，则高位字节放在数组的前面。如果 *byteorder* 是 ``"little"`` ，则高位字节放在数组的后面。如果想使用系统自身的字节顺序，可以用 :data:`sys.byteorder` 。
 
-    The *signed* argument determines whether two's complement is used to
-    represent the integer.  If *signed* is ``False`` and a negative integer is
-    given, an :exc:`OverflowError` is raised. The default value for *signed*
-    is ``False``.
+    *signed* 参数决定是否使用二的补码来表示这个整数。如果 *signed* 是 ``False`` ，而给出的整数又是负的，则抛出 :exc:`OverflowError` 。默认的 *signed* 值是 ``False`` 。
 
     .. versionadded:: 3.2
 
