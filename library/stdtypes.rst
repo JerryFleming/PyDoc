@@ -326,7 +326,7 @@ Python 完全支持混合算术运算：如果一个二目算术运算符的两�
 下表列出按位运算，并按优先级升序排列(同一单元格中的运算有相同的优先级)：
 
 +------------+--------------------------------+----------+
-| 运算       | 结果                           | 备注    |
+| 运算       | 结果                           | 备注     |
 +============+================================+==========+
 | ``x | y``  | *x* 和 *y* 的按位 :dfn:`or`    |          |
 +------------+--------------------------------+----------+
@@ -404,7 +404,7 @@ int 类型实现了 :class:`numbers.Integral` :term:`虚基类`\ 。此外，它
 
 .. classmethod:: int.from_bytes(bytes, byteorder, \*, signed=False)
 
-    Return the integer represented by the given array of bytes.
+    返回由指定数组所表示的整数。
 
         >>> int.from_bytes(b'\x00\x10', byteorder='big')
         16
@@ -417,83 +417,53 @@ int 类型实现了 :class:`numbers.Integral` :term:`虚基类`\ 。此外，它
         >>> int.from_bytes([255, 0, 0], byteorder='big')
         16711680
 
-    The argument *bytes* must either support the buffer protocol or be an
-    iterable producing bytes. :class:`bytes` and :class:`bytearray` are
-    examples of built-in objects that support the buffer protocol.
+    参数 *bytes* 必须支持 buffer 协议或者是一个能够产生字节的可迭代对象。\ :class:`bytes` 和 :class:`bytearray` 是支持 buffer 协议的内置类型。
 
-    The *byteorder* argument determines the byte order used to represent the
-    integer.  If *byteorder* is ``"big"``, the most significant byte is at the
-    beginning of the byte array.  If *byteorder* is ``"little"``, the most
-    significant byte is at the end of the byte array.  To request the native
-    byte order of the host system, use :data:`sys.byteorder` as the byte order
-    value.
+    *byteorder* 参数表示整数时所使用的字节顺序。如果 *byteorder* 是 ``"big"`` ，则高位字节位于数组前端；如果 *byteorder* 是 ``"little"`` ，则高位字节位于数组后端。如果想使用系统自身的字节顺序，可以用 :data:`sys.byteorder` 。
 
-    The *signed* argument indicates whether two's complement is used to
-    represent the integer.
+    *signed* 参数决定是否使用二的补码来表示这个整数。
 
     .. versionadded:: 3.2
 
 
-Additional Methods on Float
+浮点数类型的其它方法
 ---------------------------
 
-The float type implements the :class:`numbers.Real` :term:`虚基类`. float also has the following additional methods.
+float 类型实现了 :class:`numbers.Real` :term:`虚基类`\ 。它还有下面的额外方法：
 
 .. method:: float.as_integer_ratio()
 
-   Return a pair of integers whose ratio is exactly equal to the
-   original float and with a positive denominator.  Raises
-   :exc:`OverflowError` on infinities and a :exc:`ValueError` on
-   NaNs.
+   返回一对整数，其比值正好等于原来的浮点数，并且分母是正数。对正负无穷会抛出 :exc:`OverflowError` ，而对 NaN 会抛出 :exc:`ValueError` 。
 
 .. method:: float.is_integer()
 
-   Return ``True`` if the float instance is finite with integral
-   value, and ``False`` otherwise::
+   如果这个浮点数实例的整数部分是有限的则返回 ``True`` ，否则返回 ``False``::
 
       >>> (-2.0).is_integer()
       True
       >>> (3.2).is_integer()
       False
 
-Two methods support conversion to
-and from hexadecimal strings.  Since Python's floats are stored
-internally as binary numbers, converting a float to or from a
-*decimal* string usually involves a small rounding error.  In
-contrast, hexadecimal strings allow exact representation and
-specification of floating-point numbers.  This can be useful when
-debugging, and in numerical work.
+有两个方法支持与十六进制的互相转化。因为 Python 中的浮点数是使用二进制来存储的，它与\ *十进制*\ 字符串的来回转化通常都会产生细微的进位误差。相对而言，十六进制字符串却能精确表示一个浮点数。这在调试或数值计算中很有用。
 
 
 .. method:: float.hex()
 
-   Return a representation of a floating-point number as a hexadecimal
-   string.  For finite floating-point numbers, this representation
-   will always include a leading ``0x`` and a trailing ``p`` and
-   exponent.
+   把一个浮点数用十六进制客串表示。对于有限的浮点数，这种表示形式总是包含一个前导的 ``0x`` 和结尾的 ``p`` 及指数。
 
 
 .. classmethod:: float.fromhex(s)
 
-   Class method to return the float represented by a hexadecimal
-   string *s*.  The string *s* may have leading and trailing
-   whitespace.
+   类方法，返回由十六进制字符串 *s* 表示的浮点数。字符串 *s* 前后都可以有空白字符。
 
 
-Note that :meth:`float.hex` is an instance method, while
-:meth:`float.fromhex` is a class method.
+注意，\ :meth:`float.hex` 是一个实例方法，而 :meth:`float.fromhex` 是类方法。
 
-A hexadecimal string takes the form::
+十六进制字符串有下面的形式::
 
    [sign] ['0x'] integer ['.' fraction] ['p' exponent]
 
-where the optional ``sign`` may by either ``+`` or ``-``, ``integer``
-and ``fraction`` are strings of hexadecimal digits, and ``exponent``
-is a decimal integer with an optional leading sign.  Case is not
-significant, and there must be at least one hexadecimal digit in
-either the integer or the fraction.  This syntax is similar to the
-syntax specified in section 6.4.4.2 of the C99 standard, and also to
-the syntax used in Java 1.5 onwards.  In particular, the output of
+可选的 ``sign`` 可以是 ``+`` 或者 ``-`` ，\ ``integer`` 和 ``fraction`` 是十六进制数字构成的字符串，而 ``exponent`` 是一个前面可以带有符号的十进制整数。大小写是不重要的，并且 integer 或者 fraction 的部分必须至少有一个十六进制数字。这种语法和 C99 标准第 6.4.4.2 节规定的语法相似，也和 Java 1.5 及以后版本的语法相似。In particular, the output of
 :meth:`float.hex` is usable as a hexadecimal floating-point literal in
 C or Java code, and hexadecimal strings produced by C's ``%a`` format
 character or Java's ``Double.toHexString`` are accepted by
