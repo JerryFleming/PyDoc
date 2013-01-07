@@ -634,97 +634,76 @@ described in dedicated sections.
 
 .. _typesseq-common:
 
-Common Sequence Operations
+公共的序列运算
 --------------------------
 
-.. index:: object: sequence
+.. index:: 对象: 序列
 
-The operations in the following table are supported by most sequence types,
-both mutable and immutable. The :class:`collections.abc.Sequence` ABC is
-provided to make it easier to correctly implement these operations on
-custom sequence types.
+大部分序列类型，不管是可变的还是不可变的，都支持下表中的运算。\ :class:`collections.abc.Sequence` 虚基类可以用来让自定义序列类型正确且容易的实现这些运算。
 
-This table lists the sequence operations sorted in ascending priority
-(operations in the same box have the same priority).  In the table, *s* and *t*
-are sequences of the same type, *n*, *i*, *j* and *k* are integers and *x* is
-an arbitrary object that meets any type and value restrictions imposed by *s*.
+表中列出的序列运算按照优先级升序排列(同一个单元格中的运算具有相同的优先级)。其中，\ *s* 和 *t* 是类型相同的序列，\ *n* 、\ *i* 、\ *j* 和 *k* 是整数，而 *x* 是个任意对象，它满足 *s* 对类型和值的限定。
 
-The ``in`` and ``not in`` operations have the same priorities as the
-comparison operations. The ``+`` (concatenation) and ``*`` (repetition)
-operations have the same priority as the corresponding numeric operations.
+``in`` 和 ``not in`` 运算与比较运算有相同的优先级。\ ``+`` (拼接)和 ``*`` (重复)运算与相应的算术运算有相同的优先级。
 
 .. index::
-   triple: operations on; sequence; types
+   triple: 运算; 序列; 类型
    builtin: len
    builtin: min
    builtin: max
-   pair: concatenation; operation
-   pair: repetition; operation
-   pair: subscript; operation
-   pair: slice; operation
+   pair: 拼接; 运算
+   pair: 重复; 运算
+   pair: 下标; 运算
+   pair: 切片; 运算
    operator: in
    operator: not in
-   single: count() (sequence method)
-   single: index() (sequence method)
+   single: count() (序列方法)
+   single: index() (序列方法)
 
-+--------------------------+--------------------------------+----------+
-| Operation                | Result                         | Notes    |
-+==========================+================================+==========+
-| ``x in s``               | ``True`` if an item of *s* is  | \(1)     |
-|                          | equal to *x*, else ``False``   |          |
-+--------------------------+--------------------------------+----------+
-| ``x not in s``           | ``False`` if an item of *s* is | \(1)     |
-|                          | equal to *x*, else ``True``    |          |
-+--------------------------+--------------------------------+----------+
-| ``s + t``                | the concatenation of *s* and   | (6)(7)   |
-|                          | *t*                            |          |
-+--------------------------+--------------------------------+----------+
-| ``s * n`` or             | *n* shallow copies of *s*      | (2)(7)   |
-| ``n * s``                | concatenated                   |          |
-+--------------------------+--------------------------------+----------+
-| ``s[i]``                 | *i*\ th item of *s*, origin 0  | \(3)     |
-+--------------------------+--------------------------------+----------+
-| ``s[i:j]``               | slice of *s* from *i* to *j*   | (3)(4)   |
-+--------------------------+--------------------------------+----------+
-| ``s[i:j:k]``             | slice of *s* from *i* to *j*   | (3)(5)   |
-|                          | with step *k*                  |          |
-+--------------------------+--------------------------------+----------+
-| ``len(s)``               | length of *s*                  |          |
-+--------------------------+--------------------------------+----------+
-| ``min(s)``               | smallest item of *s*           |          |
-+--------------------------+--------------------------------+----------+
-| ``max(s)``               | largest item of *s*            |          |
-+--------------------------+--------------------------------+----------+
-| ``s.index(x[, i[, j]])`` | index of the first occurence   | \(8)     |
-|                          | of *x* in *s* (at or after     |          |
-|                          | index *i* and before index *j*)|          |
-+--------------------------+--------------------------------+----------+
-| ``s.count(x)``           | total number of occurences of  |          |
-|                          | *x* in *s*                     |          |
-+--------------------------+--------------------------------+----------+
++--------------------------+-------------------------------------+----------+
+| 运算                     | 结果                                | 备注     |
++==========================+=====================================+==========+
+| ``x in s``               | 如果 *s* 中的某个元素与 *x* 相      | \(1)     |
+|                          | 等则为``True`` ，否则为 ``False``   |          |
++--------------------------+-------------------------------------+----------+
+| ``x not in s``           | 如果 *s* 中的某个元素与 *x* 相      | \(1)     |
+|                          | 等则为``False`` ，否则为 ``True``   |          |
++--------------------------+-------------------------------------+----------+
+| ``s + t``                | *s* 和 *t* 的拼接                   | (6)(7)   |
++--------------------------+-------------------------------------+----------+
+| ``s * n`` 或者           | 对 *s* 进行 *n* 次浅复制并拼接      | (2)(7)   |
+| ``n * s``                |                                     |          |
++--------------------------+-------------------------------------+----------+
+| ``s[i]``                 | *s* 中第 *i* 个元素，从 0 算起      | \(3)     |
++--------------------------+-------------------------------------+----------+
+| ``s[i:j]``               | *s* 中从 *i* 支 *j* 的切片          | (3)(4)   |
++--------------------------+-------------------------------------+----------+
+| ``s[i:j:k]``             | *s* 中从 *i* 支 *j* 的切片，间隔    | (3)(5)   |
+|                          | *k*                                 |          |
++--------------------------+-------------------------------------+----------+
+| ``len(s)``               | *s* 的长度                          |          |
++--------------------------+-------------------------------------+----------+
+| ``min(s)``               | *s* 中最小的元素                    |          |
++--------------------------+-------------------------------------+----------+
+| ``max(s)``               | *s* 中最大的元素                    |          |
++--------------------------+-------------------------------------+----------+
+| ``s.index(x[, i[, j]])`` | *s* 中第一个 *x* 出现的下标(在 *i*  | \(8)     |
+|                          | 下标处或之后，而在 *j* 下标前)      |          |
++--------------------------+--------------------------------------+----------+
+| ``s.count(x)``           | *s* 中 *x* 出现的总次数             |          |
++--------------------------+-------------------------------------+----------+
 
-Sequences of the same type also support comparisons.  In particular, tuples
-and lists are compared lexicographically by comparing corresponding elements.
-This means that to compare equal, every element must compare equal and the
-two sequences must be of the same type and have the same length.  (For full
-details see :ref:`comparisons` in the language reference.)
+同种类型的序列还支持比较运算。特别的，元组和列表在比较时会按照字母顺序比较其对应的元素。这意味着，如果比较结果相等，则每个元素必须相等，并且两个序列必须类型相同且长度一样。(详情参见语言参考中的\ :ref:`比较`\ 。)
 
-Notes:
+备注：
 
 (1)
-   While the ``in`` and ``not in`` operations are used only for simple
-   containment testing in the general case, some specialised sequences
-   (such as :class:`str`, :class:`bytes` and :class:`bytearray`) also use
-   them for subsequence testing::
+   尽管一般情况下 ``in`` 和 ``not in`` 运算只用于简单的包含检测，一些专门的序列(例如 :class:`str` 、\ :class:`bytes` 和 :class:`bytearray`)还用它们进行子序列检测::
 
       >>> "gg" in "eggs"
       True
 
 (2)
-   Values of *n* less than ``0`` are treated as ``0`` (which yields an empty
-   sequence of the same type as *s*).  Note also that the copies are shallow;
-   nested structures are not copied.  This often haunts new Python programmers;
-   consider::
+   小于 ``0`` 的 *n* 值会当成 ``0`` 处理(这时会生成一个空的列表，其类型与 *s* 相同)。还要注意这里使用浅复制，不会复制嵌套的结构。这常常会让 Python 新手困惑，例如::
 
       >>> lists = [[]] * 3
       >>> lists
@@ -733,10 +712,7 @@ Notes:
       >>> lists
       [[3], [3], [3]]
 
-   What has happened is that ``[[]]`` is a one-element list containing an empty
-   list, so all three elements of ``[[]] * 3`` are (pointers to) this single empty
-   list.  Modifying any of the elements of ``lists`` modifies this single list.
-   You can create a list of different lists this way::
+   事实上，\ ``[[]]`` 是个单元素列表，它只含有一个空列表，所以 ``[[]] * 3`` 的三个元素都是(指向)这个唯一的空列表。修改 ``lists`` 中的任何元素都会改变这个唯一的列表。你可以像这样来创建一个包含不同列表的列表::
 
       >>> lists = [[] for i in range(3)]
       >>> lists[0].append(3)
@@ -746,58 +722,32 @@ Notes:
       [[3], [5], [7]]
 
 (3)
-   If *i* or *j* is negative, the index is relative to the end of the string:
-   ``len(s) + i`` or ``len(s) + j`` is substituted.  But note that ``-0`` is
-   still ``0``.
+   如果 *i* 或 *j* 是负的，则下标是相对于字符串结尾，即代以 ``len(s) + i`` 或 ``len(s) + j``\ 。但是要注意，\ ``-0`` 还是 ``0`` 。
 
 (4)
-   The slice of *s* from *i* to *j* is defined as the sequence of items with index
-   *k* such that ``i <= k < j``.  If *i* or *j* is greater than ``len(s)``, use
-   ``len(s)``.  If *i* is omitted or ``None``, use ``0``.  If *j* is omitted or
-   ``None``, use ``len(s)``.  If *i* is greater than or equal to *j*, the slice is
-   empty.
+   *s* 中从 *i* 到 *j* 的切片定义为下标为 *k* 的元素组成序列，使得 ``i <= k < j`` 。如果 *i* 或 *j* 大于 ``len(s)`` ，则使用 ``len(s)`` 。如果 *i* 省略或者是 ``None`` ，则用 ``0`` 。如果 *j* 省略或者为 ``None`` ，则用 ``len(s)`` 。如果 *i* 大于或等于 *j* ，则生成的序列为空。
 
 (5)
-   The slice of *s* from *i* to *j* with step *k* is defined as the sequence of
-   items with index  ``x = i + n*k`` such that ``0 <= n < (j-i)/k``.  In other words,
-   the indices are ``i``, ``i+k``, ``i+2*k``, ``i+3*k`` and so on, stopping when
-   *j* is reached (but never including *j*).  If *i* or *j* is greater than
-   ``len(s)``, use ``len(s)``.  If *i* or *j* are omitted or ``None``, they become
-   "end" values (which end depends on the sign of *k*).  Note, *k* cannot be zero.
-   If *k* is ``None``, it is treated like ``1``.
+   *s* 中从 *i* 到 *j* 且步长为 *k* 的切片定义为下标为 *k* 的元素组成序列，使得 ``x = i + n*k`` ，其中 ``0 <= n < (j-i)/k`` 。换句话说，下标是 ``i`` 、\ ``i+k`` 、\ ``i+2*k`` 、\ ``i+3*k`` 等等，到达 *j* 时停止(但从来不会包含 *j*)。如果 *i* 或 *j* 大于 ``len(s)`` 则使用 ``len(s)`` 。如果 *i* 或 *j* 省略或者为 ``None`` ，就会使用"未尾"值(使用哪一头未尾取决于 *k* 的正负符号)。注意，\ *k* 不能为零。
+   如果 *k* 是 ``None`` ，则当它为 ``1`` 。
 
 (6)
-   Concatenating immutable sequences always results in a new object.  This
-   means that building up a sequence by repeated concatenation will have a
-   quadratic runtime cost in the total sequence length.  To get a linear
-   runtime cost, you must switch to one of the alternatives below:
+   拼接不可变序列总是生成一个新的对象。这意味着如果通过连续的拼接来构建一个序列，其时间复杂度为序列总长度的二次方程。为了取得线性的时间开销，你必须转而使用下面的方法之一：
 
-   * if concatenating :class:`str` objects, you can build a list and use
-     :meth:`str.join` at the end or else write to a :class:`io.StringIO`
-     instance and retrieve its value when complete
+   * 如果要拼接 :class:`str` 对象，你可以构建一个列表，最后使用 :meth:`str.join` 或者写到一个 :class:`io.StringIO` 实例并在完成后取回它的值。
 
-   * if concatenating :class:`bytes` objects, you can similarly use
-     :meth:`bytes.join` or :class:`io.BytesIO`, or you can do in-place
-     concatenation with a :class:`bytearray` object.  :class:`bytearray`
-     objects are mutable and have an efficient overallocation mechanism
+   * 如果要拼接 :class:`bytes` 对象，你可以使用类似的 :meth:`bytes.join` 或者 :class:`io.BytesIO` ，或者使用 :class:`bytearray` 对象在原地拼接。\ :class:`bytearray` 对象是可变的，它有高效的重复分配内存机制。
 
-   * if concatenating :class:`tuple` objects, extend a :class:`list` instead
+   * 如果要拼接 :class:`tuple` 对象，应该转而扩展 :class:`list` 。
 
-   * for other types, investigate the relevant class documentation
+   * 对于其它类型，需要研读相关的类文档。
 
 
 (7)
-  Some sequence types (such as :class:`range`) only support item sequences
-  that follow specific patterns, and hence don't support sequence
-  concatenation or repetition.
+  有些序列类型(例如 :class:`range`)只支持拥有特定模式的元素序列，所以并不支持序列拼接或者重复。
 
 (8)
-   ``index`` raises :exc:`ValueError` when *x* is not found in *s*.
-   When supported, the additional arguments to the index method allow
-   efficient searching of subsections of the sequence. Passing the extra
-   arguments is roughly equivalent to using ``s[i:j].index(x)``, only
-   without copying any data and with the returned index being relative to
-   the start of the sequence rather than the start of the slice.
+   如果 *s* 中找不到 *x* ，\ ``index`` 就会抛出 :exc:`ValueError` 。如果支持的话，index 方法的额外参数会让序列中的片断搜索变得高效。传入多余的参数大致相当于使用 ``s[i:j].index(x)`` ，只不过没有复制任何数据，并且返回的下标是相对于整个序列的开头，而不是切片的开头。
 
 
 .. _typesseq-immutable:
