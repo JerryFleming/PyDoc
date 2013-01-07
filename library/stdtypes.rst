@@ -463,18 +463,9 @@ float 类型实现了 :class:`numbers.Real` :term:`虚基类`\ 。它还有下�
 
    [sign] ['0x'] integer ['.' fraction] ['p' exponent]
 
-可选的 ``sign`` 可以是 ``+`` 或者 ``-`` ，\ ``integer`` 和 ``fraction`` 是十六进制数字构成的字符串，而 ``exponent`` 是一个前面可以带有符号的十进制整数。大小写是不重要的，并且 integer 或者 fraction 的部分必须至少有一个十六进制数字。这种语法和 C99 标准第 6.4.4.2 节规定的语法相似，也和 Java 1.5 及以后版本的语法相似。In particular, the output of
-:meth:`float.hex` is usable as a hexadecimal floating-point literal in
-C or Java code, and hexadecimal strings produced by C's ``%a`` format
-character or Java's ``Double.toHexString`` are accepted by
-:meth:`float.fromhex`.
+可选的 ``sign`` 可以是 ``+`` 或者 ``-`` ，\ ``integer`` 和 ``fraction`` 是十六进制数字构成的字符串，而 ``exponent`` 是一个前面可以带有符号的十进制整数。大小写是不重要的，并且 integer 或者 fraction 的部分必须至少有一个十六进制数字。这种语法和 C99 标准第 6.4.4.2 节规定的语法相似，也和 Java 1.5 及以后版本的语法相似。特别的，\ :meth:`float.hex` 是输出可以在 C 和 Java 代码中用作十六进制浮点数，而 C 的 ``%a`` 格式或 Java 的 ``Double.toHexString`` 产生的结果都可以作为 :meth:`float.fromhex` 的输入。
 
-
-Note that the exponent is written in decimal rather than hexadecimal,
-and that it gives the power of 2 by which to multiply the coefficient.
-For example, the hexadecimal string ``0x3.a7p10`` represents the
-floating-point number ``(3 + 10./16 + 7./16**2) * 2.0**10``, or
-``3740.0``::
+注意，指数是用十进制表示的，而不是十六进制，并且它表示系数要乘以 2 的幂。例如，十六进制字符串 ``0x3.a7p10`` 表示浮点数 ``(3 + 10./16 + 7./16**2) * 2.0**10`` ，即 ``3740.0``::
 
    >>> float.fromhex('0x3.a7p10')
    3740.0
