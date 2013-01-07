@@ -490,56 +490,37 @@ float 类型实现了 :class:`numbers.Real` :term:`虚基类`\ 。它还有下�
 
 下面是具体规则:
 
-- If ``x = m / n`` is a nonnegative rational number and ``n`` is not divisible
-  by ``P``, define ``hash(x)`` as ``m * invmod(n, P) % P``, where ``invmod(n,
-  P)`` gives the inverse of ``n`` modulo ``P``.
+- 如果 ``x = m / n`` 是一个非负有理数并且 ``n`` 不可被 ``P`` 整除，则 ``hash(x)`` 定义为 ``m * invmod(n, P) % P`` ，其中 ``invmod(n,  P)`` 是 ``n`` 模 ``P`` 的倒数。
 
-- If ``x = m / n`` is a nonnegative rational number and ``n`` is
-  divisible by ``P`` (but ``m`` is not) then ``n`` has no inverse
-  modulo ``P`` and the rule above doesn't apply; in this case define
-  ``hash(x)`` to be the constant value ``sys.hash_info.inf``.
+- 如果 ``x = m / n`` 是一个非负有理数并且 ``n`` 可以被 ``P`` 整除(但 ``m`` 不可以)，则 ``n`` 不是模 ``P`` 的倒数，上面的规则不适用。这种情况下，定义 ``hash(x)`` 为常量值 ``sys.hash_info.inf`` 。
 
-- If ``x = m / n`` is a negative rational number define ``hash(x)``
-  as ``-hash(-x)``.  If the resulting hash is ``-1``, replace it with
-  ``-2``.
+- 如果 ``x = m / n`` 是负的有理数，定义 ``hash(x)`` 为 ``-hash(-x)`` 。如果这个结果是 ``-1`` ，则使用 ``-2`` 为散列值。
 
-- The particular values ``sys.hash_info.inf``, ``-sys.hash_info.inf``
-  and ``sys.hash_info.nan`` are used as hash values for positive
-  infinity, negative infinity, or nans (respectively).  (All hashable
-  nans have the same hash value.)
+- 特殊值 ``sys.hash_info.inf`` 、\ ``-sys.hash_info.inf`` 和 ``sys.hash_info.nan`` 分别作为正无穷、负无穷、NaN 的散列值(所有可散列的 NaN 都有相同的散列值)。
 
-- For a :class:`complex` number ``z``, the hash values of the real
-  and imaginary parts are combined by computing ``hash(z.real) +
-  sys.hash_info.imag * hash(z.imag)``, reduced modulo
-  ``2**sys.hash_info.width`` so that it lies in
-  ``range(-2**(sys.hash_info.width - 1), 2**(sys.hash_info.width -
-  1))``.  Again, if the result is ``-1``, it's replaced with ``-2``.
+- 对于 :class:`complex` 数值 ``z`` ，通过计算 ``hash(z.real) + sys.hash_info.imag * hash(z.imag)`` ，把实部和虚部的散列值结合起来，然后进行模归约 ``2**sys.hash_info.width`` ，使得结果位于 ``range(-2**(sys.hash_info.width - 1), 2**(sys.hash_info.width - 1))`` 。同样的，如果结果是 ``-1`` ，则用 ``-2`` 代替。
 
 
-To clarify the above rules, here's some example Python code,
-equivalent to the built-in hash, for computing the hash of a rational
-number, :class:`float`, or :class:`complex`::
+为了阐明上述规则，下面是一些 Python 代码例子，相当于内置的 hash 函数，它们用来计算一个有理数、\ :class:`float` 或 :class:`complex` 的散列值::
 
 
    import sys, math
 
    def hash_fraction(m, n):
-       """Compute the hash of a rational number m / n.
+       """计算有理数 m / n 的散列值。
 
-       Assumes m and n are integers, with n positive.
-       Equivalent to hash(fractions.Fraction(m, n)).
+       假定 m 和 n 都是整数，其中 n 是正数。相当于 hash(fractions.Fraction(m, n)) 。
 
        """
        P = sys.hash_info.modulus
-       # Remove common factors of P.  (Unnecessary if m and n already coprime.)
+       # 去掉公分母 P(如果 m 和 n 已经是互质数则不需要)。
        while m % P == n % P == 0:
            m, n = m // P, n // P
 
        if n % P == 0:
            hash_ = sys.hash_info.inf
        else:
-           # Fermat's Little Theorem: pow(n, P-1, P) is 1, so
-           # pow(n, P-2, P) gives the inverse of n modulo P.
+           # 费马小定理： pow(n, P-1, P) 是 1 ，所以 pow(n, P-2, P) 是 n 模 P 的倒数。
            hash_ = (abs(m) % P) * pow(n, P - 2, P) % P
        if m < 0:
            hash_ = -hash_
@@ -548,7 +529,7 @@ number, :class:`float`, or :class:`complex`::
        return hash_
 
    def hash_float(x):
-       """Compute the hash of a float x."""
+       """计算浮点数 x 的散列值。"""
 
        if math.isnan(x):
            return sys.hash_info.nan
@@ -558,10 +539,10 @@ number, :class:`float`, or :class:`complex`::
            return hash_fraction(*x.as_integer_ratio())
 
    def hash_complex(z):
-       """Compute the hash of a complex number z."""
+       """计算复数 z 的散列值。"""
 
        hash_ = hash_float(z.real) + sys.hash_info.imag * hash_float(z.imag)
-       # do a signed reduction modulo 2**sys.hash_info.width
+       # 进行带符号的模归约 2**sys.hash_info.width
        M = 2**(sys.hash_info.width - 1)
        hash_ = (hash_ & (M - 1)) - (hash & M)
        if hash_ == -1:
@@ -570,21 +551,18 @@ number, :class:`float`, or :class:`complex`::
 
 .. _typeiter:
 
-Iterator Types
+迭代器类型
 ==============
 
 .. index::
-   single: iterator protocol
-   single: protocol; iterator
-   single: sequence; iteration
-   single: container; iteration over
+   single: 迭代器协议
+   single: 协议; 迭代器
+   single: 序列; 迭代
+   single: 容器; 迭代
 
-Python supports a concept of iteration over containers.  This is implemented
-using two distinct methods; these are used to allow user-defined classes to
-support iteration.  Sequences, described below in more detail, always support
-the iteration methods.
+Python 支持对容器的迭代概念。它是通过两个不同的方法实现的，这就允许用户自定义的类支持迭代。序列(下面将详述)总是支持迭代方法。
 
-One method needs to be defined for container objects to provide iteration
+容器要支持迭代，需要定义一个方法：
 support:
 
 .. XXX duplicated in reference/datamodel!
