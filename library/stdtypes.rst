@@ -569,17 +569,9 @@ support:
 
 .. method:: container.__iter__()
 
-   Return an iterator object.  The object is required to support the iterator
-   protocol described below.  If a container supports different types of
-   iteration, additional methods can be provided to specifically request
-   iterators for those iteration types.  (An example of an object supporting
-   multiple forms of iteration would be a tree structure which supports both
-   breadth-first and depth-first traversal.)  This method corresponds to the
-   :attr:`tp_iter` slot of the type structure for Python objects in the Python/C
-   API.
+   返回一个迭代器对象。这个对象对于支持下述迭代器协议是必须的。如果一个容器支持不同类型的迭代，则可以提供额外的方法以明确指定需要的迭代类型。(支持多种迭代形式的例子如树型结构，它同时支持广度优先和深度优先的搜索。)这个方法对应 Python/C API 中 Python 对象类型结构的 :attr:`tp_iter` 接槽。
 
-The iterator objects themselves are required to support the following two
-methods, which together form the :dfn:`iterator protocol`:
+迭代器对象本身要求支持下面两个方法，它们共同构成\ :dfn:`迭代器协议`\ ：
 
 
 .. method:: iterator.__iter__()
