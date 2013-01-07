@@ -471,8 +471,7 @@ float 类型实现了 :class:`numbers.Real` :term:`虚基类`\ 。它还有下�
    3740.0
 
 
-Applying the reverse conversion to ``3740.0`` gives a different
-hexadecimal string representing the same number::
+对 ``3740.0`` 进行反向转换会得到一个不同的十六进制字符串，但表示的是同一个数::
 
    >>> float.hex(3740.0)
    '0x1.d380000000000p+11'
@@ -480,28 +479,16 @@ hexadecimal string representing the same number::
 
 .. _numeric-hash:
 
-Hashing of numeric types
+数值类型的散列值
 ------------------------
 
-For numbers ``x`` and ``y``, possibly of different types, it's a requirement
-that ``hash(x) == hash(y)`` whenever ``x == y`` (see the :meth:`__hash__`
-method documentation for more details).  For ease of implementation and
-efficiency across a variety of numeric types (including :class:`int`,
-:class:`float`, :class:`decimal.Decimal` and :class:`fractions.Fraction`)
-Python's hash for numeric types is based on a single mathematical function
-that's defined for any rational number, and hence applies to all instances of
-:class:`int` and :class:`fraction.Fraction`, and all finite instances of
-:class:`float` and :class:`decimal.Decimal`.  Essentially, this function is
-given by reduction modulo ``P`` for a fixed prime ``P``.  The value of ``P`` is
-made available to Python as the :attr:`modulus` attribute of
-:data:`sys.hash_info`.
+对于数值 ``x`` 和 ``y`` ，可能是不同类型的，要求只要 ``x == y`` ，就应该有 ``hash(x) == hash(y)`` (详情参见 :meth:`__hash__` 方法的文档)。为了实现的方便，以及兼顾各种不同数值类型的效率(包括 :class:`int` 、\ :class:`float` 、\ :class:`decimal.Decimal` 和 :class:`fractions.Fraction`)，Python 中数值类型的散列值是基于同一个数学函数，这个函数定义了任意有理数，所以它也适合所有 :class:`int` 和 :class:`fraction.Fraction` 的实例，以及有限的 :class:`float` 和 :class:`decimal.Decimal` 实例。这个函数的核心是用一个固定的素数 ``P`` ，计算出它的归约模 ``P`` 。\ ``P`` 的值在 Python 中可以通过 :data:`sys.hash_info` 的 :attr:`modulus` 属性来访问。
 
 .. impl-detail::
 
-   Currently, the prime used is ``P = 2**31 - 1`` on machines with 32-bit C
-   longs and ``P = 2**61 - 1`` on machines with 64-bit C longs.
+   目前使用的素数，在 C 长整型为 32 位的机器上是 ``P = 2**31 - 1`` ，在 C 长整型为 64 位的机器上是 ``P = 2**61 - 1`` 。
 
-Here are the rules in detail:
+下面是具体规则:
 
 - If ``x = m / n`` is a nonnegative rational number and ``n`` is not divisible
   by ``P``, define ``hash(x)`` as ``m * invmod(n, P) % P``, where ``invmod(n,
