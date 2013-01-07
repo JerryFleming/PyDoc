@@ -576,60 +576,40 @@ support:
 
 .. method:: iterator.__iter__()
 
-   Return the iterator object itself.  This is required to allow both containers
-   and iterators to be used with the :keyword:`for` and :keyword:`in` statements.
-   This method corresponds to the :attr:`tp_iter` slot of the type structure for
-   Python objects in the Python/C API.
+   返回迭代器对象本身。这对于容器和迭代器都可以用于 :keyword:`for` 和 :keyword:`in` 语句来说，是必须的。这个方法对应 Python/C API 中 Python 对象类型结构的 :attr:`tp_iter` 接槽。
 
 
 .. method:: iterator.__next__()
 
-   Return the next item from the container.  If there are no further items, raise
-   the :exc:`StopIteration` exception.  This method corresponds to the
-   :attr:`tp_iternext` slot of the type structure for Python objects in the
-   Python/C API.
+   返回容器中的下一个项。如果没有其它项了，则抛出 :exc:`StopIteration` 异常。这个方法对应 Python/C API 中 Python 对象类型结构的 :attr:`tp_iternext` 接槽。
 
-Python defines several iterator objects to support iteration over general and
-specific sequence types, dictionaries, and other more specialized forms.  The
-specific types are not important beyond their implementation of the iterator
-protocol.
+Python 定义了几个迭代器对象用以支持对一般和特定的序列类型、字典、以及其它更广泛形式的迭代。这些特定的类型除了实现迭代器协议以外，没有其它重要作用。
 
-Once an iterator's :meth:`~iterator.__next__` method raises
-:exc:`StopIteration`, it must continue to do so on subsequent calls.
-Implementations that do not obey this property are deemed broken.
+一旦迭代器的 :meth:`~iterator.__next__` 方法抛出 :exc:`StopIteration` ，则后续调用也必须抛出同样的异常。不这么做的实现是不兼容的。
 
 
 .. _generator-types:
 
-Generator Types
+生成函数类型
 ---------------
 
-Python's :term:`生成函数`\s provide a convenient way to implement the iterator
-protocol.  If a container object's :meth:`__iter__` method is implemented as a
-generator, it will automatically return an iterator object (technically, a
-generator object) supplying the :meth:`__iter__` and :meth:`~generator.__next__`
-methods.
-More information about generators can be found in :ref:`the documentation for
-the yield expression <yieldexpr>`.
+Python 的\ :term:`生成函数`\ 为实现迭代器协议提供了便捷方法。如果一个容器对象的 :meth:`__iter__` 方法是用生成函数实现的，就会自动返回一个迭代器对象(从技术上说是一个生成函数对象)，它支持 :meth:`__iter__` 和 :meth:`~generator.__next__` 方法。关于生成函数的更多信息参见\ :ref:`yield 表达式的文档 <yieldexpr>`\ 。
 
 
 .. _typesseq:
 
-Sequence Types --- :class:`list`, :class:`tuple`, :class:`range`
+序列类型 --- :class:`list` 、\ :class:`tuple` 、\ :class:`range`
 ================================================================
 
-There are three basic sequence types: lists, tuples, and range objects.
-Additional sequence types tailored for processing of
-:ref:`binary data <binaryseq>` and :ref:`text strings <textseq>` are
-described in dedicated sections.
+有三种基本的序列类型: 列表、元组、区间对象。为处理\ :ref:`二进制数据 <binaryseq>`\ 和\ :ref:`文本字符串 <textseq>`\ 而定制的其它序列类型会在专门的章节中介绍。
 
 
 .. _typesseq-common:
 
-Common Sequence Operations
+共同的序列运算
 --------------------------
 
-.. index:: object: sequence
+.. index:: 对象: 序列
 
 The operations in the following table are supported by most sequence types,
 both mutable and immutable. The :class:`collections.abc.Sequence` ABC is
