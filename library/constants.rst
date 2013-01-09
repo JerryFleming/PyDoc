@@ -7,17 +7,17 @@
 
 .. data:: False
 
-   :class:`bool` 类型的假值。对 ``False`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 。
+   :class:`bool` 类型的假值。对 ``False`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 异常。
 
 
 .. data:: True
 
-   :class:`bool` 类型的真值。对 ``True`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 。
+   :class:`bool` 类型的真值。对 ``True`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 异常。
 
 
 .. data:: None
 
-   类型 ``NoneType`` 唯一的值。\ ``None`` 经常用来表示没有值，例如不把默认的参数传给函数时。对 ``None`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 。
+   类型 ``NoneType`` 唯一的值。\ ``None`` 经常用来表示没有值，例如不把默认的参数传给函数时。对 ``None`` 进行赋值是非法的，会抛出 :exc:`SyntaxError` 异常。
 
 
 .. data:: NotImplemented
@@ -37,7 +37,7 @@
 
 .. note::
 
-   不能对 :data:`None` 、\ :data:`False` 、\ :data:`True` 和 :data:`__debug__` 重新赋值(对它们赋值，即使是作为属性名字，也会抛出 :exc:`SyntaxError`)，所以可以认为它们是"真正的"常量。
+   不能对 :data:`None` 、\ :data:`False` 、\ :data:`True` 和 :data:`__debug__` 重新赋值(对它们赋值，即使是作为属性名字，也会抛出 :exc:`SyntaxError` 异常)，所以可以认为它们是"真正的"常量。
 
 
 :mod:`site` 模块添加的常量
@@ -48,7 +48,7 @@
 .. data:: quit(code=None)
           exit(code=None)
 
-   一个对象，如果打印它就会输出一条信息"Use quit() or Ctrl-D (i.e. EOF) to exit"，如果调用它就会抛出 :exc:`SystemExit` 并以指定返回码 code 返回。
+   一个对象，如果打印它就会输出一条信息"Use quit() or Ctrl-D (i.e. EOF) to exit"，如果调用它就会抛出 :exc:`SystemExit` 异常并以指定返回码 code 返回。
 
 .. data:: copyright
           license

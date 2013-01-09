@@ -124,7 +124,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: chr(i)
 
-   返回一个字符串，用来表示整数 *i* 所代表的 Unicode 字符。例如，\ ``chr(97)`` 返回字符 ``'a'`` 。这和 :func:`ord` 正好相反。参数的有效范围是从 0 到 1,114,111 (16 进制为 0x10FFFF)。如果 *i* 不在此范围则抛出 :exc:`ValueError` 。
+   返回一个字符串，用来表示整数 *i* 所代表的 Unicode 字符。例如，\ ``chr(97)`` 返回字符 ``'a'`` 。这和 :func:`ord` 正好相反。参数的有效范围是从 0 到 1,114,111 (16 进制为 0x10FFFF)。如果 *i* 不在此范围则抛出 :exc:`ValueError` 异常。
 
 
 .. function:: classmethod(function)
@@ -160,7 +160,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    参数 *optimize* 指定编译器的优化级别，默认值 ``-1`` 选择的级别和解释器 :option:`-O` 选项给出的一样。可以明确指定的级别有 ``0`` (不优化，\ ``__debug__`` 为真)，\ ``1`` (去除断言语句，\ ``__debug__`` 为假)，或者 ``2`` (还要去掉文档字符串)。
 
-   如果编译后的代码无效则抛出 :exc:`SyntaxError` ，如果代码中含有空字节则抛出 :exc:`TypeError` 。
+   如果编译后的代码无效则抛出 :exc:`SyntaxError` 异常，如果代码中含有空字节则抛出 :exc:`TypeError` 异常。
 
    .. note::
 
@@ -176,7 +176,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    .. note::
 
-      转换字符串时，字符串中间的 ``+`` 或 ``-`` 运算符旁边不得包含空格。例如，\ ``complex('1+2j')`` 可以接受，而 ``complex('1 + 2j')`` 会抛出 :exc:`ValueError` 。
+      转换字符串时，字符串中间的 ``+`` 或 ``-`` 运算符旁边不得包含空格。例如，\ ``complex('1+2j')`` 可以接受，而 ``complex('1 + 2j')`` 会抛出 :exc:`ValueError` 异常。
 
    复数类型在\ :ref:`typesnumeric`\ 中介绍。
 
@@ -323,7 +323,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
    这里的 ``floatnumber`` 是 Python 中浮点数源常量的形式，在\ :ref:`floating`\ 中介绍。大小写是不重要的，例如，"inf"、"Inf"、"INFINITY"、"iNfINity" 都是正无穷的正确拼写。
 
-   否则，如果参数是个整数或浮点数，则返回一个(在 Python 的浮点数精度之内)值相等的浮点数。如果参数在 Python 浮点数范围之外，则抛出 :exc:`OverflowError` 。
+   否则，如果参数是个整数或浮点数，则返回一个(在 Python 的浮点数精度之内)值相等的浮点数。如果参数在 Python 浮点数范围之外，则抛出 :exc:`OverflowError` 异常。
 
    对于一般的 Python 对象 ``x`` ，\ ``float(x)`` 会调用 ``x.__float__()`` 。
 
@@ -369,7 +369,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: getattr(object, name[, default])
 
-   返回 *object* 指定属性的值。\ *name* 必须是个字符串；如果它是 object 某个属性的名字，则结果就是这个属性的值。例如，\ ``getattr(x, 'foobar')`` 相当于 ``x.foobar`` 。如果指定的属性不存在，而 *default* 存在，则返回 default 的值，否则抛出 :exc:`AttributeError` 。
+   返回 *object* 指定属性的值。\ *name* 必须是个字符串；如果它是 object 某个属性的名字，则结果就是这个属性的值。例如，\ ``getattr(x, 'foobar')`` 相当于 ``x.foobar`` 。如果指定的属性不存在，而 *default* 存在，则返回 default 的值，否则抛出 :exc:`AttributeError` 异常。
 
 
 .. function:: globals()
@@ -379,7 +379,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: hasattr(object, name)
 
-   参数是一个对象 object 和一个字符串 name 。如果 name 是 object 的某个属性的名字则返回 ``True`` ，否则返回 ``False`` (它的实现方法是，调用 ``getattr(object, name)`` 看看是否会抛出 :exc:`AttributeError`)。
+   参数是一个对象 object 和一个字符串 name 。如果 name 是 object 的某个属性的名字则返回 ``True`` ，否则返回 ``False`` (它的实现方法是，调用 ``getattr(object, name)`` 看看是否会抛出 :exc:`AttributeError` 异常)。
 
 
 .. function:: hash(object)
@@ -412,7 +412,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: input([prompt])
 
-   如果提供了 *prompt* 参数，则把它写入到标准输出，后面不加换行符。这个函数然后会从标准输入读取一行内容，把它转化成字符串(去掉结尾的换行符)，并返回其结果。如果读取到 EOF ，则抛出 :exc:`EOFError` 。例如::
+   如果提供了 *prompt* 参数，则把它写入到标准输出，后面不加换行符。这个函数然后会从标准输入读取一行内容，把它转化成字符串(去掉结尾的换行符)，并返回其结果。如果读取到 EOF ，则抛出 :exc:`EOFError` 异常。例如::
 
       >>> s = input('--> ')  # doctest: +SKIP
       --> Monty Python's Flying Circus
@@ -444,7 +444,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: iter(object[, sentinel])
 
-   返回一个\ :term:`迭代器`\ 对象。对第一个参数的解释会根据是否有第二个参数而区别很大。如果没有第二个参数，则 *object* 必须是个支持迭代协议(:meth:`__iter__` 方法)的集合对象，或者支持序列协议(:meth:`__getitem__` 方法，其参数为整数，从 ``0`` 开始)。如果它不支持这两种协议，则抛出 :exc:`TypeError` 。如果指定了第二个参数 *sentinel* 则 *object* 必须可调用。这种情况下创建的迭代器，每当调用其 :meth:`~iterator.__next__` 方法时都会不带参数的调用 *object* ；如果返回的值和 *sentinel* 相等，则抛出 :exc:`StopIteration` ，否则才正常返回这个值。
+   返回一个\ :term:`迭代器`\ 对象。对第一个参数的解释会根据是否有第二个参数而区别很大。如果没有第二个参数，则 *object* 必须是个支持迭代协议(:meth:`__iter__` 方法)的集合对象，或者支持序列协议(:meth:`__getitem__` 方法，其参数为整数，从 ``0`` 开始)。如果它不支持这两种协议，则抛出 :exc:`TypeError` 异常。如果指定了第二个参数 *sentinel* 则 *object* 必须可调用。这种情况下创建的迭代器，每当调用其 :meth:`~iterator.__next__` 方法时都会不带参数的调用 *object* ；如果返回的值和 *sentinel* 相等，则抛出 :exc:`StopIteration` 异常，否则才正常返回这个值。
 
    另见\ :ref:`typeiter`\ 。
 
@@ -511,7 +511,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: next(iterator[, default])
 
-   通过调用 *iteror* 的 :meth:`~iterator.__next__` 方法返回其中的下一个项。当 iterator 穷尽时，如果指定了 *default* 就返回这个值，否则就抛出 :exc:`StopIteration` 。
+   通过调用 *iteror* 的 :meth:`~iterator.__next__` 方法返回其中的下一个项。当 iterator 穷尽时，如果指定了 *default* 就返回这个值，否则就抛出 :exc:`StopIteration` 异常。
 
 
 .. function:: object()
@@ -533,7 +533,7 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
 
 .. function:: open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
 
-   打开 *file* 并返回相应的\ :term:`文件对象`\ 。如果这个文件不能打开，则抛出 :exc:`OSError` 。
+   打开 *file* 并返回相应的\ :term:`文件对象`\ 。如果这个文件不能打开，则抛出 :exc:`OSError` 异常。
 
    *file* 是个字符串或者 bytes 对象，它指定要打开文件的路径(绝对路径或者基于当前工作目录的相对路径)，或者指定要封装的文件描述符。(如果指定的是文件描述符，则在返回的 I/O 对象关闭时文件描述符也会关闭，除非把 *closefd* 设为 ``False`` 。)
 
@@ -612,8 +612,8 @@ Python 解释器中内置了一些函数和类型，可以随时使用。下面�
    另见文件处理模式，例如 :mod:`fileinput` ，\ :mod:`io` (这是定义 :func:`open` 的地方)，\ :mod:`os` 、\ :mod:`os.path` 、\ :mod:`tempfile` 、和 :mod:`shutil` 。
 
    .. versionchanged:: 3.3
-      以前会抛出 :exc:`IOError` ，它现在是 :exc:`OSError` 的别名。
-      现在，如果文件单单以创建模式(``'x'``)打开并且已经存在，则会抛出 :exc:`FileExistsError` 。
+      以前会抛出 :exc:`IOError` 异常，它现在是 :exc:`OSError` 的别名。
+      现在，如果文件单单以创建模式(``'x'``)打开并且已经存在，则会抛出 :exc:`FileExistsError` 异常。
 
 
 .. XXX works for bytes too, but should it?

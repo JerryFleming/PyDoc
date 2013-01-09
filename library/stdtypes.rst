@@ -345,7 +345,7 @@ Python 完全支持混合算术运算：如果一个二目算术运算符的两�
 备注：
 
 (1)
-   负的移动位数是非法的，会导致抛出 :exc:`ValueError` 。
+   负的移动位数是非法的，会导致抛出 :exc:`ValueError` 异常。
 
 (2)
    向左移动 *n* 位相当于乘以 ``pow(2, n)`` 而不进行溢出检查。
@@ -394,11 +394,11 @@ int 类型实现了 :class:`numbers.Integral` :term:`虚基类`\ 。此外，它
         >>> x.to_bytes((x.bit_length() // 8) + 1, byteorder='little')
         b'\xe8\x03'
 
-    该整数用 *length* 个字节表示。如果指定的字节不能表示这个整数，则抛出 :exc:`OverflowError` 。
+    该整数用 *length* 个字节表示。如果指定的字节不能表示这个整数，则抛出 :exc:`OverflowError` 异常。
 
     *byteorder* 参数决定表示该整数的字节先后顺序。如果 *byteorder* 是 ``"big"`` ，则高位字节放在数组的前面。如果 *byteorder* 是 ``"little"`` ，则高位字节放在数组的后面。如果想使用系统自身的字节顺序，可以用 :data:`sys.byteorder` 。
 
-    *signed* 参数决定是否使用二的补码来表示这个整数。如果 *signed* 是 ``False`` ，而给出的整数又是负的，则抛出 :exc:`OverflowError` 。默认的 *signed* 值是 ``False`` 。
+    *signed* 参数决定是否使用二的补码来表示这个整数。如果 *signed* 是 ``False`` ，而给出的整数又是负的，则抛出 :exc:`OverflowError` 异常。默认的 *signed* 值是 ``False`` 。
 
     .. versionadded:: 3.2
 
@@ -433,7 +433,7 @@ float 类型实现了 :class:`numbers.Real` :term:`虚基类`\ 。它还有下�
 
 .. method:: float.as_integer_ratio()
 
-   返回一对整数，其比值正好等于原来的浮点数，并且分母是正数。对正负无穷会抛出 :exc:`OverflowError` ，而对 NaN 会抛出 :exc:`ValueError` 。
+   返回一对整数，其比值正好等于原来的浮点数，并且分母是正数。对正负无穷会抛出 :exc:`OverflowError` 异常，而对 NaN 会抛出 :exc:`ValueError` 异常。
 
 .. method:: float.is_integer()
 
@@ -583,7 +583,7 @@ Python 支持对容器的迭代概念。它是通过两个不同的方法实现�
 
 Python 定义了几个迭代器对象用以支持对一般和特定的序列类型、字典、以及其它更广泛形式的迭代。这些特定的类型除了实现迭代器协议以外，没有其它重要作用。
 
-一旦迭代器的 :meth:`~iterator.__next__` 方法抛出 :exc:`StopIteration` ，则后续调用也必须抛出同样的异常。不这么做的实现是不兼容的。
+一旦迭代器的 :meth:`~iterator.__next__` 方法抛出 :exc:`StopIteration` 异常，则后续调用也必须抛出同样的异常。不这么做的实现是不兼容的。
 
 
 .. _generator-types:
@@ -717,7 +717,7 @@ Python 的\ :term:`生成函数`\ 为实现迭代器协议提供了便捷方法�
   有些序列类型(例如 :class:`range`)只支持拥有特定模式的元素序列，所以并不支持序列拼接或者重复。
 
 (8)
-   如果 *s* 中找不到 *x* ，\ ``index`` 就会抛出 :exc:`ValueError` 。如果支持的话，index 方法的额外参数会让序列中的片断搜索变得高效。传入多余的参数大致相当于使用 ``s[i:j].index(x)`` ，只不过没有复制任何数据，并且返回的下标是相对于整个序列的开头，而不是切片的开头。
+   如果 *s* 中找不到 *x* ，\ ``index`` 就会抛出 :exc:`ValueError` 异常。如果支持的话，index 方法的额外参数会让序列中的片断搜索变得高效。传入多余的参数大致相当于使用 ``s[i:j].index(x)`` ，只不过没有复制任何数据，并且返回的下标是相对于整个序列的开头，而不是切片的开头。
 
 
 .. _typesseq-immutable:
@@ -811,185 +811,117 @@ Python 的\ :term:`生成函数`\ 为实现迭代器协议提供了便捷方法�
 备注：
 
 (1)
-   *t* must have the same length as the slice it is replacing.
+   *t* 必须和它要替换的切片有相同的长度。
 
 (2)
-   The optional argument *i* defaults to ``-1``, so that by default the last
-   item is removed and returned.
+   可选参数 *i* 默认为 ``-1`` ，所以默认会删除并返回最后一个元素。
 
 (3)
-   ``remove`` raises :exc:`ValueError` when *x* is not found in *s*.
+   如果 *x* 不在 *s* 中，\ ``remove`` 会抛出 :exc:`ValueError` 异常。
 
 (4)
-   The :meth:`reverse` method modifies the sequence in place for economy of
-   space when reversing a large sequence.  To remind users that it operates by
-   side effect, it does not return the reversed sequence.
+   :meth:`reverse` 方法会在原地修改序列，以便在处理大容量序列时节省空间。为了让用户知道这个运算通过副作用操作，它并不返回对调好的序列。
 
 (5)
-   :meth:`clear` and :meth:`!copy` are included for consistency with the
-   interfaces of mutable containers that don't support slicing operations
-   (such as :class:`dict` and :class:`set`)
+   加入 :meth:`clear` 和 :meth:`!copy` 是为了与不支持切片运算的可变容器(例如 :class:`dict` 和 :class:`set`)在界面上保持一致。
 
    .. versionadded:: 3.3
-      :meth:`clear` and :meth:`!copy` methods.
+      :meth:`clear` 和 :meth:`!copy` 方法。
 
 
 .. _typesseq-list:
 
-Lists
+列表
 -----
 
-.. index:: object: list
+.. index:: 对象: 列表
 
-Lists are mutable sequences, typically used to store collections of
-homogeneous items (where the precise degree of similarity will vary by
-application).
+列表是可变序列，常规用于存放性质相同(相似的程序会根据应用而有不同)的一系列项。
 
 .. class:: list([iterable])
 
-   Lists may be constructed in several ways:
+   有好几种方法构建一个列表：
 
-   * Using a pair of square brackets to denote the empty list: ``[]``
-   * Using square brackets, separating items with commas: ``[a]``, ``[a, b, c]``
-   * Using a list comprehension: ``[x for x in iterable]``
-   * Using the type constructor: ``list()`` or ``list(iterable)``
+   * 使用一对方括号来表示空列表： ``[]``
+   * 使用方括号，中间是逗号分隔的各项： ``[a]`` 、\ ``[a, b, c]``
+   * 使用列表解析式： ``[x for x in iterable]``
+   * 使用类型构造函数： ``list()`` or ``list(iterable)``
 
-   The constructor builds a list whose items are the same and in the same
-   order as *iterable*'s items.  *iterable* may be either a sequence, a
-   container that supports iteration, or an iterator object.  If *iterable*
-   is already a list, a copy is made and returned, similar to ``iterable[:]``.
-   For example, ``list('abc')`` returns ``['a', 'b', 'c']`` and
-   ``list( (1, 2, 3) )`` returns ``[1, 2, 3]``.
-   If no argument is given, the constructor creates a new empty list, ``[]``.
+   这个构造函数会创建一个列表，其中的元素及其顺序与 *iterable* 的一样。\ *iterable* 可以是序列、支持迭代的容器、或者迭代器对象。如果 *iterable* 已经是个列表，则把它复制一份并返回这个副本，这类似于 ``iterable[:]`` 。例如，\ ``list('abc')`` 返回 ``['a', 'b', 'c']`` ，而 ``list( (1, 2, 3) )`` 返回 ``[1, 2, 3]`` 。如果没有指定参数，构造函数会创建一个空列表 ``[]`` 。
 
+   还有其它很多运算都会产生列表，包括 :func:`sorted` 内置函数。
 
-   Many other operations also produce lists, including the :func:`sorted`
-   built-in.
-
-   Lists implement all of the :ref:`common <typesseq-common>` and
-   :ref:`mutable <typesseq-mutable>` sequence operations. Lists also provide the
-   following additional method:
+   列表实现了序列的所有\ :ref:`共同 <typesseq-common>`\ 和\ :ref:`可变 <typesseq-mutable>`\ 运算，还提供下面额外的方法：
 
    .. method:: list.sort(*, key=None, reverse=None)
 
-      This method sorts the list in place, using only ``<`` comparisons
-      between items. Exceptions are not suppressed - if any comparison operations
-      fail, the entire sort operation will fail (and the list will likely be left
-      in a partially modified state).
+      这个方法会在原地对列表排序，排序时只对各项使用 ``<`` 比较。它不会处理异常---如果任何比较运算失败，则整个排序操作就失败(这时该列表可能处于部分被修改的状态)。
 
-      *key* specifies a function of one argument that is used to extract a
-      comparison key from each list element (for example, ``key=str.lower``).
-      The key corresponding to each item in the list is calculated once and
-      then used for the entire sorting process. The default value of ``None``
-      means that list items are sorted directly without calculating a separate
-      key value.
+      *key* 指定一个单参数的函数，用来从每个列表元素中抽取用于比较的键(例如 ``key=str.lower``)。每个项所对应的键只计算一次，然后用于整个排序过程。默认值 ``None`` 表示直接对列表的各项排序，而不需要另外计算键值。
 
-      The :func:`functools.cmp_to_key` utility is available to convert a 2.x
-      style *cmp* function to a *key* function.
+      实用程序 :func:`functools.cmp_to_key` 用来把 2.x 风格的 *cmp* 函数转化为 *key* 函数。
 
-      *reverse* is a boolean value.  If set to ``True``, then the list elements
-      are sorted as if each comparison were reversed.
+      *reverse* 是个布尔值。如果设为 ``True`` ，则对列表元素排序时对每次比较结果取反。
 
-      This method modifies the sequence in place for economy of space when
-      sorting a large sequence.  To remind users that it operates by side
-      effect, it does not return the sorted sequence (use :func:`sorted` to
-      explicitly request a new sorted list instance).
+      这个方法会在原地修改序列，这样可以在对大型序列排序时节省空间。为了让用户知道它是通过副作用操作的，它并不返回排序好的序列(如果明确要返回排序好的列表实例，可以使用 :func:`sorted`)。
 
-      The :meth:`sort` method is guaranteed to be stable.  A sort is stable if it
-      guarantees not to change the relative order of elements that compare equal
-      --- this is helpful for sorting in multiple passes (for example, sort by
-      department, then by salary grade).
+      :meth:`sort` 方法的排序是稳定的。稳定的排序能保证在元素比较结果相等时，不改变它们的相对顺序---这对于多次排序来说很有用(例如先根据部门排序，然后再按照工资等级排序)。
 
       .. impl-detail::
 
-         While a list is being sorted, the effect of attempting to mutate, or even
-         inspect, the list is undefined.  The C implementation of Python makes the
-         list appear empty for the duration, and raises :exc:`ValueError` if it can
-         detect that the list has been mutated during a sort.
+         在对一个列表进行排序时，试图对它进行改变，甚至只是查看，所带来的影响，是没有定义的。Python 的 C 实现在这段时间会让列表看起来为空，如果它检测到列表在排序时被改变就会抛出 :exc:`ValueError` 异常。
 
 
 .. _typesseq-tuple:
 
-Tuples
+元组
 ------
 
-.. index:: object: tuple
+.. index:: 对象: 元组
 
-Tuples are immutable sequences, typically used to store collections of
-heterogeneous data (such as the 2-tuples produced by the :func:`enumerate`
-built-in). Tuples are also used for cases where an immutable sequence of
-homogeneous data is needed (such as allowing storage in a :class:`set` or
-:class:`dict` instance).
+元组是不可变的序列，通常用于存储性质相同的一系列数据(例如 :func:`enumerate` 内置函数产生的二元组)。它还用于需要性质相同的不可变序列的地方(例如需要存放在 :class:`set` 或者 :class:`dict` 实例中)。
 
 .. class:: tuple([iterable])
 
-   Tuples may be constructed in a number of ways:
+   有好几种方法构建元组：
 
-   * Using a pair of parentheses to denote the empty tuple: ``()``
-   * Using a trailing comma for a singleton tuple: ``a,`` or ``(a,)``
-   * Separating items with commas: ``a, b, c`` or ``(a, b, c)``
-   * Using the :func:`tuple` built-in: ``tuple()`` or ``tuple(iterable)``
+   * 使用一对圆括号表示空元组： ``()``
+   * 用结尾的逗号表示一个单元素的元组： ``a,`` 或 ``(a,)``
+   * 用逗号分隔各个项： ``a, b, c`` 或 ``(a, b, c)``
+   * 使用 :func:`tuple` 内置函数： ``tuple()`` 或 ``tuple(iterable)``
 
-   The constructor builds a tuple whose items are the same and in the same
-   order as *iterable*'s items.  *iterable* may be either a sequence, a
-   container that supports iteration, or an iterator object.  If *iterable*
-   is already a tuple, it is returned unchanged. For example,
-   ``tuple('abc')`` returns ``('a', 'b', 'c')`` and
-   ``tuple( [1, 2, 3] )`` returns ``(1, 2, 3)``.
-   If no argument is given, the constructor creates a new empty tuple, ``()``.
+   这个构造函数会构建一个元组，它的元组及其顺序与 *iterable* 的相同。\ *iterable* 可以是序列、支持迭代协议的容器、或者一个迭代器对象。如果 *iterable* 已经是 个元组，则原封不动的返回它。例如，\ ``tuple('abc')`` 返回 ``('a', 'b', 'c')`` ，而 ``tuple( [1, 2, 3] )`` 返回 ``(1, 2, 3)`` 。如果没有指定参数，则构造函数会创建一个空元组 ``()`` 。
 
-   Note that it is actually the comma which makes a tuple, not the parentheses.
-   The parentheses are optional, except in the empty tuple case, or
-   when they are needed to avoid syntactic ambiguity. For example,
-   ``f(a, b, c)`` is a function call with three arguments, while
-   ``f((a, b, c))`` is a function call with a 3-tuple as the sole argument.
+   注意，创建了元组的实际上是逗号，而不是括号。括号的可选的，除非是对于空元组，或者为了避免语法岐义。例如，\ ``f(a, b, c)`` 是个带三个参数的函数调用，而 ``f((a, b, c))`` 是个带有三元组参数的函数调用。
 
-   Tuples implement all of the :ref:`common <typesseq-common>` sequence
-   operations.
+   元组实现了序列的所有\ :ref:`共同 <typesseq-common>`\ 运算。
 
-For heterogeneous collections of data where access by name is clearer than
-access by index, :func:`collections.namedtuple` may be a more appropriate
-choice than a simple tuple object.
+对于性质相同的系列数据，如果按名称访问比按下标位置访问更清楚，则 :func:`collections.namedtuple` 相对于简单的元组对象来说可能是更好的选择。
 
 
 .. _typesseq-range:
 
-Ranges
+区间
 ------
 
-.. index:: object: range
+.. index:: 对象: 区间
 
-The :class:`range` type represents an immutable sequence of numbers and is
-commonly used for looping a specific number of times in :keyword:`for`
-loops.
+:class:`range` 类型表示不可变的一系列数，通常用于 :keyword:`for` 语句中循环指定的次数。
 
 .. class:: range(stop)
            range(start, stop[, step])
 
-   The arguments to the range constructor must be integers (either built-in
-   :class:`int` or any object that implements the ``__index__`` special
-   method).  If the *step* argument is omitted, it defaults to ``1``.
-   If the *start* argument is omitted, it defaults to ``0``.
-   If *step* is zero, :exc:`ValueError` is raised.
+   range 构造函数的参数必须是整数(内置的 :class:`int` 或任何实现了 ``__index__`` 特殊方法的对象)。如果 *step* 参数省略，则默认为 ``1`` 。如果 *start* 参数省略，则默认为 ``0`` 。如果 *step* 是零，则抛出 :exc:`ValueError` 异常。
 
-   For a positive *step*, the contents of a range ``r`` are determined by the
-   formula ``r[i] = start + step*i`` where ``i >= 0`` and
-   ``r[i] < stop``.
+   对于为正数的 *step* ，则区间 ``r`` 的内容由公式 ``r[i] = start + step*i`` 决定，其中 ``i >= 0`` 且 ``r[i] < stop`` 。
 
-   For a negative *step*, the contents of the range are still determined by
-   the formula ``r[i] = start + step*i``, but the constraints are ``i >= 0``
-   and ``r[i] > stop``.
+   对于负数的 *step* ，区间的内容仍然由公式 ``r[i] = start + step*i`` 决定，但是约束条件是 ``i >= 0`` 且 ``r[i] > stop`` 。
 
-   A range object will be empty if ``r[0]`` does not meant the value
-   constraint. Ranges do support negative indices, but these are interpreted
-   as indexing from the end of the sequence determined by the positive
-   indices.
+   如果 ``r[0]`` 不符合约束条件，则区间对象为空。尽管区间也支持负数的下标，但它是从基于正数下标的序列结尾开始算起的。
 
-   Ranges containing absolute values larger than :data:`sys.maxsize` are
-   permitted but some features (such as :func:`len`) may raise
-   :exc:`OverflowError`.
+   包含绝对值比 :data:`sys.maxsize` 还要大的区间是允许的，但是有些功能(例如 :func:`len`)可能会抛出 :exc:`OverflowError` 异常。
 
-   Range examples::
+   区间的例子::
 
       >>> list(range(10))
       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -1006,34 +938,25 @@ loops.
       >>> list(range(1, 0))
       []
 
-   Ranges implement all of the :ref:`common <typesseq-common>` sequence operations
-   except concatenation and repetition (due to the fact that range objects can
-   only represent sequences that follow a strict pattern and repetition and
-   concatenation will usually violate that pattern).
+   区间实现了序列的所有\ :ref:`共同 <typesseq-common>`\ 运算，除了拼接和重复(因为区间对象只能接受严格遵循规则的序列，而重复和拼接则通常违反这个规则)。
+
+.. XXX This secion does not RENDERRRRR!
 
    .. data: start
 
-      The value of the *start* parameter (or ``0`` if the parameter was
-      not supplied)
+      *start* 参数的值(如果没有指定这个参数则为 ``0``)
 
    .. data: stop
 
-      The value of the *stop* parameter
+      *stop* 参数的值
 
    .. data: step
 
-      The value of the *step* parameter (or ``1`` if the parameter was
-      not supplied)
+      *step* 参数的值(如果没有指定这个参数则为 ``1``)
 
-The advantage of the :class:`range` type over a regular :class:`list` or
-:class:`tuple` is that a :class:`range` object will always take the same
-(small) amount of memory, no matter the size of the range it represents (as it
-only stores the ``start``, ``stop`` and ``step`` values, calculating individual
-items and subranges as needed).
+:class:`range` 类型比普通的 :class:`list` 或 :class:`tuple` 优越之处在于，\ :class:`range` 对象总是占用相同(少量)的内存，不管它所表示的区间有多大(因为它只存储 ``start`` 、\ ``stop`` 和 ``step`` 值，在需要时才计算具体的项以及子区间)。
 
-Range objects implement the :class:`collections.Sequence` ABC, and provide
-features such as containment tests, element index lookup, slicing and
-support for negative indices (see :ref:`typesseq`):
+区间对象实现了 :class:`collections.Sequence` 虚基类，提供了包容检测、元素按下标查找、切片、以及负数的下标等功能(参见\ :ref:`typesseq`)：
 
    >>> r = range(0, 20, 2)
    >>> r
@@ -1051,31 +974,21 @@ support for negative indices (see :ref:`typesseq`):
    >>> r[-1]
    18
 
-Testing range objects for equality with ``==`` and ``!=`` compares
-them as sequences.  That is, two range objects are considered equal if
-they represent the same sequence of values.  (Note that two range
-objects that compare equal might have different :attr:`start`,
-:attr:`stop` and :attr:`step` attributes, for example ``range(0) ==
-range(2, 1, 3)`` or ``range(0, 3, 2) == range(0, 4, 2)``.)
+如果对区间对象用 ``==`` 和 ``!=`` 进行比较判断，就会把它们当作序列来操作。也就是说，如果两个区间对象表示相同序列的值，则认为它们相等。(注意，两个比较结果相等的区间可能有不同的 :attr:`start` 、\ :attr:`stop` 和 :attr:`step` 属性，例如 ``range(0) == range(2, 1, 3)`` 或 ``range(0, 3, 2) == range(0, 4, 2)`` 。)
 
 .. versionchanged:: 3.2
-   Implement the Sequence ABC.
-   Support slicing and negative indices.
-   Test :class:`int` objects for membership in constant time instead of
-   iterating through all items.
+   实现了序列虚基类。支持切片和负数下标。在固定时间内检测 :class:`int` 对象的是否是其成员，而不是对所有项进行迭代。
 
 .. versionchanged:: 3.3
-   Define '==' and '!=' to compare range objects based on the
-   sequence of values they define (instead of comparing based on
-   object identity).
+   定义了 '==' 和 '!=' 用来根据其定义的序列比较区间对象(而不是根据对象身份比较)。
 
 .. versionadded:: 3.3
-   The :attr:`start`, :attr:`stop` and :attr:`step` attributes.
+   :attr:`start` 、\ :attr:`stop` 和 :attr:`step` 属性。
 
 
 .. index::
-   single: string; text sequence type
-   single: str (built-in class); (see also string)
+   single: 字符串; 文本序列类型
+   single: str (内置类); (另见 string)
    object: string
 
 .. _textseq:
