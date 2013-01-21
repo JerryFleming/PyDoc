@@ -993,50 +993,37 @@ Python 的\ :term:`生成函数`\ 为实现迭代器协议提供了便捷方法�
 
 .. _textseq:
 
-Text Sequence Type --- :class:`str`
+文本序列类型 --- :class:`str`
 ===================================
 
-Textual data in Python is handled with :class:`str` objects, or :dfn:`strings`.
-Strings are immutable
-:ref:`sequences <typesseq>` of Unicode code points.  String literals are
-written in a variety of ways:
+Python 中的文本数据是通过 :class:`str` 对象或者 :dfn:`字符串` 处理的。字符串是 Unicode 字码的不可变\ :ref:`序列 <typesseq>`\ 。有好几种方法表示字符串源常量：
 
-* Single quotes: ``'allows embedded "double" quotes'``
-* Double quotes: ``"allows embedded 'single' quotes"``.
-* Triple quoted: ``'''Three single quotes'''``, ``"""Three double quotes"""``
+* 单引号： ``'其中可以使用"双"引号'``
+* 双引号： ``"其中可以使用'单'引号"``
+* 三引号： ``'''三个单引号'''``\ 、\ ``"""三个双引号"""``
 
-Triple quoted strings may span multiple lines - all associated whitespace will
-be included in the string literal.
+使用三引号的字符串可以跨越多行 --- 其中所有的空白字符都会保留在字符串源常量中。
 
-String literals that are part of a single expression and have only whitespace
-between them will be implicitly converted to a single string literal. That
-is, ``("spam " "eggs") == "spam eggs"``.
+单个表达式中的字符串源常量，如果其间只有空白符分隔，则它们会隐式的被转换成一个字符串。即，\ ``("spam " "eggs") == "spam eggs"`` 。
 
-See :ref:`strings` for more about the various forms of string literal,
-including supported escape sequences, and the ``r`` ("raw") prefix that
-disables most escape sequence processing.
+关于字符串源常量的各种形式，包括支持的转义序列，以及取消大部分转义处理的 ``r`` ("raw")前缀，参见\ :ref:`字符串` 。
 
-Strings may also be created from other objects using the :class:`str`
-constructor.
+字符串还可以由其它对象通过 :class:`str` 构造函数来创建。
 
-Since there is no separate "character" type, indexing a string produces
-strings of length 1. That is, for a non-empty string *s*, ``s[0] == s[0:1]``.
+因为没有单独的"字符"类型，对字符串进行下标索引会产生一个长度为 1 的字符串。也就是说，对于一个非空字符串 *s* ，\ ``s[0] == s[0:1]`` 。
 
 .. index::
    object: io.StringIO
 
-There is also no mutable string type, but :meth:`str.join` or
-:class:`io.StringIO` can be used to efficiently construct strings from
-multiple fragments.
+也没有可变的字符串类型。但是可以用 :meth:`str.join` 或者 :class:`io.StringIO` 来有效的使用多个片断构造字符串。
+
 
 .. versionchanged:: 3.3
-   For backwards compatibility with the Python 2 series, the ``u`` prefix is
-   once again permitted on string literals. It has no effect on the meaning
-   of string literals and cannot be combined with the ``r`` prefix.
+   为了保持与 Python 2 系列的向后兼容性，\ ``u`` 前缀再次允许用于字符串源常量中。它对字符串源常量的含义没有影响，不可以和 ``r`` 前缀联合使用。
 
 
 .. index::
-   single: string; str (built-in class)
+   single: string; str (内置类)
 
 .. class:: str(object='')
            str(object=b'', encoding='utf-8', errors='strict')
