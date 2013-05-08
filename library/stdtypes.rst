@@ -1028,61 +1028,38 @@ Python 中的文本数据是通过 :class:`str` 对象或者 :dfn:`字符串` �
 .. class:: str(object='')
            str(object=b'', encoding='utf-8', errors='strict')
 
-   Return a :ref:`string <textseq>` version of *object*.  If *object* is not
-   provided, returns the empty string.  Otherwise, the behavior of ``str()``
-   depends on whether *encoding* or *errors* is given, as follows.
+   返回\ :ref:`字符串 <textseq>`\ 版本的\ *object* 。如果没有指定\ *object* 则返回空字符串；否则，\ ``str()`` 的行为取决于是否指定了 *encoding* 和 *errors* ，如下所述。
 
-   If neither *encoding* nor *errors* is given, ``str(object)`` returns
-   :meth:`object.__str__() <object.__str__>`, which is the "informal" or nicely
-   printable string representation of *object*.  For string objects, this is
-   the string itself.  If *object* does not have a :meth:`~object.__str__`
-   method, then :func:`str` falls back to returning
-   :meth:`repr(object) <repr>`.
+   如果 *encoding* 和 *errors* 都没有指定，\ ``str(object)`` 就返回  :meth:`object.__str__() <object.__str__>` ，这是 *object* 的“非正式”但是格式易读的字符串形式。对于字符串而言，它就是字符串本身。如果 *object* 没有 :meth:`~object.__str__` 方法，则 :func:`str` 会转而返回 :meth:`repr(object) <repr>` 。
 
    .. index::
-      single: buffer protocol; str (built-in class)
-      single: bytes; str (built-in class)
+      single: 缓存协议; str (内置类)
+      single: bytes; str (内置类)
 
-   If at least one of *encoding* or *errors* is given, *object* should be a
-   :class:`bytes` or :class:`bytearray` object, or more generally any object
-   that supports the :ref:`buffer protocol <bufferobjects>`.  In this case, if
-   *object* is a :class:`bytes` (or :class:`bytearray`) object, then
-   ``str(bytes, encoding, errors)`` is equivalent to
-   :meth:`bytes.decode(encoding, errors) <bytes.decode>`.  Otherwise, the bytes
-   object underlying the buffer object is obtained before calling
-   :meth:`bytes.decode`.  See :ref:`binaryseq` and
-   :ref:`bufferobjects` for information on buffer objects.
+   如果指定了 *encoding* 或 *errors* 中的一个参数，则 *object* 应该是个 :class:`bytes` 或者 :class:`bytearray` 对象，或者广泛的说，支持 :ref:`buffer protocol <bufferobjects>`力。在这种情况下，如果 *object* 是 :class:`bytes` (或 :class:`bytearray`)对象，则 ``str(bytes, encoding, errors)`` 就等同于 :meth:`bytes.decode(encoding, errors) <bytes.decode>` ；否则，就在调用 :meth:`bytes.decode` 之前先返回这个缓存对象的字节对象。关于缓存对象，参见 :ref:`binaryseq` 和 :ref:`bufferobjects` 。
 
-   Passing a :class:`bytes` object to :func:`str` without the *encoding*
-   or *errors* arguments falls under the first case of returning the informal
-   string representation (see also the :option:`-b` command-line option to
-   Python).  For example::
+   给 :func:`str` 传入 :class:`bytes` 对象而不指定 *encoding* 或者 *errors* 参数就属于第一种情况，这时就返回对象非正式的字符串形式(参见 Python 的命令行选项 :option:`-b`)。例如::
 
       >>> str(b'Zoot!')
       "b'Zoot!'"
 
-   For more information on the ``str`` class and its methods, see
-   :ref:`textseq` and the :ref:`string-methods` section below.  To output
-   formatted strings, see the :ref:`string-formatting` section.  In addition,
-   see the :ref:`stringservices` section.
+   关于 ``str`` 类及其方法的更多信息，参见 :ref:`textseq` 和下面的 :ref:`string-methods` 一节。如果要输出格式化的字符串，参见 :ref:`string-formatting` 一节。此外，请参见 :ref:`stringservices` 一节。
 
 
 .. index::
-   pair: string; methods
+   pair: 字符串; 方法
 
 .. _string-methods:
 
-String Methods
+字符串方法
 --------------
 
 .. index::
    module: re
 
-Strings implement all of the :ref:`common <typesseq-common>` sequence
-operations, along with the additional methods described below.
+字符串实现了\ :ref:`常见 <typesseq-common>`\ 序列的所有操作方法论，还实现了下述额外的方法。
 
-Strings also support two styles of string formatting, one providing a large
-degree of flexibility and customization (see :meth:`str.format`,
+字符串还支持两种风格的格式化，一种提供很大的灵活性和自定义功能(see :meth:`str.format`,
 :ref:`formatstrings` and :ref:`string-formatting`) and the other based on C
 ``printf`` style formatting that handles a narrower range of types and is
 slightly harder to use correctly, but is often faster for the cases it can
